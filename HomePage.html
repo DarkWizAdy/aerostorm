@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>aerostorm Racing</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,400..900;1,400..900&amp;family=Outfit:wght@300;400;500;600;700;800;900&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-[#000000] text-[#e8e8e8] font-heading overflow-auto" id="top">
+  <div id="app-wrapper" class="w-full" style="min-height:100%;">
+   <!-- NAV -->
+   <nav class="fixed top-0 left-0 w-full z-50 bg-[#000000]/90 backdrop-blur-md border-b border-[#1e1e1e]">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-8 h-8 bg-[#e0d2b3] rounded-sm flex items-center justify-center">
+       <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+       </svg>
+      </div><a href="javascript:void(0)" onclick="document.getElementById('top').scrollIntoView({behavior: 'smooth'});" id="nav-team-name" class="text-lg font-bold tracking-tight text-white hover:text-[#e0d2b3] transition-colors flex items-center gap-2">
+        <img src="aerostormLogoNoBG.png" alt="Aerostorm" class="h-8 w-auto">
+        <span style="margin-top: 1px; font-size: 1.5rem;" class="font-racing">racing</span>
+       </a>
+     </div>
+     <div class="hidden md:flex items-center gap-8"><a href="#about" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">About</a> <a href="#engineering" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Engineering</a> <a href="#season" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Season</a> <a href="#team" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Team</a> <a href="#sponsors" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Sponsors</a> <a href="#sponsor-us" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Sponsor Us</a> <a href="#contact" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Contact</a>
+     </div><button id="mobile-menu-btn" class="md:hidden text-[#bababa]" aria-label="Menu"> <i data-lucide="menu" style="width:24px;height:24px;"></i> </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-[#111111] border-t border-[#1e1e1e] px-6 py-4 flex flex-col gap-3"><a href="#about" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">About</a> <a href="#engineering" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Engineering</a> <a href="#season" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Season</a> <a href="#team" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Team</a> <a href="#sponsors" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Sponsors</a> <a href="#sponsor-us" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Sponsor Us</a> <a href="#contact" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Contact</a>
+     </div>
+   </nav><!-- HERO -->
+   <header class="relative w-full hero-grid" style="min-height:90%; display:flex; align-items:center;">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#000000] via-[#0a0a0a] to-[#111111]" style="z-index:0;"></div>
+    <div class="absolute top-0 right-0 w-1/3 h-full stripe-accent" style="z-index:1;"></div>
+    <div class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#e0d2b3] to-transparent" style="z-index:2; animation: lineGrow 1.2s ease-out 0.5s both;"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-32 md:py-0 w-full">
+     <div class="flex flex-col gap-6">
+      <div class="anim-slide-in flex items-center gap-3">
+       <div class="w-12 h-[2px] bg-[#e0d2b3]"></div><span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Formula 1 · STEM · Innovation</span>
+      </div>
+      <h1 id="hero-title" class="anim-fade-up text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[0.95]">
+        <br><img src="aerostormLogoNoBG.png" alt="Aerostorm" class="h-16 md:h-24 lg:h-28 w-auto inline-block align-middle">
+        <span class="font-racing" style="font-size: 0.9em; position: relative; top: 5px;">racing</span></h1>
+      <p id="hero-tagline" class="anim-fade-up-d1 text-lg md:text-xl text-[#bababa] max-w-xl font-light leading-relaxed">Engineering the future of motorsport through science, technology, and relentless innovation.</p>
+      <div class="anim-fade-up-d2 flex flex-wrap gap-4 mt-4"><a href="#about" class="inline-flex items-center gap-2 bg-[#e0d2b3] text-[#000000] px-6 py-3 text-sm font-bold tracking-wide uppercase hover:bg-[#d0bd92] transition-colors rounded-sm"> Discover More <i data-lucide="arrow-right" style="width:16px;height:16px;"></i> </a> <a href="#engineering" class="inline-flex items-center gap-2 border border-[#434343] text-[#d9d9d9] px-6 py-3 text-sm font-bold tracking-wide uppercase hover:border-[#e0d2b3] hover:text-[#e0d2b3] transition-colors rounded-sm"> Our Engineering </a> <a href="#sponsors" class="inline-flex items-center gap-2 border border-[#434343] text-[#d9d9d9] px-6 py-3 text-sm font-bold tracking-wide uppercase hover:border-[#e0d2b3] hover:text-[#e0d2b3] transition-colors rounded-sm"> Our Sponsors </a>
+      </div>
+     </div>
+    </div>
+   </header><!-- ABOUT -->
+   <section id="about" class="w-full bg-[#0a0a0a] scroll-section">
+    <div class="max-w-7xl mx-auto px-6 py-24 md:py-32">
+     <div class="grid md:grid-cols-2 gap-16 items-start">
+      <div><span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Who We Are</span>
+       <h2 id="about-heading" class="text-3xl md:text-5xl font-extrabold text-white mt-3 leading-tight">Built on Science.<br>
+         Driven by Speed.</h2>
+       <div class="w-16 h-[2px] bg-[#e0d2b3] mt-6 mb-6"></div>
+       <p id="about-text" class="text-[#bababa] leading-relaxed text-base md:text-lg">We're a student-led F1 STEM racing team that merges engineering precision with competitive motorsport. Every component of our car is designed, tested, and refined through rigorous scientific methodology — from aerodynamic simulations to telemetry-driven performance tuning.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+       <div class="bg-[#1e1e1e] rounded-sm p-6 card-hover border border-[#2c2c2c]"><i data-lucide="cpu" style="width:28px;height:28px;color:#e0d2b3;"></i>
+        <h3 class="text-white font-bold mt-4 text-sm uppercase tracking-wide">Engineering</h3>
+        <p class="text-[#727272] text-xs mt-2 leading-relaxed">CAD design, CFD analysis, and structural optimization</p>
+       </div>
+       <div class="bg-[#1e1e1e] rounded-sm p-6 card-hover border border-[#2c2c2c]"><i data-lucide="bar-chart-2" style="width:28px;height:28px;color:#e0d2b3;"></i>
+        <h3 class="text-white font-bold mt-4 text-sm uppercase tracking-wide">Data Science</h3>
+        <p class="text-[#727272] text-xs mt-2 leading-relaxed">Real-time telemetry and performance analytics</p>
+       </div>
+       <div class="bg-[#1e1e1e] rounded-sm p-6 card-hover border border-[#2c2c2c]"><i data-lucide="settings" style="width:28px;height:28px;color:#e0d2b3;"></i>
+        <h3 class="text-white font-bold mt-4 text-sm uppercase tracking-wide">Manufacturing</h3>
+        <p class="text-[#727272] text-xs mt-2 leading-relaxed">Carbon fiber layup, 3D printing, CNC machining</p>
+       </div>
+       <div class="bg-[#1e1e1e] rounded-sm p-6 card-hover border border-[#2c2c2c]"><i data-lucide="users" style="width:28px;height:28px;color:#e0d2b3;"></i>
+        <h3 class="text-white font-bold mt-4 text-sm uppercase tracking-wide">Teamwork</h3>
+        <p class="text-[#727272] text-xs mt-2 leading-relaxed">Cross-disciplinary collaboration and leadership</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- ENGINEERING -->
+   <section id="engineering" class="w-full bg-[#0a0a0a] scroll-section">
+    <div class="max-w-7xl mx-auto px-6 py-24 md:py-32"><span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Under the Hood</span>
+     <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-12">Engineering Pipeline</h2>
+     <div class="grid md:grid-cols-3 gap-6">
+      <div class="relative bg-[#111111] border border-[#2c2c2c] rounded-sm p-8 card-hover">
+       <div class="font-mono text-5xl font-black text-[#1e1e1e] absolute top-4 right-4">
+        01
+       </div>
+       <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="pen-tool" style="width:20px;height:20px;color:#e0d2b3;"></i>
+       </div>
+       <h3 class="text-white font-bold text-lg mb-3">Design on Autodesk Fusion</h3>
+       <p class="text-[#727272] text-sm leading-relaxed">Advanced CAD design and aerodynamic optimization using Autodesk Fusion. Every component engineered for maximum performance and minimum weight.</p>
+      </div>
+      <div class="relative bg-[#111111] border border-[#2c2c2c] rounded-sm p-8 card-hover">
+       <div class="font-mono text-5xl font-black text-[#1e1e1e] absolute top-4 right-4">
+        02
+       </div>
+       <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="wrench" style="width:20px;height:20px;color:#e0d2b3;"></i>
+       </div>
+       <h3 class="text-white font-bold text-lg mb-3">Manufacturing</h3>
+       <p class="text-[#727272] text-sm leading-relaxed">Carbon fiber layup, precision machining, and 3D printing. Rigorous quality control ensures every component meets our performance standards.</p>
+      </div>
+      <div class="relative bg-[#111111] border border-[#2c2c2c] rounded-sm p-8 card-hover">
+       <div class="font-mono text-5xl font-black text-[#1e1e1e] absolute top-4 right-4">
+        03
+       </div>
+       <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="activity" style="width:20px;height:20px;color:#e0d2b3;"></i>
+       </div>
+       <h3 class="text-white font-bold text-lg mb-3">On the Track</h3>
+       <p class="text-[#727272] text-sm leading-relaxed">Real-world testing and performance validation. Data-driven iteration to perfect race strategy and vehicle dynamics.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- TIMELINE / SEASON -->
+   <section id="season" class="w-full bg-[#000000] scroll-section">
+    <div class="max-w-7xl mx-auto px-6 py-24 md:py-32"><span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">2025 Season</span>
+     <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-12">Race Calendar</h2>
+     <div class="space-y-0">
+      <div class="flex items-center gap-6 py-5 border-b border-[#1e1e1e] hover:bg-[#111111]/50 transition-colors px-4 rounded-sm group">
+       <div class="font-mono text-sm text-[#636363] w-24 shrink-0">
+        MAY 9-10
+       </div>
+       <div class="w-2 h-2 rounded-full bg-[#e0d2b3] shrink-0"></div>
+       <div class="flex-1"><span class="text-white font-semibold">Regional Qualifiers</span> <span class="text-[#636363] text-sm ml-3">— Delhi NCR</span>
+       </div><span class="font-mono text-xs text-[#d0bd92] group-hover:text-white transition-colors">UPCOMING</span>
+      </div>
+     </div>
+    </div>
+   </section><!-- TEAM -->
+   <section id="team" class="w-full bg-[#000000] scroll-section">
+    <div class="max-w-7xl mx-auto px-6 py-24 md:py-32"><span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">The Crew</span>
+     <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-12">Meet the Team</h2>
+     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="group relative bg-[#111111] rounded-sm overflow-hidden card-hover border border-[#1e1e1e]">
+       <div class="aspect-square bg-gradient-to-br from-[#e0d2b3] to-[#c4a76a] flex items-center justify-center">
+        <span class="text-4xl font-black text-[#000000]">AT</span>
+       </div>
+       <div class="p-4">
+        <div class="text-white font-bold text-sm">
+         Aryan Trehan
+        </div>
+        <div class="text-[#d0bd92] text-xs font-mono mt-1">
+         Project Manager
+        </div>
+       </div>
+      </div>
+      <div class="group relative bg-[#111111] rounded-sm overflow-hidden card-hover border border-[#1e1e1e]">
+       <div class="aspect-square bg-gradient-to-br from-[#b8e0d2] to-[#7dbba8] flex items-center justify-center">
+        <span class="text-4xl font-black text-[#000000]">AK</span>
+       </div>
+       <div class="p-4">
+        <div class="text-white font-bold text-sm">
+         Anav Kappor
+        </div>
+        <div class="text-[#d0bd92] text-xs font-mono mt-1">
+         Outreach &amp; Sponsorship
+        </div>
+       </div>
+      </div>
+      <div class="group relative bg-[#111111] rounded-sm overflow-hidden card-hover border border-[#1e1e1e]">
+       <div class="aspect-square bg-gradient-to-br from-[#d4a5e0] to-[#a855a8] flex items-center justify-center">
+        <span class="text-4xl font-black text-[#ffffff]">AP</span>
+       </div>
+       <div class="p-4">
+        <div class="text-white font-bold text-sm">
+         Adyant Pankaj
+        </div>
+        <div class="text-[#d0bd92] text-xs font-mono mt-1">
+         Finance &amp; Resources
+        </div>
+       </div>
+      </div>
+      <div class="group relative bg-[#111111] rounded-sm overflow-hidden card-hover border border-[#1e1e1e]">
+       <div class="aspect-square bg-gradient-to-br from-[#ffa563] to-[#e67e22] flex items-center justify-center">
+        <span class="text-4xl font-black text-[#ffffff]">EB</span>
+       </div>
+       <div class="p-4">
+        <div class="text-white font-bold text-sm">
+         Eyan Borah
+        </div>
+        <div class="text-[#d0bd92] text-xs font-mono mt-1">
+         Enterprise &amp; Social Media
+        </div>
+       </div>
+      </div>
+      <div class="group relative bg-[#111111] rounded-sm overflow-hidden card-hover border border-[#1e1e1e]">
+       <div class="aspect-square bg-gradient-to-br from-[#6bb6d6] to-[#3b9dd8] flex items-center justify-center">
+        <span class="text-4xl font-black text-[#ffffff]">AS</span>
+       </div>
+       <div class="p-4">
+        <div class="text-white font-bold text-sm">
+         Abhiraj Sinha
+        </div>
+        <div class="text-[#d0bd92] text-xs font-mono mt-1">
+         Manufacturing &amp; Engineering
+        </div>
+       </div>
+      </div>
+      <div class="group relative bg-[#111111] rounded-sm overflow-hidden card-hover border border-[#1e1e1e]">
+       <div class="aspect-square bg-gradient-to-br from-[#e84c3d] to-[#c0392b] flex items-center justify-center">
+        <span class="text-4xl font-black text-[#ffffff]">AV</span>
+       </div>
+       <div class="p-4">
+        <div class="text-white font-bold text-sm">
+         Aurik Verma
+        </div>
+        <div class="text-[#d0bd92] text-xs font-mono mt-1">
+         Graphic Design Manager
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- SPONSORS -->
+   <section id="sponsors" class="w-full bg-[#111111] scroll-section overflow-hidden py-16">
+    <div class="max-w-7xl mx-auto px-6 mb-10">
+     <span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Partners</span>
+     <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-3">Our Sponsors</h2>
+     <p class="text-[#727272] mt-4 max-w-2xl leading-relaxed">We are proud to be supported by industry leaders who share our passion for innovation and excellence. Their contributions enable us to push the boundaries of engineering and compete at the highest level.</p>
+    </div>
+    <div class="sponsor-track">
+     <div class="sponsor-slide">
+      <div class="sponsor-card sponsor-gold">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 1</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+      <div class="sponsor-card sponsor-silver">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 2</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+      <div class="sponsor-card sponsor-bronze">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 3</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+      <div class="sponsor-card sponsor-gold">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 4</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+      <div class="sponsor-card sponsor-silver">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 5</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+      <div class="sponsor-card sponsor-bronze">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 6</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+     </div>
+     <div class="sponsor-slide">
+      <div class="sponsor-card sponsor-gold">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 1</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+      <div class="sponsor-card sponsor-silver">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 2</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+      <div class="sponsor-card sponsor-bronze">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 3</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+      <div class="sponsor-card sponsor-gold">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 4</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+      <div class="sponsor-card sponsor-silver">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 5</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+      <div class="sponsor-card sponsor-bronze">
+       <div class="sponsor-logo-area">
+        <span class="text-[#636363] font-bold text-base uppercase tracking-wider">Sponsor 6</span>
+       </div>
+       <div class="sponsor-name">Company Name</div>
+      </div>
+     </div>
+    </div>
+   </section><!-- SPONSOR US -->
+   <section id="sponsor-us" class="w-full bg-[#111111] scroll-section relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#e0d2b3]/30 to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-6 py-24 md:py-32">
+     <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div><span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Support the Mission</span>
+       <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-6">Partner With Us</h2>
+       <p class="text-[#bababa] leading-relaxed mb-8">Join us in engineering the future. Our partners gain global visibility and the opportunity to support the next generation of STEM leaders and engineers. Download our sponsorship prospectus to learn more about our tiers and benefits.</p>
+       <div class="flex flex-wrap gap-4"><a href="javascript:void(0)" class="inline-flex items-center gap-2 border border-[#e0d2b3] text-[#e0d2b3] px-6 py-3 text-sm font-bold tracking-wide uppercase hover:bg-[#e0d2b3] hover:text-[#000000] transition-colors rounded-sm"> Download Prospectus <i data-lucide="download" style="width:16px;height:16px;"></i> </a> <a href="#contact" class="inline-flex items-center gap-2 text-[#bababa] text-sm hover:text-white transition-colors"> View Tiers <i data-lucide="chevron-right" style="width:14px;height:14px;"></i> </a>
+       </div>
+      </div>
+      <div class="relative">
+       <div class="absolute -inset-1 bg-gradient-to-r from-[#e0d2b3]/20 to-transparent blur opacity-25"></div>
+       <form id="sponsor-form" class="relative bg-[#0a0a0a] p-8 rounded-sm border border-[#1e1e1e] space-y-4" action="https://formspree.io/f/xqewbago" method="POST">
+        <div><label for="sponsor-name" class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Company / Name</label> <input type="text" id="sponsor-name" name="name" required class="w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors" placeholder="Your organization">
+        </div>
+        <div><label for="sponsor-email" class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Email</label> <input type="email" id="sponsor-email" name="email" required class="w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors" placeholder="contact@company.com">
+        </div>
+        <div><label for="sponsor-message" class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Interest</label> <textarea id="sponsor-message" name="message" rows="4" required class="w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors resize-none" placeholder="Tell us how you'd like to partner with us..."></textarea>
+        </div><button type="submit" class="w-full bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide py-3 rounded-sm hover:bg-[#d0bd92] transition-colors flex items-center justify-center gap-2"> Submit Inquiry <i data-lucide="send" style="width:14px;height:14px;"></i> </button>
+        <div id="sponsor-success" class="hidden text-[#d0bd92] text-sm text-center py-2 font-mono">
+         ✓ Inquiry sent successfully
+        </div>
+       </form>
+      </div>
+     </div>
+    </div>
+   </section><!-- CONTACT -->
+    <section id="contact" class="w-full bg-[#0a0a0a] scroll-section">
+     <div class="max-w-7xl mx-auto px-6 py-24 md:py-32">
+     <div class="grid md:grid-cols-2 gap-16">
+      <div><span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Get in Touch</span>
+       <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-6">Contact Us</h2>
+       <p class="text-[#bababa] leading-relaxed mb-8">Have questions or general inquiries? Reach out to us through any of the contact methods below.</p>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div class="space-y-4">
+         <div class="flex items-center gap-3 text-[#727272]"><i data-lucide="mail" style="width:18px;height:18px;color:#e0d2b3;"></i> <span class="text-sm">aerostorm.stemplifyracing@gmail.com</span>
+         </div>
+         <div class="flex items-center gap-3 text-[#727272]"><i data-lucide="phone" style="width:18px;height:18px;color:#e0d2b3;"></i> <span class="text-sm">9818370338</span>
+         </div>
+         <div class="flex items-center gap-3 text-[#727272]"><i data-lucide="phone" style="width:18px;height:18px;color:#e0d2b3;"></i> <span class="text-sm">9899868789</span>
+         </div>
+        </div>
+        <div class="flex flex-col gap-4">
+         <div class="text-xs uppercase tracking-widest text-[#636363]">Follow Us</div>
+         <div class="flex gap-4"><a href="https://instagram.com/aerostorm.racing" class="w-10 h-10 rounded-sm bg-[#1e1e1e] border border-[#2c2c2c] flex items-center justify-center hover:border-[#e0d2b3] transition-colors"> <i data-lucide="instagram" style="width:16px;height:16px;color:#bababa;"></i> </a> <a href="https://www.linkedin.com/in/aerostorm-racing-b295a8404" class="w-10 h-10 rounded-sm bg-[#1e1e1e] border border-[#2c2c2c] flex items-center justify-center hover:border-[#e0d2b3] transition-colors"> <i data-lucide="linkedin" style="width:16px;height:16px;color:#bababa;"></i> </a>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="bg-[#111111] border border-[#1e1e1e] rounded-sm p-8 flex flex-col justify-center items-center text-center">
+       <div class="w-16 h-16 rounded-full bg-[#e0d2b3]/10 flex items-center justify-center mb-6"><i data-lucide="message-square" style="width:32px;height:32px;color:#e0d2b3;"></i>
+       </div>
+       <h3 class="text-white font-bold text-xl mb-3">Quick Chat</h3>
+       <p class="text-[#727272] text-sm mb-6 max-w-xs">Prefer a direct conversation? Message us on Instagram or LinkedIn for the fastest response.</p><a href="https://instagram.com/aerostorm.racing" class="bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors"> DM on Instagram </a>
+      </div>
+     </div>
+    </div>
+   </section><!-- FOOTER -->
+   <footer class="w-full bg-[#000000] border-t border-[#1e1e1e]">
+    <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+     <div class="flex items-center gap-3">
+      <div class="w-6 h-6 bg-[#e0d2b3] rounded-sm flex items-center justify-center">
+       <svg width="12" height="12" viewbox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+       </svg>
+      </div><span class="text-sm text-[#636363] font-mono">© 2026 Aerostorm racing</span>
+     </div>
+     <div class="text-xs text-[#434343] font-mono tracking-wide">
+      ENGINEERED WITH PRECISION
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script src="script.js"></script>
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ee1bfbf45b3a85a',t:'MTc3NjQ5NTE3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

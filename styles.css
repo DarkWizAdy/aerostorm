@@ -1,0 +1,170 @@
+html, body { height: 100%; margin: 0; scroll-behavior: smooth; }
+html { scroll-margin-top: 80px; }
+* { box-sizing: border-box; }
+.font-heading { font-family: 'Outfit', sans-serif; }
+.font-mono { font-family: 'Space Mono', monospace; }
+.font-racing { 
+  font-family: 'MuseoModerno', sans-serif; 
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  font-size: 1.05em;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes lineGrow {
+  from { width: 0; }
+  to { width: 100%; }
+}
+.anim-fade-up { animation: fadeUp 0.8s ease-out both; }
+.anim-fade-up-d1 { animation: fadeUp 0.8s ease-out 0.15s both; }
+.anim-fade-up-d2 { animation: fadeUp 0.8s ease-out 0.3s both; }
+.anim-slide-in { animation: slideIn 0.7s ease-out 0.2s both; }
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(224,210,179,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(224,210,179,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.nav-link {
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #e0d2b3;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Sponsor scrolling */
+.sponsor-track {
+  display: flex;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.sponsor-slide {
+  display: flex;
+  flex-shrink: 0;
+  animation: scrollLeft 25s linear infinite;
+}
+.sponsor-track:hover .sponsor-slide {
+  animation-play-state: paused;
+}
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Sponsor card with tier glow - doubled size */
+.sponsor-card {
+  flex-shrink: 0;
+  width: 440px;
+  margin-right: 32px;
+  background: #1e1e1e;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.sponsor-card:hover {
+  transform: scale(1.02);
+}
+.sponsor-logo-area {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sponsor-name {
+  padding: 24px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Gold tier - top glow */
+.sponsor-gold {
+  border: 1px solid #b8860b;
+  box-shadow: 0 0 20px rgba(184, 134, 11, 0.3), inset 0 1px 0 rgba(255, 215, 0, 0.2);
+}
+.sponsor-gold .sponsor-name {
+  background: linear-gradient(180deg, rgba(184, 134, 11, 0.15) 0%, rgba(184, 134, 11, 0.05) 100%);
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Silver tier - middle glow */
+.sponsor-silver {
+  border: 1px solid #71706e;
+  box-shadow: 0 0 20px rgba(169, 169, 169, 0.3), inset 0 1px 0 rgba(192, 192, 192, 0.2);
+}
+.sponsor-silver .sponsor-name {
+  background: linear-gradient(180deg, rgba(169, 169, 169, 0.15) 0%, rgba(169, 169, 169, 0.05) 100%);
+  color: #c0c0c0;
+  text-shadow: 0 0 10px rgba(192, 192, 192, 0.5);
+}
+
+/* Bronze tier - bottom glow */
+.sponsor-bronze {
+  border: 1px solid #8b5a2b;
+  box-shadow: 0 0 20px rgba(139, 90, 43, 0.3), inset 0 1px 0 rgba(205, 127, 50, 0.2);
+}
+.sponsor-bronze .sponsor-name {
+  background: linear-gradient(180deg, rgba(139, 90, 43, 0.15) 0%, rgba(139, 90, 43, 0.05) 100%);
+  color: #cd7f32;
+  text-shadow: 0 0 10px rgba(205, 127, 50, 0.5);
+}
+
+.scroll-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.scroll-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stripe-accent {
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 8px,
+    rgba(224,210,179,0.04) 8px,
+    rgba(224,210,179,0.04) 16px
+  );
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #111111; }
+::-webkit-scrollbar-thumb { background: #434343; border-radius: 3px; }
