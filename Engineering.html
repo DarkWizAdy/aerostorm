@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering | aerostorm Racing</title>
+  <meta property="og:title" content="Engineering | aerostorm racing">
+  <meta property="og:description" content="Discover our engineering pipeline and how we build for speed.">
+  <meta property="og:image" content="aerostormLogoFinal.png">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,400..900;1,400..900&amp;family=Outfit:wght@300;400;500;600;700;800;900&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+ </head>
+ <body class="h-full bg-[#000000] text-[#e8e8e8] font-heading overflow-auto">
+  <div id="app-wrapper" class="w-full" style="min-height:100%;">
+   <!-- NAV -->
+   <nav class="fixed top-0 left-0 w-full z-50 bg-[#000000]/90 backdrop-blur-md border-b border-[#1e1e1e]">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-8 h-8 bg-[#e0d2b3] rounded-sm flex items-center justify-center">
+       <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+       </svg>
+      </div><a href="HomePage.html" id="nav-team-name" class="text-lg font-bold tracking-tight text-white hover:text-[#e0d2b3] transition-colors flex items-center gap-2">
+        <img src="aerostormLogoNoBG.png" alt="Aerostorm" class="h-8 w-auto">
+        <span style="margin-top: 1px; font-size: 1.5rem;" class="font-racing">racing</span>
+       </a>
+     </div>
+     <div class="hidden md:flex items-center gap-8">
+      <a href="HomePage.html#about" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">About</a> 
+      <a href="Updates.html" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Updates</a> 
+      <a href="Engineering.html" class="nav-link text-sm font-medium text-[#e0d2b3] tracking-wide uppercase">Engineering</a> 
+      <a href="Sponsorship.html" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Sponsorship</a> 
+      <a href="HomePage.html#season" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Season</a> 
+      <a href="HomePage.html#team" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Team</a> 
+      <a href="HomePage.html#contact" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Contact</a>
+     </div><button id="mobile-menu-btn" class="md:hidden text-[#bababa]" aria-label="Menu"> <i data-lucide="menu" style="width:24px;height:24px;"></i> </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-[#111111] border-t border-[#1e1e1e] px-6 py-4 flex flex-col gap-3">
+      <a href="HomePage.html#about" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">About</a> 
+      <a href="Updates.html" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Updates</a> 
+      <a href="Engineering.html" class="text-sm text-[#e0d2b3] hover:text-[#e0d2b3]">Engineering</a> 
+      <a href="Sponsorship.html" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Sponsorship</a> 
+      <a href="HomePage.html#season" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Season</a> 
+      <a href="HomePage.html#team" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Team</a> 
+      <a href="HomePage.html#contact" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Contact</a>
+     </div>
+   </nav>
+
+   <!-- ENGINEERING HERO -->
+   <header class="relative w-full pt-32 pb-16 bg-[#000000]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-[2px] bg-[#e0d2b3]"></div>
+          <span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Under the Hood</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight">
+          <img src="aerostormLogoNoBG.png" alt="Aerostorm" class="h-10 md:h-14 lg:h-16 w-auto inline-block align-middle">
+          <span class="font-racing" style="font-size: 0.9em; position: relative; top: 1px;">engineering</span></h1>
+        <p class="text-[#bababa] max-w-2xl font-light">Precision, speed, and scientific methodology. Explore our engineering pipeline and how we build the next generation of racing cars.</p>
+      </div>
+    </div>
+   </header>
+
+   <main class="w-full">
+     <!-- ENGINEERING PIPELINE -->
+     <section id="engineering" class="w-full bg-[#0a0a0a] py-24">
+      <div class="max-w-7xl mx-auto px-6">
+       <span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">The Pipeline</span>
+       <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-12">Engineering Workflow</h2>
+       <div class="grid md:grid-cols-3 gap-6">
+        <div class="relative bg-[#111111] border border-[#2c2c2c] rounded-sm p-8 card-hover">
+         <div class="font-mono text-5xl font-black text-[#1e1e1e] absolute top-4 right-4">
+          01
+         </div>
+         <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="pen-tool" style="width:20px;height:20px;color:#e0d2b3;"></i>
+         </div>
+         <h3 class="text-white font-bold text-lg mb-3">Design on Autodesk Fusion</h3>
+         <p class="text-[#727272] text-sm leading-relaxed">Advanced CAD design and aerodynamic optimization using Autodesk Fusion. Every component engineered for maximum performance and minimum weight.</p>
+        </div>
+        <div class="relative bg-[#111111] border border-[#2c2c2c] rounded-sm p-8 card-hover">
+         <div class="font-mono text-5xl font-black text-[#1e1e1e] absolute top-4 right-4">
+          02
+         </div>
+         <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="wrench" style="width:20px;height:20px;color:#e0d2b3;"></i>
+         </div>
+         <h3 class="text-white font-bold text-lg mb-3">Manufacturing</h3>
+         <p class="text-[#727272] text-sm leading-relaxed">Carbon fiber layup, precision machining, and 3D printing. Rigorous quality control ensures every component meets our performance standards.</p>
+        </div>
+        <div class="relative bg-[#111111] border border-[#2c2c2c] rounded-sm p-8 card-hover">
+         <div class="font-mono text-5xl font-black text-[#1e1e1e] absolute top-4 right-4">
+          03
+         </div>
+         <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="activity" style="width:20px;height:20px;color:#e0d2b3;"></i>
+         </div>
+         <h3 class="text-white font-bold text-lg mb-3">On the Track</h3>
+         <p class="text-[#727272] text-sm leading-relaxed">Real-world testing and performance validation. Data-driven iteration to perfect race strategy and vehicle dynamics.</p>
+        </div>
+       </div>
+      </div>
+     </section>
+   </main>
+
+   <!-- FOOTER -->
+   <footer class="w-full bg-[#000000] border-t border-[#1e1e1e]">
+    <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+     <div class="flex items-center gap-3">
+      <div class="w-6 h-6 bg-[#e0d2b3] rounded-sm flex items-center justify-center">
+       <svg width="12" height="12" viewbox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+       </svg>
+      </div><span class="text-sm text-[#636363] font-mono">© 2026 Aerostorm racing</span>
+     </div>
+     <div class="text-xs text-[#434343] font-mono tracking-wide">
+      ENGINEERED WITH PRECISION
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script src="script.js"></script>
+ </body>
+</html>
