@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>aerostorm Racing</title>
+  <meta property="og:title" content="aerostorm racing | STEM Racing">
+  <meta property="og:description" content="Official website for our F1 in Schools journey. Exploring engineering, speed, and innovation.">
+  <meta property="og:image" content="aerostormLogoFinal.png">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
@@ -26,26 +29,38 @@
         <span style="margin-top: 1px; font-size: 1.5rem;" class="font-racing">racing</span>
        </a>
      </div>
-     <div class="hidden md:flex items-center gap-8"><a href="#about" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">About</a> <a href="#engineering" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Engineering</a> <a href="#season" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Season</a> <a href="#team" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Team</a> <a href="#sponsors" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Sponsors</a> <a href="#sponsor-us" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Sponsor Us</a> <a href="#contact" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Contact</a>
+     <div class="hidden md:flex items-center gap-8"><a href="#about" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">About</a> <a href="Updates.html" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Updates</a> <a href="#engineering" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Engineering</a> <a href="#season" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Season</a> <a href="#team" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Team</a> <a href="#sponsors" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Sponsors</a> <a href="#sponsor-us" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Sponsor Us</a> <a href="#contact" class="nav-link text-sm font-medium text-[#bababa] tracking-wide uppercase">Contact</a>
      </div><button id="mobile-menu-btn" class="md:hidden text-[#bababa]" aria-label="Menu"> <i data-lucide="menu" style="width:24px;height:24px;"></i> </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-[#111111] border-t border-[#1e1e1e] px-6 py-4 flex flex-col gap-3"><a href="#about" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">About</a> <a href="#engineering" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Engineering</a> <a href="#season" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Season</a> <a href="#team" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Team</a> <a href="#sponsors" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Sponsors</a> <a href="#sponsor-us" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Sponsor Us</a> <a href="#contact" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Contact</a>
+    <div id="mobile-menu" class="hidden md:hidden bg-[#111111] border-t border-[#1e1e1e] px-6 py-4 flex flex-col gap-3"><a href="#about" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">About</a> <a href="Updates.html" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Updates</a> <a href="#engineering" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Engineering</a> <a href="#season" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Season</a> <a href="#team" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Team</a> <a href="#sponsors" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Sponsors</a> <a href="#sponsor-us" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Sponsor Us</a> <a href="#contact" class="text-sm text-[#bababa] hover:text-[#e0d2b3]">Contact</a>
      </div>
    </nav><!-- HERO -->
-   <header class="relative w-full hero-grid" style="min-height:90%; display:flex; align-items:center;">
+   <header class="relative w-full hero-grid" style="min-height:90%; display:flex; align-items:flex-end;">
     <div class="absolute inset-0 bg-gradient-to-br from-[#000000] via-[#0a0a0a] to-[#111111]" style="z-index:0;"></div>
     <div class="absolute top-0 right-0 w-1/3 h-full stripe-accent" style="z-index:1;"></div>
     <div class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#e0d2b3] to-transparent" style="z-index:2; animation: lineGrow 1.2s ease-out 0.5s both;"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-6 py-32 md:py-0 w-full">
-     <div class="flex flex-col gap-6">
-      <div class="anim-slide-in flex items-center gap-3">
+    <div class="relative z-10 max-w-7xl mx-auto px-6 pb-0 w-full">
+     <div class="flex flex-col gap-6 pt-32">
+      <div class="flex items-center gap-3">
        <div class="w-12 h-[2px] bg-[#e0d2b3]"></div><span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Formula 1 · STEM · Innovation</span>
       </div>
-      <h1 id="hero-title" class="anim-fade-up text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[0.95]">
-        <br><img src="aerostormLogoNoBG.png" alt="Aerostorm" class="h-16 md:h-24 lg:h-28 w-auto inline-block align-middle">
+      <h1 id="hero-title" class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[0.95]">
+        <img src="aerostormLogoNoBG.png" alt="Aerostorm" class="h-16 md:h-24 lg:h-28 w-auto inline-block align-middle">
         <span class="font-racing" style="font-size: 0.9em; position: relative; top: 5px;">racing</span></h1>
-      <p id="hero-tagline" class="anim-fade-up-d1 text-lg md:text-xl text-[#bababa] max-w-xl font-light leading-relaxed">Engineering the future of motorsport through science, technology, and relentless innovation.</p>
-      <div class="anim-fade-up-d2 flex flex-wrap gap-4 mt-4"><a href="#about" class="inline-flex items-center gap-2 bg-[#e0d2b3] text-[#000000] px-6 py-3 text-sm font-bold tracking-wide uppercase hover:bg-[#d0bd92] transition-colors rounded-sm"> Discover More <i data-lucide="arrow-right" style="width:16px;height:16px;"></i> </a> <a href="#engineering" class="inline-flex items-center gap-2 border border-[#434343] text-[#d9d9d9] px-6 py-3 text-sm font-bold tracking-wide uppercase hover:border-[#e0d2b3] hover:text-[#e0d2b3] transition-colors rounded-sm"> Our Engineering </a> <a href="#sponsors" class="inline-flex items-center gap-2 border border-[#434343] text-[#d9d9d9] px-6 py-3 text-sm font-bold tracking-wide uppercase hover:border-[#e0d2b3] hover:text-[#e0d2b3] transition-colors rounded-sm"> Our Sponsors </a>
+      <p id="hero-tagline" class="text-lg md:text-xl text-[#bababa] max-w-xl font-light leading-relaxed">Engineering the future of motorsport through science, technology, and relentless innovation.</p>
+      <div class="flex flex-wrap gap-4 mt-4 mb-0">
+        <a href="#about" class="group inline-flex items-center border border-[#434343] text-[#d9d9d9] px-6 py-3 text-sm font-bold tracking-wide uppercase hover:bg-[#e0d2b3] hover:text-[#000000] hover:border-[#e0d2b3] transition-all duration-300 rounded-sm">
+          Discover More 
+          <i data-lucide="arrow-right" class="w-0 opacity-0 group-hover:w-4 group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 overflow-hidden" style="height:16px;"></i>
+        </a> 
+        <a href="#engineering" class="group inline-flex items-center border border-[#434343] text-[#d9d9d9] px-6 py-3 text-sm font-bold tracking-wide uppercase hover:bg-[#e0d2b3] hover:text-[#000000] hover:border-[#e0d2b3] transition-all duration-300 rounded-sm">
+          Our Engineering 
+          <i data-lucide="arrow-right" class="w-0 opacity-0 group-hover:w-4 group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 overflow-hidden" style="height:16px;"></i>
+        </a> 
+        <a href="#sponsors" class="group inline-flex items-center border border-[#434343] text-[#d9d9d9] px-6 py-3 text-sm font-bold tracking-wide uppercase hover:bg-[#e0d2b3] hover:text-[#000000] hover:border-[#e0d2b3] transition-all duration-300 rounded-sm">
+          Our Sponsors 
+          <i data-lucide="arrow-right" class="w-0 opacity-0 group-hover:w-4 group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 overflow-hidden" style="height:16px;"></i>
+        </a>
       </div>
      </div>
     </div>
@@ -115,7 +130,7 @@
     </div>
    </section><!-- TIMELINE / SEASON -->
    <section id="season" class="w-full bg-[#000000] scroll-section">
-    <div class="max-w-7xl mx-auto px-6 py-24 md:py-32"><span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">2025 Season</span>
+    <div class="max-w-7xl mx-auto px-6 py-24 md:py-32"><span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">2026 Season</span>
      <h2 class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-12">Race Calendar</h2>
      <div class="space-y-0">
       <div class="flex items-center gap-6 py-5 border-b border-[#1e1e1e] hover:bg-[#111111]/50 transition-colors px-4 rounded-sm group">
@@ -135,11 +150,11 @@
      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       <div class="group relative bg-[#111111] rounded-sm overflow-hidden card-hover border border-[#1e1e1e]">
        <div class="aspect-square bg-gradient-to-br from-[#e0d2b3] to-[#c4a76a] flex items-center justify-center">
-        <span class="text-4xl font-black text-[#000000]">AT</span>
+        <span class="text-4xl font-black text-[#000000]">AS</span>
        </div>
        <div class="p-4">
         <div class="text-white font-bold text-sm">
-         Aryan Trehan
+         Abhiraj Sinha
         </div>
         <div class="text-[#d0bd92] text-xs font-mono mt-1">
          Project Manager
@@ -187,11 +202,11 @@
       </div>
       <div class="group relative bg-[#111111] rounded-sm overflow-hidden card-hover border border-[#1e1e1e]">
        <div class="aspect-square bg-gradient-to-br from-[#6bb6d6] to-[#3b9dd8] flex items-center justify-center">
-        <span class="text-4xl font-black text-[#ffffff]">AS</span>
+        <span class="text-4xl font-black text-[#ffffff]">AT</span>
        </div>
        <div class="p-4">
         <div class="text-white font-bold text-sm">
-         Abhiraj Sinha
+         Aryan Trehan
         </div>
         <div class="text-[#d0bd92] text-xs font-mono mt-1">
          Manufacturing &amp; Engineering
