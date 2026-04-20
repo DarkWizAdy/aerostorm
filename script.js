@@ -50,9 +50,15 @@ function applyConfig(config) {
     }
   }
 
-  document.getElementById('hero-tagline').textContent = c.hero_tagline;
-  document.getElementById('about-heading').innerHTML = c.about_heading.replace('.', '.<br>');
-  document.getElementById('about-text').textContent = c.about_text;
+  if (document.getElementById('hero-tagline')) {
+    document.getElementById('hero-tagline').textContent = c.hero_tagline;
+  }
+  if (document.getElementById('about-heading')) {
+    document.getElementById('about-heading').innerHTML = c.about_heading.replace('.', '.<br>');
+  }
+  if (document.getElementById('about-text')) {
+    document.getElementById('about-text').textContent = c.about_text;
+  }
   document.body.style.backgroundColor = c.background_color;
   document.body.style.color = c.text_color;
   const fontStack = `${c.font_family}, sans-serif`;
