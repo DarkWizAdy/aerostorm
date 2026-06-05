@@ -68,65 +68,116 @@
    <main class="w-full bg-[#0a0a0a] min-h-screen">
     <div class="max-w-7xl mx-auto px-6 py-16">
       <div class="grid gap-12">
-        <!-- Update Card 1 -->
+        <!-- New Update: Started work on new car -->
         <article class="grid md:grid-cols-[300px_1fr] gap-8 items-start group">
           <div class="aspect-video md:aspect-square bg-[#111111] border border-[#1e1e1e] rounded-sm overflow-hidden">
             <div class="w-full h-full flex items-center justify-center text-[#2c2c2c]">
-              <i data-lucide="image" style="width:48px;height:48px;"></i>
+              <i data-lucide="tool" style="width:48px;height:48px;"></i>
             </div>
           </div>
           <div class="flex flex-col gap-3">
             <div class="flex items-center gap-4">
-              <span class="font-mono text-xs text-[#d0bd92]">APRIL 19, 2026</span>
+              <span class="font-mono text-xs text-[#d0bd92]">JUNE 01, 2026</span>
               <span class="px-2 py-0.5 rounded-full border border-[#e0d2b3]/20 text-[10px] text-[#e0d2b3] font-mono uppercase">Engineering</span>
             </div>
-            <h2 class="text-2xl font-bold text-white group-hover:text-[#e0d2b3] transition-colors underline-offset-4 group-hover:underline">Finalizing the Rear Wing Assembly</h2>
-            <p class="text-[#727272] leading-relaxed">Today we completed the third iteration of our rear wing assembly. Using CFD analysis, we've managed to reduce drag by 4% while maintaining the necessary downforce for tight corners.</p>
+            <h2 class="text-2xl font-bold text-white group-hover:text-[#e0d2b3] transition-colors underline-offset-4 group-hover:underline">Started Work on New Car</h2>
+            <p class="text-[#727272] leading-relaxed">The team has kicked off development of our next-generation car platform. Initial CAD and concept work began on June 1.</p>
             <a href="#" class="inline-flex items-center gap-2 text-sm font-bold text-[#e0d2b3] mt-2">Read Full Update <i data-lucide="arrow-right" style="width:14px;height:14px;"></i></a>
           </div>
         </article>
 
-        <!-- Update Card 2 -->
+        <!-- New Update: Acquired new sponsors -->
         <article class="grid md:grid-cols-[300px_1fr] gap-8 items-start group border-t border-[#1e1e1e] pt-12">
           <div class="aspect-video md:aspect-square bg-[#111111] border border-[#1e1e1e] rounded-sm overflow-hidden">
             <div class="w-full h-full flex items-center justify-center text-[#2c2c2c]">
-              <i data-lucide="users" style="width:48px;height:48px;"></i>
+              <img src="ITSS Logo.png" alt="ITSS Sponsor" class="h-full w-full object-contain">
             </div>
           </div>
           <div class="flex flex-col gap-3">
             <div class="flex items-center gap-4">
-              <span class="font-mono text-xs text-[#d0bd92]">APRIL 12, 2026</span>
-              <span class="px-2 py-0.5 rounded-full border border-[#e0d2b3]/20 text-[10px] text-[#e0d2b3] font-mono uppercase">Team News</span>
+              <span class="font-mono text-xs text-[#d0bd92]">MAY 7, 2026</span>
+              <span class="px-2 py-0.5 rounded-full border border-[#e0d2b3]/20 text-[10px] text-[#e0d2b3] font-mono uppercase">Sponsorship</span>
             </div>
-            <h2 class="text-2xl font-bold text-white group-hover:text-[#e0d2b3] transition-colors underline-offset-4 group-hover:underline">New Sponsorship Partnership Announced</h2>
-            <p class="text-[#727272] leading-relaxed">We are thrilled to welcome our newest Gold Tier sponsor. This partnership will provide the resources needed for our advanced carbon fiber manufacturing process.</p>
+            <h2 class="text-2xl font-bold text-white group-hover:text-[#e0d2b3] transition-colors underline-offset-4 group-hover:underline">Acquired New Sponsors</h2>
+            <p class="text-[#727272] leading-relaxed">We have secured an additional sponsor, ITSS, to strengthen our manufacturing and outreach efforts. Welcome aboard to all new partners.</p>
             <a href="#" class="inline-flex items-center gap-2 text-sm font-bold text-[#e0d2b3] mt-2">Read Full Update <i data-lucide="arrow-right" style="width:14px;height:14px;"></i></a>
           </div>
         </article>
 
-        <!-- Update Card 3 -->
-        <article class="grid md:grid-cols-[300px_1fr] gap-8 items-start group border-t border-[#1e1e1e] pt-12">
-          <div class="aspect-video md:aspect-square bg-[#111111] border border-[#1e1e1e] rounded-sm overflow-hidden">
-            <div class="w-full h-full flex items-center justify-center text-[#2c2c2c]">
-              <i data-lucide="zap" style="width:48px;height:48px;"></i>
+        <!-- Older updates (hidden behind Load More) -->
+        <div id="older-updates" class="hidden">
+          <!-- Update Card 1 -->
+          <article class="grid md:grid-cols-[300px_1fr] gap-8 items-start group">
+            <div class="aspect-video md:aspect-square bg-[#111111] border border-[#1e1e1e] rounded-sm overflow-hidden">
+              <div class="w-full h-full flex items-center justify-center text-[#2c2c2c]">
+                <i data-lucide="image" style="width:48px;height:48px;"></i>
+              </div>
             </div>
-          </div>
-          <div class="flex flex-col gap-3">
-            <div class="flex items-center gap-4">
-              <span class="font-mono text-xs text-[#d0bd92]">MARCH 28, 2026</span>
-              <span class="px-2 py-0.5 rounded-full border border-[#e0d2b3]/20 text-[10px] text-[#e0d2b3] font-mono uppercase">Competition</span>
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-4">
+                <span class="font-mono text-xs text-[#d0bd92]">APRIL 19, 2026</span>
+                <span class="px-2 py-0.5 rounded-full border border-[#e0d2b3]/20 text-[10px] text-[#e0d2b3] font-mono uppercase">Engineering</span>
+              </div>
+              <h2 class="text-2xl font-bold text-white group-hover:text-[#e0d2b3] transition-colors underline-offset-4 group-hover:underline">Finalizing the Rear Wing Assembly</h2>
+              <p class="text-[#727272] leading-relaxed">Today we completed the third iteration of our rear wing assembly. Using CFD analysis, we've managed to reduce drag by 4% while maintaining the necessary downforce for tight corners.</p>
+              <a href="#" class="inline-flex items-center gap-2 text-sm font-bold text-[#e0d2b3] mt-2">Read Full Update <i data-lucide="arrow-right" style="width:14px;height:14px;"></i></a>
             </div>
-            <h2 class="text-2xl font-bold text-white group-hover:text-[#e0d2b3] transition-colors underline-offset-4 group-hover:underline">Preparation for Regional Qualifiers</h2>
-            <p class="text-[#727272] leading-relaxed">The team is working around the clock to finalize the car for the upcoming Delhi NCR Regional Qualifiers. Testing phase has officially begun.</p>
-            <a href="#" class="inline-flex items-center gap-2 text-sm font-bold text-[#e0d2b3] mt-2">Read Full Update <i data-lucide="arrow-right" style="width:14px;height:14px;"></i></a>
-          </div>
-        </article>
+          </article>
+
+          <!-- Update Card 2 -->
+          <article class="grid md:grid-cols-[300px_1fr] gap-8 items-start group border-t border-[#1e1e1e] pt-12">
+            <div class="aspect-video md:aspect-square bg-[#111111] border border-[#1e1e1e] rounded-sm overflow-hidden">
+              <div class="w-full h-full flex items-center justify-center text-[#2c2c2c]">
+                <i data-lucide="users" style="width:48px;height:48px;"></i>
+              </div>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-4">
+                <span class="font-mono text-xs text-[#d0bd92]">APRIL 12, 2026</span>
+                <span class="px-2 py-0.5 rounded-full border border-[#e0d2b3]/20 text-[10px] text-[#e0d2b3] font-mono uppercase">Team News</span>
+              </div>
+              <h2 class="text-2xl font-bold text-white group-hover:text-[#e0d2b3] transition-colors underline-offset-4 group-hover:underline">New Sponsorship Partnership Announced</h2>
+              <p class="text-[#727272] leading-relaxed">We are thrilled to welcome our newest Gold Tier sponsor. This partnership will provide the resources needed for our advanced carbon fiber manufacturing process.</p>
+              <a href="#" class="inline-flex items-center gap-2 text-sm font-bold text-[#e0d2b3] mt-2">Read Full Update <i data-lucide="arrow-right" style="width:14px;height:14px;"></i></a>
+            </div>
+          </article>
+
+          <!-- Update Card 3 -->
+          <article class="grid md:grid-cols-[300px_1fr] gap-8 items-start group border-t border-[#1e1e1e] pt-12">
+            <div class="aspect-video md:aspect-square bg-[#111111] border border-[#1e1e1e] rounded-sm overflow-hidden">
+              <div class="w-full h-full flex items-center justify-center text-[#2c2c2c]">
+                <i data-lucide="zap" style="width:48px;height:48px;"></i>
+              </div>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-4">
+                <span class="font-mono text-xs text-[#d0bd92]">MARCH 28, 2026</span>
+                <span class="px-2 py-0.5 rounded-full border border-[#e0d2b3]/20 text-[10px] text-[#e0d2b3] font-mono uppercase">Competition</span>
+              </div>
+              <h2 class="text-2xl font-bold text-white group-hover:text-[#e0d2b3] transition-colors underline-offset-4 group-hover:underline">Preparation for Regional Qualifiers</h2>
+              <p class="text-[#727272] leading-relaxed">The team is working around the clock to finalize the car for the upcoming Delhi NCR Regional Qualifiers. Testing phase has officially begun.</p>
+              <a href="#" class="inline-flex items-center gap-2 text-sm font-bold text-[#e0d2b3] mt-2">Read Full Update <i data-lucide="arrow-right" style="width:14px;height:14px;"></i></a>
+            </div>
+          </article>
+        </div>
       </div>
 
       <!-- Pagination/More -->
       <div class="mt-16 flex justify-center">
-        <button class="border border-[#434343] text-[#bababa] px-8 py-3 text-sm font-bold tracking-wide uppercase hover:border-[#e0d2b3] hover:text-[#e0d2b3] transition-colors rounded-sm">Load More Updates</button>
+        <button id="load-more-updates" class="border border-[#434343] text-[#bababa] px-8 py-3 text-sm font-bold tracking-wide uppercase hover:border-[#e0d2b3] hover:text-[#e0d2b3] transition-colors rounded-sm">Load More Updates</button>
       </div>
+
+      <script>
+        (function(){
+          var btn = document.getElementById('load-more-updates');
+          var older = document.getElementById('older-updates');
+          if(!btn || !older) return;
+          btn.addEventListener('click', function(){
+            var isHidden = older.classList.toggle('hidden');
+            btn.textContent = isHidden ? 'Load More Updates' : 'Show Less';
+          });
+        })();
+      </script>
     </div>
    </main>
 
