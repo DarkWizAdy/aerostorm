@@ -161,19 +161,14 @@
   </div>
 
   <script src="script.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
   <script>
     const grid = document.getElementById('grid');
     const empty = document.getElementById('empty');
-    let socket;
-
-    try {
-      socket = io();
-    } catch (e) {
-      console.log('Socket.io not available');
-    }
+    const knownPhotos = new Set();
 
     function addPhoto(url) {
+      if (knownPhotos.has(url)) return;
+      knownPhotos.add(url);
       if (empty) empty.remove();
       const tile = document.createElement('div');
       tile.className = 'tile';
@@ -186,19 +181,25 @@
       grid.scrollTop = grid.scrollHeight;
     }
 
-    // Load any photos already taken
-    if (socket) {
-      fetch('/photos-list')
-        .then(r => r.json())
-        .then(urls => urls.forEach(addPhoto))
-        .catch(() => {
-          // Fallback - add some placeholder content if no server
-          console.log('No photos available');
-        });
+    const apiBase = window.location.port === '8000' ? window.location.origin : 'http://localhost:8000';
 
-      // Live updates as new photos come in
-      socket.on('new-photo', addPhoto);
+    function loadPhotos() {
+      fetch(`${apiBase}/photos-list`)
+        .then((response) => {
+          if (!response.ok) throw new Error('Failed to load photos');
+          return response.json();
+        })
+        .then((urls) => {
+          if (!Array.isArray(urls) || urls.length === 0) return;
+          urls.forEach(addPhoto);
+        })
+        .catch(() => {
+          console.log('No photos available from server yet');
+        });
     }
+
+    loadPhotos();
+    setInterval(loadPhotos, 3000);
   </script>
 </body>
 </html>
