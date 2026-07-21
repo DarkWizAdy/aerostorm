@@ -94,9 +94,13 @@ if (window.elementSdk) {
   });
 }
 
-document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-  document.getElementById('mobile-menu').classList.toggle('hidden');
-});
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+if (mobileMenuBtn && mobileMenu) {
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+}
 
 function handleForm(formId, successId) {
   const form = document.getElementById(formId);
