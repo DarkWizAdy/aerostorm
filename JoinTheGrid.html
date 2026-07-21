@@ -75,6 +75,38 @@
     #success { display: none; }
     #success.active { display: flex; flex-direction: column; align-items: center; gap: 10px; }
     #success .flag { font-size: 3.2rem; line-height: 1; }
+    .camera-preview {
+      width: min(100%, 560px);
+      aspect-ratio: 4 / 3;
+      border-radius: 1.5rem;
+      background: #111111;
+      object-fit: cover;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+    }
+    #cameraButton {
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      border: none;
+      background: var(--primary-gold);
+      color: #000000;
+      font-family: 'MuseoModerno', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      box-shadow: 0 0 0 8px rgba(224, 210, 179, 0.18), 0 12px 30px rgba(0, 0, 0, 0.35);
+      transition: transform 0.15s ease, background 0.3s ease;
+      user-select: none;
+    }
+    #cameraButton:hover { background: #d0bd92; }
+    #cameraButton:active { transform: scale(0.96); }
+    .captured-photo {
+      width: min(100%, 560px);
+      border-radius: 1.5rem;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+    }
     .hidden { display: none !important; }
   </style>
 </head>
@@ -144,8 +176,9 @@
             <div id="idle" class="hidden">
             </div>
 
-            <label id="captureLabel" class="">TAP&nbsp;TO<br>SNAP</label>
-            <input id="fileInput" type="file" accept="image/*" capture="environment">
+            <video id="cameraPreview" class="camera-preview hidden" autoplay playsinline muted></video>
+            <button id="captureLabel" type="button" class="">TAP&nbsp;TO<br>SNAP</button>
+            <button id="cameraButton" type="button" class="hidden">CAPTURE</button>
 
             <div id="lights" class="">
               <div class="bulb" id="b1"></div>
@@ -166,10 +199,15 @@
 
           <div class="checker w-full"></div>
 
-          <a href="PitWall.html" class="group inline-flex items-center border border-[#434343] text-[#d9d9d9] px-8 py-4 text-sm font-bold tracking-wide uppercase hover:bg-[#e0d2b3] hover:text-[#000000] hover:border-[#e0d2b3] transition-all duration-300 rounded-sm">
-            View Pit Wall
-            <i data-lucide="arrow-right" class="w-0 opacity-0 group-hover:w-4 group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 overflow-hidden" style="height:16px;"></i>
-          </a>
+          <div class="flex flex-col gap-4 items-center">
+            <a href="PitWall.html" class="group inline-flex items-center border border-[#434343] text-[#d9d9d9] px-8 py-4 text-sm font-bold tracking-wide uppercase hover:bg-[#e0d2b3] hover:text-[#000000] hover:border-[#e0d2b3] transition-all duration-300 rounded-sm">
+              View Pit Wall
+              <i data-lucide="arrow-right" class="w-0 opacity-0 group-hover:w-4 group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 overflow-hidden" style="height:16px;"></i>
+            </a>
+            <button id="clearWallButton" type="button" class="inline-flex items-center border border-[#434343] text-[#d9d9d9] px-8 py-4 text-sm font-bold tracking-wide uppercase hover:bg-[#e0d2b3] hover:text-[#000000] hover:border-[#e0d2b3] transition-all duration-300 rounded-sm">
+              Clear Wall
+            </button>
+          </div>
         </div>
       </div>
     </header>
@@ -194,35 +232,84 @@
 
   <script src="script.js"></script>
   <script>
+    const apiBase = window.location.port === '8000' ? window.location.origin : 'http://localhost:8000';
     const idle = document.getElementById('idle');
     const captureLabel = document.getElementById('captureLabel');
-    const fileInput = document.getElementById('fileInput');
+    const cameraPreview = document.getElementById('cameraPreview');
+    const cameraButton = document.getElementById('cameraButton');
     const lights = document.getElementById('lights');
     const bulbs = [1,2,3,4,5].map(n => document.getElementById('b'+n));
     const statusText = document.getElementById('statusText');
     const success = document.getElementById('success');
+    const clearWallButton = document.getElementById('clearWallButton');
+    let stream = null;
 
     window.addEventListener('load', () => {
       idle.classList.add('hidden');
       captureLabel.classList.remove('hidden');
+      if (clearWallButton) {
+        clearWallButton.addEventListener('click', clearWall);
+      }
     });
 
-    captureLabel.addEventListener('click', () => fileInput.click());
+    captureLabel.addEventListener('click', openCamera);
+    cameraButton.addEventListener('click', captureFromCamera);
 
-    fileInput.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
+    async function openCamera() {
+      if (!navigator.mediaDevices?.getUserMedia) {
+        statusText.textContent = 'Camera not supported on this device.';
+        return;
+      }
 
+      captureLabel.disabled = true;
+      statusText.textContent = 'Opening camera...';
+
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+        cameraPreview.srcObject = stream;
+        cameraPreview.classList.remove('hidden');
+        cameraButton.classList.remove('hidden');
+        captureLabel.classList.add('hidden');
+        statusText.textContent = '';
+
+        await new Promise((resolve) => {
+          if (cameraPreview.readyState >= 2) return resolve();
+          cameraPreview.addEventListener('loadeddata', resolve, { once: true });
+        });
+      } catch (err) {
+        console.error('Camera open failed:', err);
+        statusText.textContent = 'Camera unavailable. Refresh and allow access.';
+      } finally {
+        captureLabel.disabled = false;
+      }
+    }
+
+    async function captureFromCamera() {
+      if (!stream) return;
+      if (cameraPreview.readyState < 2) {
+        statusText.textContent = 'Waiting for camera...';
+        await new Promise((resolve) => cameraPreview.addEventListener('loadeddata', resolve, { once: true }));
+      }
+
+      cameraPreview.classList.add('hidden');
+      cameraButton.classList.add('hidden');
+
+      const videoWidth = cameraPreview.videoWidth || 1280;
+      const videoHeight = cameraPreview.videoHeight || 720;
+      const canvas = document.createElement('canvas');
+      canvas.width = videoWidth;
+      canvas.height = videoHeight;
+      canvas.getContext('2d').drawImage(cameraPreview, 0, 0, videoWidth, videoHeight);
+
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+      await processImageDataUrl(dataUrl);
+    }
+
+
+    async function processImageDataUrl(dataUrl) {
       captureLabel.classList.add('hidden');
       lights.classList.add('active');
       statusText.textContent = 'Get ready...';
-
-      const readPromise = new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
 
       for (let i = 0; i < bulbs.length; i++) {
         await sleep(280);
@@ -233,14 +320,16 @@
       statusText.textContent = 'Sending...';
 
       try {
-        const dataUrl = await readPromise;
         const resized = await resizeImage(dataUrl, 1000);
-        const res = await fetch('/upload', {
+        const res = await fetch(`${apiBase}/upload`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ image: resized })
         });
-        if (!res.ok) throw new Error('Upload failed');
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(`Upload failed (${res.status}): ${text}`);
+        }
 
         lights.classList.remove('active');
         bulbs.forEach(b => b.classList.remove('go'));
@@ -249,10 +338,11 @@
 
         setTimeout(resetForNextPerson, 3000);
       } catch (err) {
-        statusText.textContent = 'Something went wrong — try again';
+        console.error('Upload failed:', err);
+        statusText.textContent = 'Upload failed — check server';
         setTimeout(resetForNextPerson, 2000);
       }
-    });
+    }
 
     function resetForNextPerson() {
       success.classList.remove('active');
@@ -260,7 +350,28 @@
       bulbs.forEach(b => { b.classList.remove('on'); b.classList.remove('go'); });
       statusText.textContent = '';
       captureLabel.classList.remove('hidden');
-      fileInput.value = '';
+      cameraButton.classList.add('hidden');
+      cameraPreview.classList.add('hidden');
+      stopCameraStream();
+    }
+
+    function stopCameraStream() {
+      if (!stream) return;
+      stream.getTracks().forEach(track => track.stop());
+      stream = null;
+    }
+
+    async function clearWall() {
+      try {
+        const res = await fetch(`${apiBase}/clear-photos`, { method: 'POST' });
+        if (!res.ok) throw new Error('Clear failed');
+        statusText.textContent = 'Wall cleared.';
+        setTimeout(() => { statusText.textContent = ''; }, 2000);
+      } catch (err) {
+        console.error('Clear failed:', err);
+        statusText.textContent = 'Could not clear wall.';
+        setTimeout(() => { statusText.textContent = ''; }, 2000);
+      }
     }
 
     function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
