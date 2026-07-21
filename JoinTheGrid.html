@@ -232,7 +232,6 @@
 
   <script src="script.js"></script>
   <script>
-    const apiBase = window.location.port === '8000' ? window.location.origin : 'http://localhost:8000';
     const idle = document.getElementById('idle');
     const captureLabel = document.getElementById('captureLabel');
     const cameraPreview = document.getElementById('cameraPreview');
@@ -321,15 +320,11 @@
 
       try {
         const resized = await resizeImage(dataUrl, 1000);
-        const res = await fetch(`${apiBase}/upload`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ image: resized })
-        });
-        if (!res.ok) {
-          const text = await res.text();
-          throw new Error(`Upload failed (${res.status}): ${text}`);
-        }
+        
+        // Store to localStorage
+        const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+        photos.push(resized);
+        localStorage.setItem('photos', JSON.stringify(photos));
 
         lights.classList.remove('active');
         bulbs.forEach(b => b.classList.remove('go'));
@@ -339,7 +334,7 @@
         setTimeout(resetForNextPerson, 3000);
       } catch (err) {
         console.error('Upload failed:', err);
-        statusText.textContent = 'Upload failed — check server';
+        statusText.textContent = 'Upload failed';
         setTimeout(resetForNextPerson, 2000);
       }
     }
@@ -363,8 +358,7 @@
 
     async function clearWall() {
       try {
-        const res = await fetch(`${apiBase}/clear-photos`, { method: 'POST' });
-        if (!res.ok) throw new Error('Clear failed');
+        localStorage.setItem('photos', JSON.stringify([]));
         statusText.textContent = 'Wall cleared.';
         setTimeout(() => { statusText.textContent = ''; }, 2000);
       } catch (err) {
