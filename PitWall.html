@@ -181,21 +181,10 @@
       grid.scrollTop = grid.scrollHeight;
     }
 
-    const apiBase = window.location.port === '8000' ? window.location.origin : 'http://localhost:8000';
-
     function loadPhotos() {
-      fetch(`${apiBase}/photos-list`)
-        .then((response) => {
-          if (!response.ok) throw new Error('Failed to load photos');
-          return response.json();
-        })
-        .then((urls) => {
-          if (!Array.isArray(urls) || urls.length === 0) return;
-          urls.forEach(addPhoto);
-        })
-        .catch(() => {
-          console.log('No photos available from server yet');
-        });
+      const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+      if (!Array.isArray(photos) || photos.length === 0) return;
+      photos.forEach(addPhoto);
     }
 
     loadPhotos();
