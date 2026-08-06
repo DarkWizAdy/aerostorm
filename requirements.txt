@@ -1,0 +1,2 @@
+# No external Python packages required for server.py
+# Uses only Python standard library (http.server, json, os)
