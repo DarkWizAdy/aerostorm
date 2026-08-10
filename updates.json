@@ -1,0 +1,57 @@
+[
+  {
+    "id": "started-work-on-new-car",
+    "date": "2026-06-01",
+    "displayDate": "JUNE 01, 2026",
+    "title": "Started Work on New Car",
+    "category": "Engineering",
+    "summary": "The team has kicked off development of our next-generation car platform. Initial CAD and concept work began on June 1.",
+    "icon": "wrench",
+    "image": null,
+    "pdf": null
+  },
+  {
+    "id": "acquired-new-sponsors",
+    "date": "2026-05-07",
+    "displayDate": "MAY 7, 2026",
+    "title": "Acquired New Sponsors",
+    "category": "Sponsorship",
+    "summary": "We have secured an additional sponsor, ITSS, to strengthen our manufacturing and outreach efforts. Welcome aboard to all new partners.",
+    "icon": null,
+    "image": "ITSS Logo.png",
+    "pdf": null
+  },
+  {
+    "id": "finalizing-rear-wing-assembly",
+    "date": "2026-04-19",
+    "displayDate": "APRIL 19, 2026",
+    "title": "Finalizing the Rear Wing Assembly",
+    "category": "Engineering",
+    "summary": "Today we completed the third iteration of our rear wing assembly. Using CFD analysis, we've managed to reduce drag by 4% while maintaining the necessary downforce for tight corners.",
+    "icon": "image",
+    "image": null,
+    "pdf": null
+  },
+  {
+    "id": "new-sponsorship-partnership-announced",
+    "date": "2026-04-12",
+    "displayDate": "APRIL 12, 2026",
+    "title": "New Sponsorship Partnership Announced",
+    "category": "Team News",
+    "summary": "We are thrilled to welcome our newest Gold Tier sponsor. This partnership will provide the resources needed for our advanced carbon fiber manufacturing process.",
+    "icon": "users",
+    "image": null,
+    "pdf": null
+  },
+  {
+    "id": "preparation-for-regional-qualifiers",
+    "date": "2026-03-28",
+    "displayDate": "MARCH 28, 2026",
+    "title": "Preparation for Regional Qualifiers",
+    "category": "Competition",
+    "summary": "The team is working around the clock to finalize the car for the upcoming Delhi NCR Regional Qualifiers. Testing phase has officially begun.",
+    "icon": "zap",
+    "image": null,
+    "pdf": null
+  }
+]

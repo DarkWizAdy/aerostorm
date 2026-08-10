@@ -18,9 +18,37 @@ Welcome to the Aerostorm Racing Team website! This is a student-led F1 STEM raci
 
 ### 📱 Other Pages
 - **HomePage.html**: Landing page with team information
-- **Engineering.html**: Technical details and project specs
+- **Engineering.html**: The engineering story behind AR Ventus 2.27 and AR Nimbus 4.51 — CAD process, aerodynamics, materials, and lessons learned
 - **Sponsorship.html**: Sponsorship opportunities
-- **Updates.html**: Latest team news and updates
+- **Updates.html**: Team news feed, rendered from [`updates.json`](#updatesjson--pdf-drop-automation) — see below for how new cards get added
+
+## updates.json & PDF-drop automation
+
+`Updates.html` doesn't hand-code its cards — it fetches [`updates.json`](updates.json) and renders each entry as a card (date, category pill, title, summary, and a "Read Full Update" link). The first two entries (by date) show by default; the rest sit behind the "Load More" button.
+
+> Because it fetches a JSON file, `Updates.html` needs to be served over `http://`, not opened directly as a `file://` path — browsers block that fetch otherwise. Run `python server.py` (or any static server) and open it from there.
+
+Each entry looks like:
+```json
+{
+  "id": "kebab-case-slug",
+  "date": "2026-06-01",
+  "displayDate": "JUNE 01, 2026",
+  "title": "Started Work on New Car",
+  "category": "Engineering",
+  "summary": "2-3 sentence summary.",
+  "icon": "wrench",
+  "image": null,
+  "pdf": null
+}
+```
+
+New cards can also be generated automatically from PDFs:
+1. Drop a PDF (sponsor announcement, design report, competition recap, etc.) into `updates-pdfs/`.
+2. Once a day at midnight, a Windows Scheduled Task runs `scripts/run-pdf-check.ps1`, which invokes Claude Code headlessly (`claude -p`) with the instructions in `scripts/process-update-pdfs.md`.
+3. Claude reads any PDF not already listed in `updates-manifest.json`, writes a title/summary/category/date, and appends a new entry to `updates.json` linking back to the PDF. The manifest is updated so the same PDF is never reprocessed.
+
+See `updates-pdfs/README.md` and `scripts/process-update-pdfs.md` for details, and `scripts/run-pdf-check.ps1` for the scheduled task itself.
 
 ## Getting Started
 
@@ -99,18 +127,25 @@ Photo appears on all connected devices
 
 ```
 aerostorm-website/
-├── HomePage.html          # Landing page
-├── JoinTheGrid.html       # Camera capture interface
-├── PitWall.html           # Photo gallery
-├── Engineering.html       # Tech specs
-├── Sponsorship.html       # Sponsorship info
-├── Updates.html           # News/updates
-├── script.js              # Shared JavaScript utilities
-├── styles.css             # Global styles
-├── server.py              # Python HTTP backend
-├── package.json           # Node.js dependencies (Tailwind)
-├── .gitignore             # Git ignore file
-└── [images]/              # Team logos and assets
+├── HomePage.html            # Landing page
+├── JoinTheGrid.html         # Camera capture interface
+├── PitWall.html             # Photo gallery
+├── Engineering.html         # AR Ventus / AR Nimbus engineering story
+├── Sponsorship.html         # Sponsorship info
+├── Updates.html             # News feed (renders updates.json)
+├── updates.json             # Update card data, fetched by Updates.html
+├── updates-manifest.json    # Tracks which PDFs have been auto-processed
+├── updates-pdfs/            # Drop PDFs here for auto-generated update cards
+├── scripts/
+│   ├── process-update-pdfs.md   # Prompt driving the headless Claude run
+│   └── run-pdf-check.ps1        # Script the scheduled task actually runs
+├── car-renders/              # Cropped CAD render images used on Engineering.html
+├── script.js                 # Shared JavaScript utilities
+├── styles.css                 # Global styles
+├── server.py                  # Python HTTP backend (also serves static files)
+├── requirements.txt            # Documents server.py needs no packages
+├── .gitignore                  # Git ignore file
+└── [images]/                    # Team logos and sponsor assets
 ```
 
 ## API Endpoints

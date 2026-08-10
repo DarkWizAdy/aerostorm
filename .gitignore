@@ -31,6 +31,9 @@ wheels/
 *~
 .DS_Store
 
+# Claude Code local tooling config (machine-local permissions, dev-server launch config)
+.claude/
+
 # Node
 node_modules/
 package-lock.json
@@ -39,3 +42,9 @@ npm-debug.log
 # Environment
 .env
 .env.local
+
+# Source portfolio PDFs (large, reference-only — not needed for the live site)
+reference-docs/
+
+# Runtime log from the PDF-drop automation (scripts/run-pdf-check.ps1)
+scripts/pdf-check.log
