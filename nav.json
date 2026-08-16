@@ -1,0 +1,9 @@
+[
+  { "id": "home",        "label": "Home",        "page": "index.html",       "anchor": null, "exclude_pages": [] },
+  { "id": "updates",     "label": "Updates",     "page": "Updates.html",     "anchor": null, "exclude_pages": [] },
+  { "id": "engineering", "label": "Engineering", "page": "Engineering.html", "anchor": null, "exclude_pages": [] },
+  { "id": "sponsorship", "label": "Sponsorship", "page": "Sponsorship.html", "anchor": null, "exclude_pages": [] },
+  { "id": "pitwall",     "label": "Pit Wall",    "page": "PitWall.html",     "anchor": null, "exclude_pages": [] },
+  { "id": "jointhegrid", "label": "Join Grid",   "page": "JoinTheGrid.html", "anchor": null, "exclude_pages": [] },
+  { "id": "contact",     "label": "Contact",     "page": "Contact.html",    "anchor": null, "exclude_pages": [] }
+]

@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | aerostorm Racing</title>
+  <meta name="robots" content="noindex, nofollow">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,400..900;1,400..900&amp;family=Outfit:wght@300;400;500;600;700;800;900&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+ </head>
+ <body class="h-full bg-[#000000] text-[#e8e8e8] font-heading">
+
+  <!-- LOGIN VIEW -->
+  <div id="login-view" class="min-h-screen flex items-center justify-center px-6">
+   <div class="w-full max-w-sm bg-[#111111] border border-[#1e1e1e] rounded-sm p-8">
+    <div class="flex items-center gap-2 mb-8">
+     <img src="aerostormLogoNoBG.png" alt="Aerostorm" class="h-8 w-auto">
+     <span class="font-racing text-2xl">admin</span>
+    </div>
+    <form id="login-form" class="space-y-4">
+     <div>
+      <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Email</label>
+      <input type="email" id="login-email" required autocomplete="username" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors">
+     </div>
+     <div>
+      <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Password</label>
+      <input type="password" id="login-password" required autocomplete="current-password" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors">
+     </div>
+     <div id="login-error" class="hidden text-sm text-[#e8412f] font-mono"></div>
+     <button type="submit" class="w-full bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Log In</button>
+    </form>
+   </div>
+  </div>
+
+  <!-- DASHBOARD VIEW -->
+  <div id="dashboard-view" class="hidden min-h-screen">
+   <nav class="border-b border-[#1e1e1e] bg-[#0a0a0a]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+     <div class="flex items-center gap-2 shrink-0">
+      <img src="aerostormLogoNoBG.png" alt="Aerostorm" class="h-7 w-auto">
+      <span class="font-racing text-xl">admin</span>
+     </div>
+     <div class="flex items-center gap-3 sm:gap-4 text-sm text-[#bababa] min-w-0">
+      <span id="admin-email" class="hidden sm:inline font-mono text-xs truncate max-w-[12rem]"></span>
+      <button id="logout-btn" class="shrink-0 border border-[#434343] px-3 sm:px-4 py-2 rounded-sm text-xs uppercase tracking-wide hover:border-[#e0d2b3] hover:text-[#e0d2b3] transition-colors">Logout</button>
+     </div>
+    </div>
+   </nav>
+
+   <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row gap-8">
+    <div class="md:w-48 shrink-0 flex flex-nowrap md:flex-col gap-1 overflow-x-auto" id="tab-list">
+     <button data-tab="settings" class="admin-tab-btn active">Site Settings</button>
+     <button data-tab="homepage" class="admin-tab-btn">Homepage</button>
+     <button type="button" id="pages-toggle-btn" class="admin-tab-btn flex items-center justify-between gap-2">Pages <i data-lucide="chevron-down" style="width:14px;height:14px;"></i></button>
+     <div id="pages-subtab-list" class="hidden flex flex-nowrap md:flex-col gap-1 md:pl-3 md:border-l md:border-[#2c2c2c] md:ml-2">
+      <button data-tab="page-engineering" class="admin-tab-btn admin-subtab-btn">Engineering</button>
+      <button data-tab="page-sponsorship" class="admin-tab-btn admin-subtab-btn">Sponsorship</button>
+      <button data-tab="page-updates" class="admin-tab-btn admin-subtab-btn">Updates</button>
+      <button data-tab="page-pitwall" class="admin-tab-btn admin-subtab-btn">Pit Wall</button>
+      <button data-tab="page-contact" class="admin-tab-btn admin-subtab-btn">Contact</button>
+     </div>
+     <button data-tab="menu" class="admin-tab-btn">Menu</button>
+     <button data-tab="updates" class="admin-tab-btn">Updates</button>
+     <button data-tab="sponsors" class="admin-tab-btn">Sponsors</button>
+     <button data-tab="gallery" class="admin-tab-btn">Gallery</button>
+     <button data-tab="contact" class="admin-tab-btn">Contact Data</button>
+     <button data-tab="audit" class="admin-tab-btn">Audit Log</button>
+    </div>
+
+    <div class="flex-1 min-w-0">
+
+     <!-- SITE SETTINGS -->
+     <div id="panel-settings" class="admin-panel">
+      <h2 class="text-2xl font-bold text-white mb-1">Site Settings</h2>
+      <p class="text-sm text-[#636363] mb-6">Changes apply across the whole live site.</p>
+      <form id="settings-form" class="space-y-6">
+       <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+         <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Site Title</label>
+         <input type="text" id="settings-site_title" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors">
+        </div>
+        <div>
+         <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Logo Path</label>
+         <input type="text" id="settings-logo" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors">
+        </div>
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Tagline</label>
+        <textarea id="settings-tagline" rows="2" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors resize-none"></textarea>
+       </div>
+       <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+         <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Favicon Path</label>
+         <input type="text" id="settings-favicon" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors">
+        </div>
+        <div>
+         <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Copyright Text</label>
+         <input type="text" id="settings-copyright_text" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors">
+        </div>
+       </div>
+
+       <div>
+        <div class="flex items-center justify-between mb-2">
+         <label class="block text-xs uppercase tracking-widest text-[#636363]">Footer Social Links</label>
+         <button type="button" id="add-social-link" class="text-xs text-[#e0d2b3] hover:underline">+ Add link</button>
+        </div>
+        <div class="hidden sm:grid grid-cols-[7rem_1fr_6rem_auto] gap-2 px-1 mb-1 text-[10px] uppercase tracking-widest text-[#636363]"><span>Platform Name</span><span>Profile URL</span><span>Lucide Icon</span><span></span></div>
+        <div id="social-links-list" class="space-y-2"></div>
+       </div>
+
+       <div class="bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-4">
+        <label class="flex items-center gap-2 text-sm text-white mb-3">
+         <input type="checkbox" id="settings-announcement-enabled">
+         Enable announcement ticker
+        </label>
+        <input type="text" id="settings-announcement-text" placeholder="Announcement text" class="w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors">
+       </div>
+
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Tracking Snippet (GA4, etc. — pasted into &lt;head&gt;)</label>
+        <textarea id="settings-tracking_snippet" rows="4" placeholder="<script>...</script>" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-xs font-mono placeholder-[#474747] focus:border-[#e0d2b3] focus:outline-none transition-colors"></textarea>
+       </div>
+
+       <div class="flex items-center gap-4">
+        <button type="submit" class="bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save Settings</button>
+        <span id="settings-saved-msg" class="hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+       </div>
+      </form>
+     </div>
+
+     <!-- HOMEPAGE CONTENT -->
+     <div id="panel-homepage" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Homepage Content</h2>
+      <p class="text-sm text-[#636363] mb-6">The About, Team, and Season sections on the homepage, plus the Contact details shown on the Contact page.</p>
+
+      <h3 class="text-sm font-bold text-[#e0d2b3] uppercase tracking-wide mb-3">About</h3>
+      <div class="space-y-3 mb-4">
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Heading (supports &lt;br&gt;)</label>
+        <input type="text" id="hp-about-heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Body Text</label>
+        <textarea id="hp-about-text" rows="3" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm"></textarea>
+       </div>
+      </div>
+
+      <h3 class="text-sm font-bold text-[#e0d2b3] uppercase tracking-wide mt-8 mb-3 pt-6 border-t border-[#1e1e1e]">Stats Cards</h3>
+      <div class="hidden sm:grid grid-cols-[8rem_10rem_1fr_auto] gap-2 px-1 mb-1 text-[10px] uppercase tracking-widest text-[#636363]"><span>Lucide Icon Name</span><span>Card Title</span><span>Card Description</span><span></span></div>
+      <div id="hp-stats-list" class="space-y-2 mb-3"></div>
+      <button type="button" id="add-stat-item" class="text-xs text-[#e0d2b3] hover:underline mb-4 block">+ Add stat card</button>
+
+      <h3 class="text-sm font-bold text-[#e0d2b3] uppercase tracking-wide mt-8 mb-3 pt-6 border-t border-[#1e1e1e]">Team</h3>
+      <div class="hidden sm:grid grid-cols-7 gap-2 px-1 mb-1 text-[10px] uppercase tracking-widest text-[#636363]"><span>Initials</span><span>Name</span><span>Role</span><span>Gradient From</span><span>Gradient To</span><span>Text Color</span><span></span></div>
+      <div id="hp-team-list" class="space-y-2 mb-3"></div>
+      <button type="button" id="add-team-item" class="text-xs text-[#e0d2b3] hover:underline mb-4 block">+ Add team member</button>
+
+      <h3 class="text-sm font-bold text-[#e0d2b3] uppercase tracking-wide mt-8 mb-3 pt-6 border-t border-[#1e1e1e]">Season</h3>
+      <div class="mb-3">
+       <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Status Text</label>
+       <input type="text" id="hp-season-status" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+      </div>
+      <div class="hidden sm:grid grid-cols-5 gap-2 px-1 mb-1 text-[10px] uppercase tracking-widest text-[#636363]"><span>Date</span><span>Event Name</span><span>Subtitle / Location</span><span>Status</span><span></span></div>
+      <div id="hp-races-list" class="space-y-2 mb-3"></div>
+      <button type="button" id="add-race-item" class="text-xs text-[#e0d2b3] hover:underline mb-4 block">+ Add race</button>
+
+      <h3 class="text-sm font-bold text-[#e0d2b3] uppercase tracking-wide mt-8 mb-3 pt-6 border-t border-[#1e1e1e]">Contact</h3>
+      <div class="mb-3">
+       <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Email</label>
+       <input type="text" id="hp-contact-email" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+      </div>
+      <div class="mb-2">
+       <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Phone Numbers — the "name tag" shows next to the number on the Contact page, e.g. "9818370338 — Sponsorship"</label>
+      </div>
+      <div class="hidden sm:grid grid-cols-[1fr_1fr_auto] gap-2 px-1 mb-1 text-[10px] uppercase tracking-widest text-[#636363]"><span>Phone Number</span><span>Name Tag (who this number reaches)</span><span></span></div>
+      <div id="hp-phones-list" class="space-y-2 mb-3"></div>
+      <button type="button" id="add-phone-item" class="text-xs text-[#e0d2b3] hover:underline mb-6 block">+ Add phone number</button>
+
+      <div class="flex items-center gap-4">
+       <button type="button" id="save-homepage-btn" class="bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save Homepage</button>
+       <span id="homepage-saved-msg" class="hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+      </div>
+     </div>
+
+     <!-- PAGES: ENGINEERING -->
+     <div id="panel-page-engineering" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Engineering Page</h2>
+      <p class="text-sm text-[#636363] mb-6">The hero text and section headings only. The dense technical write-ups (formulas, bullet lists) stay hand-edited in the HTML.</p>
+      <div class="space-y-3 mb-4">
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Eyebrow (small label above the title)</label>
+        <input type="text" id="pg-eng-hero-eyebrow" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Tagline</label>
+        <textarea id="pg-eng-hero-tagline" rows="2" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm"></textarea>
+       </div>
+      </div>
+      <div class="space-y-3 mb-6">
+       <div class="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-2 items-center">
+        <label class="text-xs uppercase tracking-widest text-[#636363]">Evolution Section</label>
+        <div class="grid grid-cols-2 gap-2"><input type="text" id="pg-eng-evolution-eyebrow" placeholder="Eyebrow label" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"><input type="text" id="pg-eng-evolution-heading" placeholder="Heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"></div>
+       </div>
+       <div class="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-2 items-center">
+        <label class="text-xs uppercase tracking-widest text-[#636363]">Aerodynamics Section</label>
+        <div class="grid grid-cols-2 gap-2"><input type="text" id="pg-eng-aerodynamics-eyebrow" placeholder="Eyebrow label" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"><input type="text" id="pg-eng-aerodynamics-heading" placeholder="Heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"></div>
+       </div>
+       <div class="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-2 items-center">
+        <label class="text-xs uppercase tracking-widest text-[#636363]">CAD &amp; Materials Section</label>
+        <div class="grid grid-cols-2 gap-2"><input type="text" id="pg-eng-cad-eyebrow" placeholder="Eyebrow label" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"><input type="text" id="pg-eng-cad-heading" placeholder="Heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"></div>
+       </div>
+       <div class="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-2 items-center">
+        <label class="text-xs uppercase tracking-widest text-[#636363]">Physics Section</label>
+        <div class="grid grid-cols-2 gap-2"><input type="text" id="pg-eng-physics-eyebrow" placeholder="Eyebrow label" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"><input type="text" id="pg-eng-physics-heading" placeholder="Heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"></div>
+       </div>
+       <div class="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-2 items-center">
+        <label class="text-xs uppercase tracking-widest text-[#636363]">Manufacturing Section</label>
+        <div class="grid grid-cols-2 gap-2"><input type="text" id="pg-eng-manufacturing-eyebrow" placeholder="Eyebrow label" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"><input type="text" id="pg-eng-manufacturing-heading" placeholder="Heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"></div>
+       </div>
+       <div class="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-2 items-center">
+        <label class="text-xs uppercase tracking-widest text-[#636363]">Track Testing Section</label>
+        <div class="grid grid-cols-2 gap-2"><input type="text" id="pg-eng-track_testing-eyebrow" placeholder="Eyebrow label" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"><input type="text" id="pg-eng-track_testing-heading" placeholder="Heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs"></div>
+       </div>
+      </div>
+      <div class="flex items-center gap-4">
+       <button type="button" class="save-pages-btn bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save</button>
+       <span class="pages-saved-msg hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+      </div>
+     </div>
+
+     <!-- PAGES: SPONSORSHIP -->
+     <div id="panel-page-sponsorship" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Sponsorship Page</h2>
+      <p class="text-sm text-[#636363] mb-6">Hero text plus the "Our Sponsors" and "Partner With Us" section text. The sponsor marquee itself is edited in the Sponsors tab.</p>
+      <div class="space-y-3 mb-6">
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Eyebrow</label>
+        <input type="text" id="pg-spon-hero-eyebrow" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Tagline</label>
+        <textarea id="pg-spon-hero-tagline" rows="2" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm"></textarea>
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">"Our Sponsors" Section Eyebrow</label>
+        <input type="text" id="pg-spon-sponsors-eyebrow" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">"Our Sponsors" Section Heading</label>
+        <input type="text" id="pg-spon-sponsors-heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">"Our Sponsors" Section Body Text</label>
+        <textarea id="pg-spon-sponsors-text" rows="2" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm"></textarea>
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">"Partner With Us" Section Eyebrow</label>
+        <input type="text" id="pg-spon-partner-eyebrow" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">"Partner With Us" Section Heading</label>
+        <input type="text" id="pg-spon-partner-heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">"Partner With Us" Section Body Text</label>
+        <textarea id="pg-spon-partner-text" rows="2" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm"></textarea>
+       </div>
+      </div>
+      <div class="flex items-center gap-4">
+       <button type="button" class="save-pages-btn bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save</button>
+       <span class="pages-saved-msg hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+      </div>
+     </div>
+
+     <!-- PAGES: UPDATES -->
+     <div id="panel-page-updates" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Updates Page</h2>
+      <p class="text-sm text-[#636363] mb-6">Hero text above the update cards. The cards themselves are edited in the Updates tab.</p>
+      <div class="space-y-3 mb-6">
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Eyebrow</label>
+        <input type="text" id="pg-upd-hero-eyebrow" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Tagline</label>
+        <textarea id="pg-upd-hero-tagline" rows="2" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm"></textarea>
+       </div>
+      </div>
+      <div class="flex items-center gap-4">
+       <button type="button" class="save-pages-btn bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save</button>
+       <span class="pages-saved-msg hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+      </div>
+     </div>
+
+     <!-- PAGES: PIT WALL -->
+     <div id="panel-page-pitwall" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Pit Wall Page</h2>
+      <p class="text-sm text-[#636363] mb-6">Heading above the Gallery section on the Pit Wall page (the live photo wall above it isn't editable text — see the Gallery tab for the photos themselves).</p>
+      <div class="space-y-3 mb-6">
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Gallery Section Eyebrow</label>
+        <input type="text" id="pg-pw-gallery-eyebrow" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Gallery Section Heading</label>
+        <input type="text" id="pg-pw-gallery-heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+      </div>
+      <div class="flex items-center gap-4">
+       <button type="button" class="save-pages-btn bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save</button>
+       <span class="pages-saved-msg hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+      </div>
+     </div>
+
+     <!-- PAGES: CONTACT -->
+     <div id="panel-page-contact" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Contact Page</h2>
+      <p class="text-sm text-[#636363] mb-6">Hero text and the "Quick Chat" card. The email/phone numbers themselves are edited in the Homepage tab's Contact section.</p>
+      <div class="space-y-3 mb-6">
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Eyebrow</label>
+        <input type="text" id="pg-con-hero-eyebrow" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Tagline</label>
+        <textarea id="pg-con-hero-tagline" rows="2" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm"></textarea>
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">"Quick Chat" Card Heading</label>
+        <input type="text" id="pg-con-quickchat-heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">"Quick Chat" Card Body Text</label>
+        <textarea id="pg-con-quickchat-text" rows="2" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm"></textarea>
+       </div>
+      </div>
+      <div class="flex items-center gap-4">
+       <button type="button" class="save-pages-btn bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save</button>
+       <span class="pages-saved-msg hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+      </div>
+     </div>
+
+     <!-- MENU -->
+     <div id="panel-menu" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Menu</h2>
+      <p class="text-sm text-[#636363] mb-6">The nav link ribbon shown on every page.</p>
+      <div class="hidden sm:grid grid-cols-[6rem_1fr_1fr_8rem_1fr_auto] gap-2 px-1 mb-1 text-[10px] uppercase tracking-widest text-[#636363]"><span>ID (unique)</span><span>Label Shown</span><span>Target Page</span><span>Anchor (optional)</span><span>Hide On Pages</span><span></span></div>
+      <div id="menu-list" class="space-y-3 mb-4"></div>
+      <button type="button" id="add-menu-item" class="text-xs text-[#e0d2b3] hover:underline mb-6 block">+ Add menu item</button>
+      <div class="flex items-center gap-4">
+       <button type="button" id="save-menu-btn" class="bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save Menu</button>
+       <span id="menu-saved-msg" class="hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+      </div>
+     </div>
+
+     <!-- UPDATES -->
+     <div id="panel-updates" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Updates</h2>
+      <p class="text-sm text-[#636363] mb-6">Cards shown on the Updates page. Each card, top to bottom: ID (leave blank to auto-generate from the title) / Date / Category tag, then Title, then Summary, then Lucide icon name / image path / PDF link.</p>
+      <div id="updates-list" class="space-y-4 mb-4"></div>
+      <button type="button" id="add-update-item" class="text-xs text-[#e0d2b3] hover:underline mb-6 block">+ Add update</button>
+      <div class="flex items-center gap-4">
+       <button type="button" id="save-updates-btn" class="bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save Updates</button>
+       <span id="updates-saved-msg" class="hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+      </div>
+     </div>
+
+     <!-- SPONSORS -->
+     <div id="panel-sponsors" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Sponsors</h2>
+      <p class="text-sm text-[#636363] mb-6">The sponsor marquee on the Sponsorship page.</p>
+      <div class="hidden sm:grid grid-cols-[1fr_1fr_8rem_auto] gap-2 px-1 mb-1 text-[10px] uppercase tracking-widest text-[#636363]"><span>Sponsor Name</span><span>Logo File Path</span><span>Tier</span><span></span></div>
+      <div id="sponsors-list" class="space-y-2 mb-4"></div>
+      <button type="button" id="add-sponsor-item" class="text-xs text-[#e0d2b3] hover:underline mb-6 block">+ Add sponsor</button>
+      <div class="flex items-center gap-4">
+       <button type="button" id="save-sponsors-btn" class="bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save Sponsors</button>
+       <span id="sponsors-saved-msg" class="hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+      </div>
+     </div>
+
+     <!-- GALLERY -->
+     <div id="panel-gallery" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Gallery</h2>
+      <p class="text-sm text-[#636363] mb-6">Photos shown in the Gallery section of the Pit Wall page.</p>
+
+      <div class="bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-4 mb-6">
+       <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Upload a photo</label>
+       <input type="file" id="gallery-file-input" accept="image/png,image/jpeg,image/webp,image/gif" class="text-sm text-[#bababa]">
+       <p id="gallery-upload-status" class="text-xs text-[#636363] mt-2"></p>
+      </div>
+
+      <div id="gallery-list" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4"></div>
+      <div class="flex items-center gap-4">
+       <button type="button" id="save-gallery-btn" class="bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save Gallery</button>
+       <span id="gallery-saved-msg" class="hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+      </div>
+     </div>
+
+     <!-- CONTACT DATA -->
+     <div id="panel-contact" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Contact Data</h2>
+      <p class="text-sm text-[#636363] mb-6">Every submission from the Sponsorship page's contact form lands here — name, email, message, and a Mark Actioned / Delete action per row. "Export CSV" is an extra way to download them, not the only thing this tab does; it's disabled below until there's at least one submission.</p>
+      <div class="flex items-center gap-4 mb-4">
+       <button type="button" id="export-contacts-btn" class="border border-[#434343] text-[#bababa] px-4 py-2 rounded-sm text-xs uppercase tracking-wide hover:border-[#e0d2b3] hover:text-[#e0d2b3] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">Export CSV</button>
+      </div>
+      <div id="contacts-list" class="space-y-3"></div>
+      <p id="contacts-empty" class="hidden text-[#636363] text-sm">No submissions yet — this list fills in as soon as someone submits the Sponsorship page's contact form.</p>
+     </div>
+
+     <!-- AUDIT LOG -->
+     <div id="panel-audit" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Audit Log</h2>
+      <p class="text-sm text-[#636363] mb-6">Recent admin actions.</p>
+      <div class="overflow-x-auto">
+       <table class="w-full text-sm">
+        <thead>
+         <tr class="text-left text-xs uppercase tracking-widest text-[#636363] border-b border-[#1e1e1e]">
+          <th class="py-2 pr-4">Time</th>
+          <th class="py-2 pr-4">User</th>
+          <th class="py-2 pr-4">Action</th>
+          <th class="py-2 pr-4">Target</th>
+         </tr>
+        </thead>
+        <tbody id="audit-log-body"></tbody>
+       </table>
+      </div>
+     </div>
+
+    </div>
+   </div>
+  </div>
+
+  <script src="admin.js"></script>
+ </body>
+</html>

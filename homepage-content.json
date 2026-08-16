@@ -1,0 +1,136 @@
+{
+  "about": {
+    "heading": "Built on Science.<br>Driven by Speed.",
+    "text": "We're a student-led F1 STEM racing team that merges engineering precision with competitive motorsport. Every component of our car is designed, tested, and refined through rigorous scientific methodology — from aerodynamic simulations to telemetry-driven performance tuning."
+  },
+  "stats": [
+    {
+      "icon": "cpu",
+      "title": "Engineering",
+      "description": "CAD design, CFD analysis, and structural optimization"
+    },
+    {
+      "icon": "bar-chart-2",
+      "title": "Data Science",
+      "description": "Real-time telemetry and performance analytics"
+    },
+    {
+      "icon": "settings",
+      "title": "Manufacturing",
+      "description": "Carbon fiber layup, 3D printing, CNC machining"
+    },
+    {
+      "icon": "users",
+      "title": "Teamwork",
+      "description": "Cross-disciplinary collaboration and leadership"
+    }
+  ],
+  "team": [
+    {
+      "initials": "EB",
+      "name": "Eyan Borah",
+      "role": "Project Manager",
+      "gradient_from": "#ffa563",
+      "gradient_to": "#e67e22",
+      "text_color": "#ffffff"
+    },
+    {
+      "initials": "AP",
+      "name": "Adyant Pankaj",
+      "role": "Technology and Communications Manager",
+      "gradient_from": "#d4a5e0",
+      "gradient_to": "#a855a8",
+      "text_color": "#ffffff"
+    },
+    {
+      "initials": "AT",
+      "name": "Aryan Trehan",
+      "role": "Design and Engineering Manager",
+      "gradient_from": "#6bb6d6",
+      "gradient_to": "#3b9dd8",
+      "text_color": "#ffffff"
+    },
+    {
+      "initials": "AS",
+      "name": "Abhiraj Sinha",
+      "role": "Finance Manager",
+      "gradient_from": "#e0d2b3",
+      "gradient_to": "#c4a76a",
+      "text_color": "#000000"
+    },
+    {
+      "initials": "RA",
+      "name": "Ribhav Arya",
+      "role": "Sponsorship Manager",
+      "gradient_from": "#b8e0d2",
+      "gradient_to": "#7dbba8",
+      "text_color": "#000000"
+    },
+    {
+      "initials": "DG",
+      "name": "Dhruv Gandhi",
+      "role": "Social Media and Graphic Design Manager",
+      "gradient_from": "#4ecca3",
+      "gradient_to": "#2e8659",
+      "text_color": "#ffffff"
+    }
+  ],
+  "season": {
+    "status_text": "Qualified for Nationals — congratulations to the team!",
+    "races": [
+      {
+        "date": "MAY 9-10",
+        "name": "Regional Qualifiers",
+        "subtitle": "Genesis Global School, Delhi NCR",
+        "status": "OVER"
+      },
+      {
+        "date": "JUL 31",
+        "name": "National Judgings",
+        "subtitle": "Sharda University, Delhi NCR",
+        "status": "OVER"
+      },
+      {
+        "date": "JUL 1",
+        "name": "National Time Trials",
+        "subtitle": "Sharda University, Delhi NCR",
+        "status": "OVER"
+      },
+      {
+        "date": "JUL 26 2",
+        "name": "National Knockout Racing",
+        "subtitle": "Sharda University, Delhi NCR",
+        "status": "OVER"
+      }
+    ]
+  },
+  "contact": {
+    "email": "aerostorm.stemplifyracing@gmail.com",
+    "phones": [
+      {
+        "number": "9205810892",
+        "name": "Eyan Borah, Project Manager"
+      },
+      {
+        "number": "9899868789",
+        "name": "Adyant Pankaj, Technology & Communication Manager"
+      },
+      {
+        "number": "9625921821",
+        "name": "Aryan Trehan, Design and Engineering Manager"
+      },
+      {
+        "number": "8851700565",
+        "name": "Abhiraj Sinha, Finance Manager"
+      },
+      {
+        "number": "9717219400",
+        "name": "Ribhav Arya, Sponsorship Manager"
+      },
+      {
+        "number": "7303177355",
+        "name": "Dhruv Gandhi, Social Media and Graphic Design Manager"
+      }
+    ]
+  }
+}

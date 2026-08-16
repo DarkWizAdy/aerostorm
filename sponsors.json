@@ -1,0 +1,32 @@
+[
+  {
+    "id": "f1-bearings",
+    "name": "F1 bearings",
+    "logo": "Sponsor1Logo.png",
+    "tier": "gold"
+  },
+  {
+    "id": "awl",
+    "name": "AWL",
+    "logo": "awlLogo.webp",
+    "tier": "gold"
+  },
+  {
+    "id": "efablink",
+    "name": "EFABLINK",
+    "logo": "EFABLINK logo 2025 Light White transparent.png",
+    "tier": "gold"
+  },
+  {
+    "id": "watthifi",
+    "name": "WATTHiFi",
+    "logo": "WATTHiFi Logo.png",
+    "tier": "gold"
+  },
+  {
+    "id": "itss",
+    "name": "ITSS",
+    "logo": "ITSS Logo.png",
+    "tier": "gold"
+  }
+]

@@ -34,4 +34,4 @@ You are running unattended (no human present) as a scheduled daily job for the A
 
 - Base every summary strictly on what's actually in that PDF. Don't invent facts, numbers, or claims that aren't in the source document.
 - Keep the summary to 2-3 sentences — this renders as a short card blurb on the live site, not a full article.
-- This is the only task for this run. Do not touch `Engineering.html`, `Updates.html`, `HomePage.html`, `Sponsorship.html`, `styles.css`, `script.js`, or anything else.
+- This is the only task for this run. Do not touch `Engineering.html`, `Updates.html`, `index.html`, `Sponsorship.html`, `styles.css`, `script.js`, or anything else.

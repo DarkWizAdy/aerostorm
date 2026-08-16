@@ -168,3 +168,18 @@ html { scroll-margin-top: 80px; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #111111; }
 ::-webkit-scrollbar-thumb { background: #434343; border-radius: 3px; }
+
+/* Admin dashboard tabs */
+.admin-tab-btn {
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #bababa;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background-color 0.2s, color 0.2s;
+}
+.admin-tab-btn:hover { background: #111111; color: #e8e8e8; }
+.admin-tab-btn.active { background: #1e1e1e; color: #e0d2b3; font-weight: 600; }
+.admin-subtab-btn { font-size: 0.8125rem; padding: 8px 14px; color: #929292; }

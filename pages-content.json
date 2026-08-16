@@ -1,0 +1,56 @@
+{
+  "engineering": {
+    "hero_eyebrow": "Under the Hood",
+    "hero_tagline": "From AR Ventus 2.27 to AR Nimbus 4.51 — the real specs, the CAD process, the physics, and the lessons learned building each car.",
+    "sections": {
+      "evolution": {
+        "eyebrow": "The Evolution",
+        "heading": "Two Cars, One Relentless Redesign"
+      },
+      "aerodynamics": {
+        "eyebrow": "Airflow First",
+        "heading": "Designed to Cut Through the Air"
+      },
+      "cad": {
+        "eyebrow": "Autodesk Fusion",
+        "heading": "From Sketch to Solid"
+      },
+      "physics": {
+        "eyebrow": "The Numbers Behind It",
+        "heading": "Physics, Not Guesswork"
+      },
+      "manufacturing": {
+        "eyebrow": "From CAD to Car",
+        "heading": "Built By Hand, Machined With Precision"
+      },
+      "track_testing": {
+        "eyebrow": "Reality Check",
+        "heading": "What the Track Taught Us"
+      }
+    }
+  },
+  "sponsorship": {
+    "hero_eyebrow": "Support the Mission",
+    "hero_tagline": "Join us in engineering the future of motorsport. Explore how your organization can partner with Aerostorm Racing.",
+    "sponsors_eyebrow": "Partners",
+    "sponsors_heading": "Our Sponsors",
+    "sponsors_text": "We are proud to be supported by industry leaders who share our passion for innovation and excellence. Their contributions enable us to push the boundaries of engineering and compete at the highest level.",
+    "partner_eyebrow": "Support the Mission",
+    "partner_heading": "Partner With Us",
+    "partner_text": "Join us in engineering the future. Our partners gain global visibility and the opportunity to support the next generation of STEM leaders and engineers. Download our sponsorship prospectus to learn more about our tiers and benefits."
+  },
+  "updates": {
+    "hero_eyebrow": "Project Log",
+    "hero_tagline": "Follow our journey through the 2025 season. From initial sketches to trackside telemetry."
+  },
+  "pitwall": {
+    "gallery_eyebrow": "From the Archive",
+    "gallery_heading": "Gallery"
+  },
+  "contact": {
+    "hero_eyebrow": "Get in Touch",
+    "hero_tagline": "Have questions or general inquiries? Reach out to us through any of the contact methods below.",
+    "quick_chat_heading": "Quick Chat",
+    "quick_chat_text": "Prefer a direct conversation? Message us on Instagram or LinkedIn for the fastest response."
+  }
+}

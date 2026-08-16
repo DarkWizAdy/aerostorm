@@ -48,3 +48,15 @@ reference-docs/
 
 # Runtime log from the PDF-drop automation (scripts/run-pdf-check.ps1)
 scripts/pdf-check.log
+
+# Local admin portal database (contains a password hash — never commit)
+admin.db
+admin.db-journal
+admin.db-wal
+admin.db-shm
+*.sqlite
+*.sqlite3
+
+# Pit Wall / Join the Grid camera captures — live photos of event attendees,
+# cleared between events, not meant to be permanent tracked site content
+Images/wall/

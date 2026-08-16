@@ -120,8 +120,8 @@ function handleForm(formId, successId) {
     try {
       const response = await fetch(form.action, {
         method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
+        body: JSON.stringify(Object.fromEntries(data.entries())),
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
       });
       
       if (response.ok) {

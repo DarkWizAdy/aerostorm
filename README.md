@@ -17,7 +17,7 @@ Welcome to the Aerostorm Racing Team website! This is a student-led F1 STEM raci
 - **Responsive Grid**: Beautiful photo display with Tailwind CSS styling
 
 ### 📱 Other Pages
-- **HomePage.html**: Landing page with team information
+- **index.html**: Landing page with team information (served at the site root)
 - **Engineering.html**: The engineering story behind AR Ventus 2.27 and AR Nimbus 4.51 — CAD process, aerodynamics, materials, and lessons learned
 - **Sponsorship.html**: Sponsorship opportunities
 - **Updates.html**: Team news feed, rendered from [`updates.json`](#updatesjson--pdf-drop-automation) — see below for how new cards get added
@@ -77,7 +77,7 @@ See `updates-pdfs/README.md` and `scripts/process-update-pdfs.md` for details, a
    - Option C: Serve with Python's built-in server on a different port
 
 4. **Access the website**
-   - **Local**: `http://localhost:5502/HomePage.html` (or your server's port)
+   - **Local**: `http://localhost:5502/` (or your server's port)
    - **Capture photos**: Navigate to `JoinTheGrid.html`
    - **View gallery**: Navigate to `PitWall.html`
 
@@ -100,11 +100,11 @@ Canvas resizes image (max 1000px)
     ↓
 Base64 encoding with JPEG compression
     ↓
-POST to http://localhost:8000/upload
+POST to /api/wall-photos
     ↓
-Backend stores image in memory
+Backend validates, saves to Images/wall/, records row in admin.db (wall_photos table)
     ↓
-Status message: "Photo uploaded!"
+Status message: "You're on the wall!"
 ```
 
 ### Cross-Device Sync Flow
@@ -112,22 +112,24 @@ Status message: "Photo uploaded!"
 ```
 PitWall.html page loads
     ↓
-Every 3 seconds: GET /photos-list
+Every 3 seconds: GET /api/wall-photos
     ↓
-Backend returns array of Base64 images
+Backend returns every photo currently in the wall_photos table
     ↓
 New images added to gallery dynamically
     ↓
-Duplicate detection prevents duplicates
+Duplicate detection (by photo id) prevents duplicates
     ↓
-Photo appears on all connected devices
+Photo appears on every device polling PitWall.html
 ```
+
+Both routes are unauthenticated (matching the kiosk's original no-login design — anyone with physical access to the event display can capture or clear). The "Clear Wall" button on `JoinTheGrid.html` calls `POST /api/wall-photos/clear`, which deletes every row and file.
 
 ## Project Structure
 
 ```
 aerostorm-website/
-├── HomePage.html            # Landing page
+├── index.html               # Landing page (site root)
 ├── JoinTheGrid.html         # Camera capture interface
 ├── PitWall.html             # Photo gallery
 ├── Engineering.html         # AR Ventus / AR Nimbus engineering story
