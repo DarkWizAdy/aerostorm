@@ -275,7 +275,8 @@ if __name__ == '__main__':
 
     import os
     port = int(os.environ.get('PORT', '8000'))
-    server_address = ('', port)
+    host = os.environ.get('HOST', '')
+    server_address = (host, port)
     httpd = HTTPServer(server_address, AerostormHandler)
     print(f'Serving on http://localhost:{port}')
     try:
