@@ -136,7 +136,7 @@
      <!-- HOMEPAGE CONTENT -->
      <div id="panel-homepage" class="admin-panel hidden">
       <h2 class="text-2xl font-bold text-white mb-1">Homepage Content</h2>
-      <p class="text-sm text-[#636363] mb-6">The About, Team, and Season sections on the homepage, plus the Contact details shown on the Contact page.</p>
+      <p class="text-sm text-[#636363] mb-6">The About, Team, and Season sections on the homepage. Contact email/phone numbers are edited in Pages → Contact.</p>
 
       <h3 class="text-sm font-bold text-[#e0d2b3] uppercase tracking-wide mb-3">About</h3>
       <div class="space-y-3 mb-4">
@@ -168,18 +168,6 @@
       <div class="hidden sm:grid grid-cols-5 gap-2 px-1 mb-1 text-[10px] uppercase tracking-widest text-[#636363]"><span>Date</span><span>Event Name</span><span>Subtitle / Location</span><span>Status</span><span></span></div>
       <div id="hp-races-list" class="space-y-2 mb-3"></div>
       <button type="button" id="add-race-item" class="text-xs text-[#e0d2b3] hover:underline mb-4 block">+ Add race</button>
-
-      <h3 class="text-sm font-bold text-[#e0d2b3] uppercase tracking-wide mt-8 mb-3 pt-6 border-t border-[#1e1e1e]">Contact</h3>
-      <div class="mb-3">
-       <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Email</label>
-       <input type="text" id="hp-contact-email" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
-      </div>
-      <div class="mb-2">
-       <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Phone Numbers — the "name tag" shows next to the number on the Contact page, e.g. "9818370338 — Sponsorship"</label>
-      </div>
-      <div class="hidden sm:grid grid-cols-[1fr_1fr_auto] gap-2 px-1 mb-1 text-[10px] uppercase tracking-widest text-[#636363]"><span>Phone Number</span><span>Name Tag (who this number reaches)</span><span></span></div>
-      <div id="hp-phones-list" class="space-y-2 mb-3"></div>
-      <button type="button" id="add-phone-item" class="text-xs text-[#e0d2b3] hover:underline mb-6 block">+ Add phone number</button>
 
       <div class="flex items-center gap-4">
        <button type="button" id="save-homepage-btn" class="bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save Homepage</button>
@@ -352,7 +340,7 @@
      <!-- PAGES: CONTACT -->
      <div id="panel-page-contact" class="admin-panel hidden">
       <h2 class="text-2xl font-bold text-white mb-1">Contact Page</h2>
-      <p class="text-sm text-[#636363] mb-6">Hero text and the "Quick Chat" card. The email/phone numbers themselves are edited in the Homepage tab's Contact section.</p>
+      <p class="text-sm text-[#636363] mb-6">Hero text, the "Quick Chat" card, and the email/phone numbers shown on the Contact page.</p>
       <div class="space-y-3 mb-6">
        <div>
         <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Eyebrow</label>
@@ -371,6 +359,19 @@
         <div id="pg-con-quickchat-text-editor" class="quill-field"></div>
        </div>
       </div>
+
+      <h3 class="text-sm font-bold text-[#e0d2b3] uppercase tracking-wide mt-8 mb-3 pt-6 border-t border-[#1e1e1e]">Email &amp; Phone Numbers</h3>
+      <div class="mb-3">
+       <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Email</label>
+       <input type="text" id="pg-con-email" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+      </div>
+      <div class="mb-2">
+       <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Phone Numbers — the "name tag" shows next to the number on the Contact page, e.g. "9818370338 — Sponsorship"</label>
+      </div>
+      <div class="hidden sm:grid grid-cols-[1fr_1fr_auto] gap-2 px-1 mb-1 text-[10px] uppercase tracking-widest text-[#636363]"><span>Phone Number</span><span>Name Tag (who this number reaches)</span><span></span></div>
+      <div id="pg-con-phones-list" class="space-y-2 mb-3"></div>
+      <button type="button" id="add-con-phone-item" class="text-xs text-[#e0d2b3] hover:underline mb-6 block">+ Add phone number</button>
+
       <div class="flex items-center gap-4">
        <button type="button" class="save-pages-btn bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save</button>
        <span class="pages-saved-msg hidden text-[#d0bd92] text-sm font-mono">Saved</span>

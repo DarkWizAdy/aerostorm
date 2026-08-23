@@ -1,7 +1,8 @@
-// Renders About/Stats/Team/Season/Contact on index.html from
-// homepage-content.json. Same resilience pattern as site-chrome.js: only
-// overwrites a container on fetch success, so today's hardcoded markup is
-// the fallback if this ever fails to load.
+// Renders About/Stats/Team/Season on index.html from homepage-content.json.
+// Same resilience pattern as site-chrome.js: only overwrites a container on
+// fetch success, so today's hardcoded markup is the fallback if this ever
+// fails to load. Contact (email/phones) moved to pages-content.js/json —
+// it's Contact-page content, not homepage content.
 (function () {
   function renderAbout(about) {
     var heading = document.getElementById('about-heading');
@@ -55,21 +56,6 @@
     }
   }
 
-  function renderContact(contact) {
-    var email = document.getElementById('contact-email');
-    if (email && contact.email) email.textContent = contact.email;
-
-    var phones = document.getElementById('contact-phones');
-    if (phones && Array.isArray(contact.phones)) {
-      phones.innerHTML = contact.phones.map(function (p) {
-        var number = typeof p === 'string' ? p : (p.number || '');
-        var name = typeof p === 'string' ? '' : (p.name || '');
-        var tag = name ? ' <span class="text-[#636363]">— ' + name + '</span>' : '';
-        return '<div class="flex items-center gap-3 text-[#727272]"><i data-lucide="phone" style="width:18px;height:18px;color:#e0d2b3;"></i> <span class="text-sm">' + number + tag + '</span></div>';
-      }).join('');
-    }
-  }
-
   fetch('homepage-content.json')
     .then(function (res) { return res.json(); })
     .then(function (content) {
@@ -77,7 +63,6 @@
       if (content.stats) renderStats(content.stats);
       if (content.team) renderTeam(content.team);
       if (content.season) renderSeason(content.season);
-      if (content.contact) renderContact(content.contact);
       if (window.lucide) lucide.createIcons();
     })
     .catch(function (err) { console.error('homepage-content: failed to load', err); });

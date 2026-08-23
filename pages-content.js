@@ -66,6 +66,17 @@
     setHtml('con-hero-tagline', data.hero_tagline);
     setText('con-quickchat-heading', data.quick_chat_heading);
     setHtml('con-quickchat-text', data.quick_chat_text);
+
+    var email = document.getElementById('contact-email');
+    if (email && data.email) email.textContent = data.email;
+
+    var phones = document.getElementById('contact-phones');
+    if (phones && Array.isArray(data.phones)) {
+      phones.innerHTML = data.phones.map(function (p) {
+        var tag = p.name ? ' <span class="text-[#636363]">— ' + p.name + '</span>' : '';
+        return '<div class="flex items-center gap-3 text-[#727272]"><i data-lucide="phone" style="width:18px;height:18px;color:#e0d2b3;"></i> <span class="text-sm">' + p.number + tag + '</span></div>';
+      }).join('');
+    }
   }
 
   fetch('pages-content.json')

@@ -384,8 +384,8 @@
     return row;
   }
 
-  document.getElementById('add-phone-item').addEventListener('click', function () {
-    document.getElementById('hp-phones-list').appendChild(renderPhoneRow());
+  document.getElementById('add-con-phone-item').addEventListener('click', function () {
+    document.getElementById('pg-con-phones-list').appendChild(renderPhoneRow());
   });
 
   function loadHomepageContent() {
@@ -405,11 +405,6 @@
       var racesList = document.getElementById('hp-races-list');
       racesList.innerHTML = '';
       ((content.season && content.season.races) || []).forEach(function (r) { racesList.appendChild(renderRaceRow(r)); });
-
-      document.getElementById('hp-contact-email').value = (content.contact && content.contact.email) || '';
-      var phonesList = document.getElementById('hp-phones-list');
-      phonesList.innerHTML = '';
-      ((content.contact && content.contact.phones) || []).forEach(function (p) { phonesList.appendChild(renderPhoneRow(p)); });
     });
   }
 
@@ -446,15 +441,6 @@
             status: row.querySelector('.race-status').value.trim(),
           };
         }),
-      },
-      contact: {
-        email: document.getElementById('hp-contact-email').value.trim(),
-        phones: Array.from(document.querySelectorAll('.phone-item-row')).map(function (row) {
-          return {
-            number: row.querySelector('.phone-number').value.trim(),
-            name: row.querySelector('.phone-name').value.trim(),
-          };
-        }).filter(function (p) { return p.number; }),
       },
     };
 
@@ -533,6 +519,10 @@
       setQuillHtml('pg-con-hero-tagline', con.hero_tagline);
       document.getElementById('pg-con-quickchat-heading').value = con.quick_chat_heading || '';
       setQuillHtml('pg-con-quickchat-text', con.quick_chat_text);
+      document.getElementById('pg-con-email').value = con.email || '';
+      var conPhonesList = document.getElementById('pg-con-phones-list');
+      conPhonesList.innerHTML = '';
+      (con.phones || []).forEach(function (p) { conPhonesList.appendChild(renderPhoneRow(p)); });
     });
   }
 
@@ -581,6 +571,13 @@
         hero_tagline: getQuillHtml('pg-con-hero-tagline'),
         quick_chat_heading: document.getElementById('pg-con-quickchat-heading').value.trim(),
         quick_chat_text: getQuillHtml('pg-con-quickchat-text'),
+        email: document.getElementById('pg-con-email').value.trim(),
+        phones: Array.from(document.querySelectorAll('#pg-con-phones-list .phone-item-row')).map(function (row) {
+          return {
+            number: row.querySelector('.phone-number').value.trim(),
+            name: row.querySelector('.phone-name').value.trim(),
+          };
+        }).filter(function (p) { return p.number; }),
       },
     };
 

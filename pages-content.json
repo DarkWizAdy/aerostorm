@@ -58,6 +58,33 @@
     "hero_eyebrow": "Get in Touch",
     "hero_tagline": "<p>Have questions or general inquiries? Reach out to us through any of the contact methods below.</p>",
     "quick_chat_heading": "Quick Chat",
-    "quick_chat_text": "<p>Prefer a direct conversation? Message us on Instagram or LinkedIn for the fastest response.</p>"
+    "quick_chat_text": "<p>Prefer a direct conversation? Message us on Instagram or LinkedIn for the fastest response.</p>",
+    "email": "aerostorm.stemplifyracing@gmail.com",
+    "phones": [
+      {
+        "number": "9205810892",
+        "name": "Eyan Borah, Project Manager"
+      },
+      {
+        "number": "9899868789",
+        "name": "Adyant Pankaj, Technology & Communication Manager"
+      },
+      {
+        "number": "9625921821",
+        "name": "Aryan Trehan, Design and Engineering Manager"
+      },
+      {
+        "number": "8851700565",
+        "name": "Abhiraj Sinha, Finance Manager"
+      },
+      {
+        "number": "9717219400",
+        "name": "Ribhav Arya, Sponsorship Manager"
+      },
+      {
+        "number": "7303177355",
+        "name": "Dhruv Gandhi, Social Media and Graphic Design Manager"
+      }
+    ]
   }
 }
