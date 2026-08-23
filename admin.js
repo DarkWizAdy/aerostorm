@@ -464,7 +464,7 @@
   // text inputs — a one-line heading doesn't need rich formatting.
   var QUILL_TOOLBAR = [['bold', 'italic', 'underline'], [{ list: 'ordered' }, { list: 'bullet' }], ['link'], ['clean']];
   var quillEditors = {};
-  ['pg-eng-hero-tagline', 'pg-con-hero-tagline', 'pg-con-quickchat-text', 'pg-pw-gallery-description', 'pg-jtg-hero-tagline'].forEach(function (id) {
+  ['pg-eng-hero-tagline', 'pg-eng-evolution-body', 'pg-con-hero-tagline', 'pg-con-quickchat-text', 'pg-pw-gallery-description', 'pg-jtg-hero-tagline'].forEach(function (id) {
     quillEditors[id] = new Quill('#' + id + '-editor', { theme: 'snow', modules: { toolbar: QUILL_TOOLBAR } });
   });
 
@@ -477,17 +477,229 @@
     return html === '<p><br></p>' ? '' : html;
   }
 
+  // -- Image fields (hero/section images on the Pages tab) --------------
+  // A text input holding the path + a file input that uploads a
+  // replacement via the same endpoint the Gallery tab uses, then fills
+  // the text input and preview with the result. Delegated so it works for
+  // any .image-upload-input added to the page, present or future.
+  function setImagePreview(input) {
+    var previewId = input.dataset.preview;
+    var preview = previewId && document.getElementById(previewId);
+    if (preview) preview.src = input.value;
+  }
+
+  document.querySelectorAll('.image-path-input').forEach(function (input) {
+    setImagePreview(input);
+    input.addEventListener('input', function () { setImagePreview(input); });
+  });
+
+  document.addEventListener('change', function (e) {
+    if (!e.target.classList || !e.target.classList.contains('image-upload-input')) return;
+    var file = e.target.files[0];
+    if (!file) return;
+    var targetInput = document.getElementById(e.target.dataset.target);
+    var reader = new FileReader();
+    reader.onload = function () {
+      apiPost('/api/admin/upload-image', { filename: file.name, data: reader.result }).then(function (result) {
+        if (result.ok) {
+          targetInput.value = result.data.path;
+          setImagePreview(targetInput);
+        } else {
+          alert('Upload failed: ' + (result.data.error || 'unknown error'));
+        }
+        e.target.value = '';
+      });
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // -- Generic Engineering-section row editors ---------------------------
+
+  function renderIconLeadTextRow(row) {
+    row = row || { icon: '', lead: '', text: '' };
+    var el = document.createElement('div');
+    el.className = 'grid grid-cols-1 sm:grid-cols-[6rem_1fr_2fr_auto] gap-2 sm:items-center bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-3 icon-lead-text-row';
+    el.innerHTML =
+      '<input type="text" class="row-icon w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" placeholder="lucide icon" value="' + escapeHtml(row.icon) + '">' +
+      '<input type="text" class="row-lead w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" placeholder="Bold lead-in" value="' + escapeHtml(row.lead) + '">' +
+      '<textarea class="row-text w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" rows="2" placeholder="Rest of the text">' + escapeHtml(row.text) + '</textarea>' +
+      '<button type="button" class="remove-row text-[#e8412f] text-xs px-2 justify-self-start sm:justify-self-auto">✕ Remove</button>';
+    el.querySelector('.remove-row').addEventListener('click', function () { el.remove(); });
+    return el;
+  }
+
+  function renderIconTitleTextRow(row) {
+    row = row || { icon: '', title: '', text: '' };
+    var el = document.createElement('div');
+    el.className = 'grid grid-cols-1 sm:grid-cols-[6rem_1fr_2fr_auto] gap-2 sm:items-center bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-3 icon-title-text-row';
+    el.innerHTML =
+      '<input type="text" class="row-icon w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" placeholder="lucide icon" value="' + escapeHtml(row.icon) + '">' +
+      '<input type="text" class="row-title w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" placeholder="Title" value="' + escapeHtml(row.title) + '">' +
+      '<textarea class="row-text w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" rows="2" placeholder="Text">' + escapeHtml(row.text) + '</textarea>' +
+      '<button type="button" class="remove-row text-[#e8412f] text-xs px-2 justify-self-start sm:justify-self-auto">✕ Remove</button>';
+    el.querySelector('.remove-row').addEventListener('click', function () { el.remove(); });
+    return el;
+  }
+
+  function renderIconFormulaTextRow(row) {
+    row = row || { icon: '', formula: '', text: '' };
+    var el = document.createElement('div');
+    el.className = 'grid grid-cols-1 sm:grid-cols-[6rem_1fr_2fr_auto] gap-2 sm:items-center bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-3 icon-formula-text-row';
+    el.innerHTML =
+      '<input type="text" class="row-icon w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" placeholder="lucide icon" value="' + escapeHtml(row.icon) + '">' +
+      '<input type="text" class="row-formula w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" placeholder="Formula" value="' + escapeHtml(row.formula) + '">' +
+      '<textarea class="row-text w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" rows="2" placeholder="Text">' + escapeHtml(row.text) + '</textarea>' +
+      '<button type="button" class="remove-row text-[#e8412f] text-xs px-2 justify-self-start sm:justify-self-auto">✕ Remove</button>';
+    el.querySelector('.remove-row').addEventListener('click', function () { el.remove(); });
+    return el;
+  }
+
+  function renderEvolutionCardRow(card) {
+    card = card || { icon: '', label: '', title: '', items: [] };
+    var el = document.createElement('div');
+    el.className = 'bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-3 space-y-2 evolution-card-row';
+    el.innerHTML =
+      '<div class="grid sm:grid-cols-3 gap-2">' +
+      '<input type="text" class="row-icon bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" placeholder="lucide icon" value="' + escapeHtml(card.icon) + '">' +
+      '<input type="text" class="row-label bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" placeholder="Small label above title" value="' + escapeHtml(card.label) + '">' +
+      '<input type="text" class="row-title bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" placeholder="Card title" value="' + escapeHtml(card.title) + '">' +
+      '</div>' +
+      '<textarea class="row-items w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-2 text-white text-xs" rows="3" placeholder="Bullet points, one per line">' + escapeHtml((card.items || []).join('\n')) + '</textarea>' +
+      '<button type="button" class="remove-row text-[#e8412f] text-xs">✕ Remove</button>';
+    el.querySelector('.remove-row').addEventListener('click', function () { el.remove(); });
+    return el;
+  }
+
+  function renderSimpleTextRow(value) {
+    var el = document.createElement('div');
+    el.className = 'flex gap-2 items-center simple-text-row';
+    el.innerHTML =
+      '<input type="text" class="row-value flex-1 bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-3 py-2 text-white text-xs" value="' + escapeHtml(value || '') + '">' +
+      '<button type="button" class="remove-row text-[#e8412f] text-xs px-2">✕</button>';
+    el.querySelector('.remove-row').addEventListener('click', function () { el.remove(); });
+    return el;
+  }
+
+  function wireAddButton(btnId, listId, renderFn) {
+    document.getElementById(btnId).addEventListener('click', function () {
+      document.getElementById(listId).appendChild(renderFn());
+    });
+  }
+  wireAddButton('add-eng-evolution-card', 'pg-eng-evolution-cards-list', renderEvolutionCardRow);
+  wireAddButton('add-eng-aerodynamics-row', 'pg-eng-aerodynamics-rows-list', renderIconLeadTextRow);
+  wireAddButton('add-eng-cad-card', 'pg-eng-cad-cards-list', renderIconTitleTextRow);
+  wireAddButton('add-eng-cad-material', 'pg-eng-cad-materials-list', renderSimpleTextRow);
+  wireAddButton('add-eng-physics-card', 'pg-eng-physics-cards-list', renderIconFormulaTextRow);
+  wireAddButton('add-eng-manufacturing-row', 'pg-eng-manufacturing-rows-list', renderIconLeadTextRow);
+  wireAddButton('add-eng-track_testing-card', 'pg-eng-track_testing-cards-list', renderIconTitleTextRow);
+
+  function readIconLeadTextRows(listId) {
+    return Array.from(document.querySelectorAll('#' + listId + ' .icon-lead-text-row')).map(function (row) {
+      return {
+        icon: row.querySelector('.row-icon').value.trim(),
+        lead: row.querySelector('.row-lead').value.trim(),
+        text: row.querySelector('.row-text').value.trim(),
+      };
+    });
+  }
+
+  function readIconTitleTextRows(listId) {
+    return Array.from(document.querySelectorAll('#' + listId + ' .icon-title-text-row')).map(function (row) {
+      return {
+        icon: row.querySelector('.row-icon').value.trim(),
+        title: row.querySelector('.row-title').value.trim(),
+        text: row.querySelector('.row-text').value.trim(),
+      };
+    });
+  }
+
+  function readIconFormulaTextRows(listId) {
+    return Array.from(document.querySelectorAll('#' + listId + ' .icon-formula-text-row')).map(function (row) {
+      return {
+        icon: row.querySelector('.row-icon').value.trim(),
+        formula: row.querySelector('.row-formula').value.trim(),
+        text: row.querySelector('.row-text').value.trim(),
+      };
+    });
+  }
+
+  function readEvolutionCards(listId) {
+    return Array.from(document.querySelectorAll('#' + listId + ' .evolution-card-row')).map(function (row) {
+      return {
+        icon: row.querySelector('.row-icon').value.trim(),
+        label: row.querySelector('.row-label').value.trim(),
+        title: row.querySelector('.row-title').value.trim(),
+        items: row.querySelector('.row-items').value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean),
+      };
+    });
+  }
+
+  function readSimpleTextRows(listId) {
+    return Array.from(document.querySelectorAll('#' + listId + ' .simple-text-row .row-value')).map(function (input) {
+      return input.value.trim();
+    }).filter(Boolean);
+  }
+
+  function setImagePathField(id, value) {
+    var input = document.getElementById(id);
+    if (!input) return;
+    input.value = value || '';
+    setImagePreview(input);
+  }
+
   function loadPagesContent() {
     fetchJsonFile('pages-content.json').then(function (content) {
       var eng = content.engineering || {};
       document.getElementById('pg-eng-hero-eyebrow').value = eng.hero_eyebrow || '';
       setQuillHtml('pg-eng-hero-tagline', eng.hero_tagline);
+      setImagePathField('pg-eng-hero-image', eng.hero_image);
+      document.getElementById('pg-eng-hero-image-label').value = eng.hero_image_label || '';
+      document.getElementById('pg-eng-hero-image-caption').value = eng.hero_image_caption || '';
+
       var engSections = eng.sections || {};
       PAGES_ENGINEERING_SECTIONS.forEach(function (key) {
         var section = engSections[key] || {};
         document.getElementById('pg-eng-' + key + '-eyebrow').value = section.eyebrow || '';
         document.getElementById('pg-eng-' + key + '-heading').value = section.heading || '';
       });
+
+      var evo = engSections.evolution || {};
+      setQuillHtml('pg-eng-evolution-body', evo.body);
+      var evoCardsList = document.getElementById('pg-eng-evolution-cards-list');
+      evoCardsList.innerHTML = '';
+      (evo.cards || []).forEach(function (c) { evoCardsList.appendChild(renderEvolutionCardRow(c)); });
+      setImagePathField('pg-eng-evolution-image', evo.image);
+
+      var aero = engSections.aerodynamics || {};
+      setImagePathField('pg-eng-aerodynamics-image', aero.image);
+      var aeroRowsList = document.getElementById('pg-eng-aerodynamics-rows-list');
+      aeroRowsList.innerHTML = '';
+      (aero.rows || []).forEach(function (r) { aeroRowsList.appendChild(renderIconLeadTextRow(r)); });
+
+      var cad = engSections.cad || {};
+      var cadCardsList = document.getElementById('pg-eng-cad-cards-list');
+      cadCardsList.innerHTML = '';
+      (cad.cards || []).forEach(function (c) { cadCardsList.appendChild(renderIconTitleTextRow(c)); });
+      document.getElementById('pg-eng-cad-materials-label').value = cad.materials_label || '';
+      var cadMaterialsList = document.getElementById('pg-eng-cad-materials-list');
+      cadMaterialsList.innerHTML = '';
+      (cad.materials || []).forEach(function (m) { cadMaterialsList.appendChild(renderSimpleTextRow(m)); });
+
+      var physics = engSections.physics || {};
+      var physicsCardsList = document.getElementById('pg-eng-physics-cards-list');
+      physicsCardsList.innerHTML = '';
+      (physics.cards || []).forEach(function (c) { physicsCardsList.appendChild(renderIconFormulaTextRow(c)); });
+
+      var manu = engSections.manufacturing || {};
+      var manuRowsList = document.getElementById('pg-eng-manufacturing-rows-list');
+      manuRowsList.innerHTML = '';
+      (manu.rows || []).forEach(function (r) { manuRowsList.appendChild(renderIconLeadTextRow(r)); });
+      setImagePathField('pg-eng-manufacturing-image', manu.image);
+
+      var track = engSections.track_testing || {};
+      var trackCardsList = document.getElementById('pg-eng-track_testing-cards-list');
+      trackCardsList.innerHTML = '';
+      (track.cards || []).forEach(function (c) { trackCardsList.appendChild(renderIconTitleTextRow(c)); });
 
       var spon = content.sponsorship || {};
       document.getElementById('pg-spon-hero-eyebrow').value = spon.hero_eyebrow || '';
@@ -534,11 +746,31 @@
         heading: document.getElementById('pg-eng-' + key + '-heading').value.trim(),
       };
     });
+    sections.evolution.body = getQuillHtml('pg-eng-evolution-body');
+    sections.evolution.cards = readEvolutionCards('pg-eng-evolution-cards-list');
+    sections.evolution.image = document.getElementById('pg-eng-evolution-image').value.trim();
+
+    sections.aerodynamics.image = document.getElementById('pg-eng-aerodynamics-image').value.trim();
+    sections.aerodynamics.rows = readIconLeadTextRows('pg-eng-aerodynamics-rows-list');
+
+    sections.cad.cards = readIconTitleTextRows('pg-eng-cad-cards-list');
+    sections.cad.materials_label = document.getElementById('pg-eng-cad-materials-label').value.trim();
+    sections.cad.materials = readSimpleTextRows('pg-eng-cad-materials-list');
+
+    sections.physics.cards = readIconFormulaTextRows('pg-eng-physics-cards-list');
+
+    sections.manufacturing.rows = readIconLeadTextRows('pg-eng-manufacturing-rows-list');
+    sections.manufacturing.image = document.getElementById('pg-eng-manufacturing-image').value.trim();
+
+    sections.track_testing.cards = readIconTitleTextRows('pg-eng-track_testing-cards-list');
 
     var content = {
       engineering: {
         hero_eyebrow: document.getElementById('pg-eng-hero-eyebrow').value.trim(),
         hero_tagline: getQuillHtml('pg-eng-hero-tagline'),
+        hero_image: document.getElementById('pg-eng-hero-image').value.trim(),
+        hero_image_label: document.getElementById('pg-eng-hero-image-label').value.trim(),
+        hero_image_caption: document.getElementById('pg-eng-hero-image-caption').value.trim(),
         sections: sections,
       },
       sponsorship: {

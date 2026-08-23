@@ -2,30 +2,152 @@
   "engineering": {
     "hero_eyebrow": "Under the Hood",
     "hero_tagline": "<p>From AR Ventus 2.27 to AR Nimbus 4.51 — the real specs, the CAD process, the physics, and the lessons learned building each car.</p>",
+    "hero_image": "Images/Render1.png",
+    "hero_image_label": "Current Car",
+    "hero_image_caption": "AR Nimbus 4.51",
     "sections": {
       "evolution": {
         "eyebrow": "The Evolution",
-        "heading": "Two Cars, One Relentless Redesign"
+        "heading": "Two Cars, One Relentless Redesign",
+        "body": "<p>Every Aerostorm car carries a version number that tracks its design iteration count — 2.27, for example, marks the 27th iteration of our second concept line. It's a small detail, but an honest one: nothing on the car arrived on the first try.</p><p>AR Nimbus 4.51 didn't start on a clean sheet — it's a direct rebuild of what we learned racing AR Ventus 2.27 at regionals.</p>",
+        "cards": [
+          {
+            "icon": "alert-triangle",
+            "label": "Regional Qualifier",
+            "title": "AR Ventus 2.27",
+            "items": [
+              "A gap between the wheel and sidepod edge increased friction and hurt aerodynamics.",
+              "Ran a plain axle-hole wheel system with no bearings, costing performance."
+            ]
+          },
+          {
+            "icon": "check-circle",
+            "label": "Nationals · Current",
+            "title": "AR Nimbus 4.51",
+            "items": [
+              "Sidepod lengthened within regs while managing weight — airflow is more linear and the part is actually manufacturable on the CNC.",
+              "Replaced the axle-hole system with Axle → Bearing Holder → Wheel, using F1 Bearing's Hybrid Ceramic Bearings."
+            ]
+          }
+        ],
+        "image": "Images/WhatsApp Image 2026-07-25 at 19.58.01.jpeg"
       },
       "aerodynamics": {
         "eyebrow": "Airflow First",
-        "heading": "Designed to Cut Through the Air"
+        "heading": "Designed to Cut Through the Air",
+        "image": "Images/Image1.png",
+        "rows": [
+          {
+            "icon": "wind",
+            "lead": "Tapered, pointed nose",
+            "text": "minimizes the stagnation zone, while the body's top surface transitions gradually into the cockpit hump with no sharp corners — keeping airflow attached longer and avoiding early boundary-layer separation and turbulent wake."
+          },
+          {
+            "icon": "minimize-2",
+            "lead": "Frontal cross-sectional area minimized",
+            "text": "(bluff-body minimization) to cut drag."
+          },
+          {
+            "icon": "gauge",
+            "lead": "Rear wing tilted 10°",
+            "text": "— a deliberately moderate angle, enough for downforce and grip without excessive drag on a straight track."
+          },
+          {
+            "icon": "search",
+            "lead": "Validated in Airshaper",
+            "text": ", a browser-based CFD/CAA tool, to visualize airflow — this is what caught the Ventus sidepod flaw before Nimbus was built."
+          }
+        ]
       },
       "cad": {
         "eyebrow": "Autodesk Fusion",
-        "heading": "From Sketch to Solid"
+        "heading": "From Sketch to Solid",
+        "cards": [
+          {
+            "icon": "layers",
+            "title": "Main Body",
+            "text": "Modeled with Fusion's loft tool to build the continuous body surface."
+          },
+          {
+            "icon": "pen-tool",
+            "title": "Sidepod & Wings",
+            "text": "Built with sketch, extrude, and fillet operations."
+          },
+          {
+            "icon": "cog",
+            "title": "Wheel & Axle",
+            "text": "Assembled with Fusion's joint tool — axles get revolute motion, wheels get circular motion."
+          }
+        ],
+        "materials_label": "Materials — per official Stemplify spec",
+        "materials": [
+          "Main car body — CNC-machined Polyurethane foam",
+          "Halo, helmet, front wing, rear wing, bearings, bearing holders, wheels — PLA-CF"
+        ]
       },
       "physics": {
         "eyebrow": "The Numbers Behind It",
-        "heading": "Physics, Not Guesswork"
+        "heading": "Physics, Not Guesswork",
+        "cards": [
+          {
+            "icon": "flask-conical",
+            "formula": "F = ma",
+            "text": "Used to compare material acceleration — PLA-CF's lower mass versus alternatives gave better acceleration."
+          },
+          {
+            "icon": "wind",
+            "formula": "F<sub>d</sub> = ½ρC<sub>d</sub>Av<sup>2</sup>",
+            "text": "The drag equation, used to reason about reducing frontal area and drag."
+          },
+          {
+            "icon": "rocket",
+            "formula": "~15 m/s target",
+            "text": "Early-stage balloon-rocket experiments estimated achievable velocity, targeting roughly an 80% drag reduction from initial concepts."
+          }
+        ]
       },
       "manufacturing": {
         "eyebrow": "From CAD to Car",
-        "heading": "Built By Hand, Machined With Precision"
+        "heading": "Built By Hand, Machined With Precision",
+        "rows": [
+          {
+            "icon": "printer",
+            "lead": "Prototyping",
+            "text": "— test iterations 3D-printed on a Bambu Lab A1, reusing old and near-empty filament spools and parts from prior prototypes."
+          },
+          {
+            "icon": "cog",
+            "lead": "Manufacturing",
+            "text": "— CNC-machined by Stemplify, our manufacturing partner."
+          },
+          {
+            "icon": "wrench",
+            "lead": "Hand-finishing",
+            "text": "— axle holes drilled at home, front wing joints sawed for proper fit, and loose-fitting pieces hand-assembled with super glue."
+          },
+          {
+            "icon": "paintbrush",
+            "lead": "Paint",
+            "text": "— sprayed by sponsor House of Polish."
+          }
+        ],
+        "image": "Images/WhatsApp Image 2026-07-26 at 14.17.02.jpeg"
       },
       "track_testing": {
         "eyebrow": "Reality Check",
-        "heading": "What the Track Taught Us"
+        "heading": "What the Track Taught Us",
+        "cards": [
+          {
+            "icon": "activity",
+            "title": "Bearing Fix, On the Fly",
+            "text": "Testing at the Official STEM Racing India track surfaced a bearing-rotation issue that was loosening the wheel. Fixed by adding a thin layer of paint over the axle protrusion that inserts into the bearing, tightening the joint."
+          },
+          {
+            "icon": "scale",
+            "title": "Simulated vs. Real Weight",
+            "text": "Fusion's simulated weight estimates were well off from the real build: the bearing assembly alone came in at ~34g, heavier than expected, and the real main body weighed 68g against Fusion's simulated 36g — roughly double. A lesson learned for the next iteration, not a failure."
+          }
+        ]
       }
     }
   },

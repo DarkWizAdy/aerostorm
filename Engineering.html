@@ -13,7 +13,7 @@
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,400..900;1,400..900&amp;family=Outfit:wght@300;400;500;600;700;800;900&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
   <link rel="icon" id="site-favicon" href="aerostormLogoNoBG.png">
  </head>
  <body class="h-full bg-[#000000] text-[#e8e8e8] font-heading overflow-auto">
@@ -75,10 +75,10 @@
      <section class="w-full bg-[#0a0a0a] pb-24">
       <div class="max-w-7xl mx-auto px-6">
        <div class="relative rounded-sm overflow-hidden border border-[#2c2c2c]">
-        <img src="Images/Render1.png" alt="AR Nimbus 4.51 CAD render on track" class="w-full h-auto block">
+        <img id="eng-hero-image" src="Images/Render1.png" alt="AR Nimbus 4.51 CAD render on track" class="w-full h-auto block">
         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-         <span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Current Car</span>
-         <p class="text-white font-bold text-xl mt-1">AR Nimbus 4.51</p>
+         <span id="eng-hero-image-label" class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Current Car</span>
+         <p id="eng-hero-image-caption" class="text-white font-bold text-xl mt-1">AR Nimbus 4.51</p>
         </div>
        </div>
       </div>
@@ -89,40 +89,12 @@
       <div class="max-w-7xl mx-auto px-6">
        <span id="eng-evolution-eyebrow" class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">The Evolution</span>
        <h2 id="eng-evolution-heading" class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-6">Two Cars, One Relentless Redesign</h2>
-       <p class="text-[#bababa] max-w-3xl font-light leading-relaxed mb-4">Every Aerostorm car carries a version number that tracks its design iteration count &mdash; <span class="text-[#e0d2b3] font-mono">2.27</span>, for example, marks the 27th iteration of our second concept line. It's a small detail, but an honest one: nothing on the car arrived on the first try.</p>
-       <p class="text-[#bababa] max-w-3xl font-light leading-relaxed mb-12">AR Nimbus 4.51 didn't start on a clean sheet &mdash; it's a direct rebuild of what we learned racing AR Ventus 2.27 at regionals.</p>
+       <div id="eng-evolution-body" class="wysiwyg-content text-[#bababa] max-w-3xl font-light leading-relaxed mb-12"></div>
 
-       <div class="grid md:grid-cols-2 gap-6 mb-12">
-        <div class="relative bg-[#111111] border border-[#2c2c2c] rounded-sm p-8 card-hover">
-         <div class="flex items-center gap-3 mb-5">
-          <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center"><i data-lucide="alert-triangle" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-          <div>
-           <span class="font-mono text-[10px] tracking-[0.2em] text-[#636363] uppercase">Regional Qualifier</span>
-           <h3 class="text-white font-bold text-lg">AR Ventus 2.27</h3>
-          </div>
-         </div>
-         <ul class="space-y-3 text-[#727272] text-sm leading-relaxed">
-          <li class="flex gap-2"><span class="text-[#e0d2b3] shrink-0">&mdash;</span>A gap between the wheel and sidepod edge increased friction and hurt aerodynamics.</li>
-          <li class="flex gap-2"><span class="text-[#e0d2b3] shrink-0">&mdash;</span>Ran a plain axle-hole wheel system with no bearings, costing performance.</li>
-         </ul>
-        </div>
-        <div class="relative bg-[#111111] border border-[#e0d2b3]/30 rounded-sm p-8 card-hover">
-         <div class="flex items-center gap-3 mb-5">
-          <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center"><i data-lucide="check-circle" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-          <div>
-           <span class="font-mono text-[10px] tracking-[0.2em] text-[#d0bd92] uppercase">Nationals &middot; Current</span>
-           <h3 class="text-white font-bold text-lg">AR Nimbus 4.51</h3>
-          </div>
-         </div>
-         <ul class="space-y-3 text-[#bababa] text-sm leading-relaxed">
-          <li class="flex gap-2"><span class="text-[#e0d2b3] shrink-0">&mdash;</span>Sidepod lengthened within regs while managing weight &mdash; airflow is more linear and the part is actually manufacturable on the CNC.</li>
-          <li class="flex gap-2"><span class="text-[#e0d2b3] shrink-0">&mdash;</span>Replaced the axle-hole system with Axle &rarr; Bearing Holder &rarr; Wheel, using F1 Bearing's Hybrid Ceramic Bearings.</li>
-         </ul>
-        </div>
-       </div>
+       <div id="eng-evolution-cards" class="grid md:grid-cols-2 gap-6 mb-12"></div>
 
        <div class="rounded-sm overflow-hidden border border-[#2c2c2c]">
-        <img src="Images/WhatsApp Image 2026-07-25 at 19.58.01.jpeg" alt="AR Nimbus 4.51 side profile CAD render" class="w-full h-auto block">
+        <img id="eng-evolution-image" src="Images/WhatsApp Image 2026-07-25 at 19.58.01.jpeg" alt="AR Nimbus 4.51 side profile CAD render" class="w-full h-auto block">
        </div>
       </div>
      </section>
@@ -134,26 +106,9 @@
        <h2 id="eng-aerodynamics-heading" class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-12">Designed to Cut Through the Air</h2>
        <div class="grid md:grid-cols-2 gap-12 items-start">
         <div class="rounded-sm overflow-hidden border border-[#2c2c2c] order-2 md:order-1">
-         <img src="Images/Image1.png" alt="AR Nimbus 4.51 front orthographic CAD render" class="w-full h-auto block">
+         <img id="eng-aerodynamics-image" src="Images/Image1.png" alt="AR Nimbus 4.51 front orthographic CAD render" class="w-full h-auto block">
         </div>
-        <div class="order-1 md:order-2 space-y-6">
-         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center shrink-0"><i data-lucide="wind" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-          <p class="text-[#bababa] text-sm leading-relaxed"><span class="text-white font-semibold">Tapered, pointed nose</span> minimizes the stagnation zone, while the body's top surface transitions gradually into the cockpit hump with no sharp corners &mdash; keeping airflow attached longer and avoiding early boundary-layer separation and turbulent wake.</p>
-         </div>
-         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center shrink-0"><i data-lucide="minimize-2" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-          <p class="text-[#bababa] text-sm leading-relaxed"><span class="text-white font-semibold">Frontal cross-sectional area minimized</span> (bluff-body minimization) to cut drag.</p>
-         </div>
-         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center shrink-0"><i data-lucide="gauge" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-          <p class="text-[#bababa] text-sm leading-relaxed"><span class="text-white font-semibold">Rear wing tilted 10&deg;</span> &mdash; a deliberately moderate angle, enough for downforce and grip without excessive drag on a straight track.</p>
-         </div>
-         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center shrink-0"><i data-lucide="search" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-          <p class="text-[#bababa] text-sm leading-relaxed"><span class="text-white font-semibold">Validated in Airshaper</span>, a browser-based CFD/CAA tool, to visualize airflow &mdash; this is what caught the Ventus sidepod flaw before Nimbus was built.</p>
-         </div>
-        </div>
+        <div id="eng-aerodynamics-rows" class="order-1 md:order-2 space-y-6"></div>
        </div>
       </div>
      </section>
@@ -163,36 +118,11 @@
       <div class="max-w-7xl mx-auto px-6">
        <span id="eng-cad-eyebrow" class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Autodesk Fusion</span>
        <h2 id="eng-cad-heading" class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-12">From Sketch to Solid</h2>
-       <div class="grid md:grid-cols-3 gap-6 mb-6">
-        <div class="relative bg-[#111111] border border-[#2c2c2c] rounded-sm p-8 card-hover">
-         <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="layers" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-         <h3 class="text-white font-bold text-lg mb-3">Main Body</h3>
-         <p class="text-[#727272] text-sm leading-relaxed">Modeled with Fusion's loft tool to build the continuous body surface.</p>
-        </div>
-        <div class="relative bg-[#111111] border border-[#2c2c2c] rounded-sm p-8 card-hover">
-         <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="pen-tool" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-         <h3 class="text-white font-bold text-lg mb-3">Sidepod &amp; Wings</h3>
-         <p class="text-[#727272] text-sm leading-relaxed">Built with sketch, extrude, and fillet operations.</p>
-        </div>
-        <div class="relative bg-[#111111] border border-[#2c2c2c] rounded-sm p-8 card-hover">
-         <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="cog" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-         <h3 class="text-white font-bold text-lg mb-3">Wheel &amp; Axle</h3>
-         <p class="text-[#727272] text-sm leading-relaxed">Assembled with Fusion's joint tool &mdash; axles get revolute motion, wheels get circular motion.</p>
-        </div>
-       </div>
+       <div id="eng-cad-cards" class="grid md:grid-cols-3 gap-6 mb-6"></div>
 
        <div class="bg-[#111111] border border-[#2c2c2c] rounded-sm p-8">
-        <span class="font-mono text-[10px] tracking-[0.2em] text-[#636363] uppercase">Materials &mdash; per official Stemplify spec</span>
-        <div class="grid sm:grid-cols-2 gap-4 mt-4">
-         <div class="flex items-center gap-3">
-          <div class="w-2 h-2 rounded-full bg-[#e0d2b3] shrink-0"></div>
-          <p class="text-[#bababa] text-sm">Main car body &mdash; CNC-machined Polyurethane foam</p>
-         </div>
-         <div class="flex items-center gap-3">
-          <div class="w-2 h-2 rounded-full bg-[#e0d2b3] shrink-0"></div>
-          <p class="text-[#bababa] text-sm">Halo, helmet, front wing, rear wing, bearings, bearing holders, wheels &mdash; PLA-CF</p>
-         </div>
-        </div>
+        <span id="eng-cad-materials-label" class="font-mono text-[10px] tracking-[0.2em] text-[#636363] uppercase">Materials &mdash; per official Stemplify spec</span>
+        <div id="eng-cad-materials" class="grid sm:grid-cols-2 gap-4 mt-4"></div>
        </div>
       </div>
      </section>
@@ -202,23 +132,7 @@
       <div class="max-w-7xl mx-auto px-6">
        <span id="eng-physics-eyebrow" class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">The Numbers Behind It</span>
        <h2 id="eng-physics-heading" class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-12">Physics, Not Guesswork</h2>
-       <div class="grid md:grid-cols-3 gap-6">
-        <div class="relative bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-8 card-hover">
-         <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="flask-conical" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-         <p class="font-mono text-[#e0d2b3] text-lg mb-3">F = ma</p>
-         <p class="text-[#727272] text-sm leading-relaxed">Used to compare material acceleration &mdash; PLA-CF's lower mass versus alternatives gave better acceleration.</p>
-        </div>
-        <div class="relative bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-8 card-hover">
-         <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="wind" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-         <p class="font-mono text-[#e0d2b3] text-lg mb-3">F<sub>d</sub> = &frac12;&rho;C<sub>d</sub>Av<sup>2</sup></p>
-         <p class="text-[#727272] text-sm leading-relaxed">The drag equation, used to reason about reducing frontal area and drag.</p>
-        </div>
-        <div class="relative bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-8 card-hover">
-         <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="rocket" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-         <p class="font-mono text-[#e0d2b3] text-lg mb-3">~15 m/s target</p>
-         <p class="text-[#727272] text-sm leading-relaxed">Early-stage balloon-rocket experiments estimated achievable velocity, targeting roughly an 80% drag reduction from initial concepts.</p>
-        </div>
-       </div>
+       <div id="eng-physics-cards" class="grid md:grid-cols-3 gap-6"></div>
       </div>
      </section>
 
@@ -228,26 +142,9 @@
        <span id="eng-manufacturing-eyebrow" class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">From CAD to Car</span>
        <h2 id="eng-manufacturing-heading" class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-12">Built By Hand, Machined With Precision</h2>
        <div class="grid md:grid-cols-2 gap-12 items-start">
-        <div class="space-y-6">
-         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center shrink-0"><i data-lucide="printer" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-          <p class="text-[#bababa] text-sm leading-relaxed"><span class="text-white font-semibold">Prototyping</span> &mdash; test iterations 3D-printed on a Bambu Lab A1, reusing old and near-empty filament spools and parts from prior prototypes.</p>
-         </div>
-         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center shrink-0"><i data-lucide="cog" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-          <p class="text-[#bababa] text-sm leading-relaxed"><span class="text-white font-semibold">Manufacturing</span> &mdash; CNC-machined by Stemplify, our manufacturing partner.</p>
-         </div>
-         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center shrink-0"><i data-lucide="wrench" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-          <p class="text-[#bababa] text-sm leading-relaxed"><span class="text-white font-semibold">Hand-finishing</span> &mdash; axle holes drilled at home, front wing joints sawed for proper fit, and loose-fitting pieces hand-assembled with super glue.</p>
-         </div>
-         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center shrink-0"><i data-lucide="paintbrush" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-          <p class="text-[#bababa] text-sm leading-relaxed"><span class="text-white font-semibold">Paint</span> &mdash; sprayed by sponsor House of Polish.</p>
-         </div>
-        </div>
+        <div id="eng-manufacturing-rows" class="space-y-6"></div>
         <div class="rounded-sm overflow-hidden border border-[#2c2c2c]">
-         <img src="Images/WhatsApp Image 2026-07-26 at 14.17.02.jpeg" alt="AR Nimbus 4.51 front three-quarter CAD render" class="w-full h-auto block">
+         <img id="eng-manufacturing-image" src="Images/WhatsApp Image 2026-07-26 at 14.17.02.jpeg" alt="AR Nimbus 4.51 front three-quarter CAD render" class="w-full h-auto block">
         </div>
        </div>
       </div>
@@ -258,18 +155,7 @@
       <div class="max-w-7xl mx-auto px-6">
        <span id="eng-track_testing-eyebrow" class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Reality Check</span>
        <h2 id="eng-track_testing-heading" class="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-12">What the Track Taught Us</h2>
-       <div class="grid md:grid-cols-2 gap-6">
-        <div class="relative bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-8 card-hover">
-         <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="activity" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-         <h3 class="text-white font-bold text-lg mb-3">Bearing Fix, On the Fly</h3>
-         <p class="text-[#727272] text-sm leading-relaxed">Testing at the Official STEM Racing India track surfaced a bearing-rotation issue that was loosening the wheel. Fixed by adding a thin layer of paint over the axle protrusion that inserts into the bearing, tightening the joint.</p>
-        </div>
-        <div class="relative bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-8 card-hover">
-         <div class="w-10 h-10 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center mb-5"><i data-lucide="scale" style="width:20px;height:20px;color:#e0d2b3;"></i></div>
-         <h3 class="text-white font-bold text-lg mb-3">Simulated vs. Real Weight</h3>
-         <p class="text-[#727272] text-sm leading-relaxed">Fusion's simulated weight estimates were well off from the real build: the bearing assembly alone came in at ~34g, heavier than expected, and the real main body weighed 68g against Fusion's simulated 36g &mdash; roughly double. A lesson learned for the next iteration, not a failure.</p>
-        </div>
-       </div>
+       <div id="eng-track_testing-cards" class="grid md:grid-cols-2 gap-6"></div>
       </div>
      </section>
 
@@ -292,8 +178,8 @@
     </div>
    </footer>
   </div>
-  <script src="site-chrome.js?v=2"></script>
-  <script src="pages-content.js?v=2"></script>
-  <script src="script.js?v=2"></script>
+  <script src="site-chrome.js?v=3"></script>
+  <script src="pages-content.js?v=3"></script>
+  <script src="script.js?v=3"></script>
  </body>
 </html>
