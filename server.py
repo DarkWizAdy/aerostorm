@@ -270,6 +270,12 @@ if __name__ == '__main__':
     if '--create-admin' in sys.argv:
         admin_backend._run_create_admin_cli()
         sys.exit(0)
+    if '--list-admins' in sys.argv:
+        admin_backend._run_list_admins_cli()
+        sys.exit(0)
+    if '--delete-admin' in sys.argv:
+        admin_backend._run_delete_admin_cli()
+        sys.exit(0)
 
     admin_backend.init_db()
 

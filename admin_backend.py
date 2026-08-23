@@ -161,13 +161,16 @@ def _verify_password(password, salt_hex, hash_hex, n, r, p):
 
 
 def create_or_update_admin(email, password):
-    """Upserts the single admin account. Also serves as the 'reset my
-    password' path — running it again just overwrites the one row."""
+    """Upserts one admin account, keyed by email. If that email doesn't
+    exist yet it's created (so this supports any number of admins); if it
+    does, its password is reset. Never touches a *different* admin's row."""
     salt_hex, hash_hex = _hash_password(password)
     now = _now_iso()
     conn = get_connection()
     try:
-        existing = conn.execute("SELECT id FROM admin_users LIMIT 1").fetchone()
+        existing = conn.execute(
+            "SELECT id FROM admin_users WHERE email = ?", (email,)
+        ).fetchone()
         if existing is None:
             conn.execute(
                 """INSERT INTO admin_users
@@ -179,13 +182,43 @@ def create_or_update_admin(email, password):
         else:
             conn.execute(
                 """UPDATE admin_users
-                   SET email = ?, password_hash = ?, password_salt = ?,
-                       password_algo = 'scrypt', password_n = ?, password_r = ?,
-                       password_p = ?, updated_at = ?
+                   SET password_hash = ?, password_salt = ?, password_algo = 'scrypt',
+                       password_n = ?, password_r = ?, password_p = ?, updated_at = ?
                    WHERE id = ?""",
-                (email, hash_hex, salt_hex, SCRYPT_N, SCRYPT_R, SCRYPT_P, now, existing["id"]),
+                (hash_hex, salt_hex, SCRYPT_N, SCRYPT_R, SCRYPT_P, now, existing["id"]),
             )
         conn.commit()
+    finally:
+        conn.close()
+
+
+def list_admins():
+    conn = get_connection()
+    try:
+        rows = conn.execute(
+            "SELECT email, created_at, updated_at FROM admin_users ORDER BY created_at"
+        ).fetchall()
+        return [dict(r) for r in rows]
+    finally:
+        conn.close()
+
+
+def delete_admin(email):
+    """Deletes one admin by email. Refuses if it's the last remaining admin,
+    so you can't lock yourself out. Returns (True, None) on success, or
+    (False, error_message) on failure."""
+    conn = get_connection()
+    try:
+        count = conn.execute("SELECT COUNT(*) AS c FROM admin_users").fetchone()["c"]
+        row = conn.execute("SELECT id FROM admin_users WHERE email = ?", (email,)).fetchone()
+        if row is None:
+            return False, f"No admin with email {email}"
+        if count <= 1:
+            return False, "Can't delete the last remaining admin"
+        conn.execute("DELETE FROM sessions WHERE user_id = ?", (row["id"],))
+        conn.execute("DELETE FROM admin_users WHERE id = ?", (row["id"],))
+        conn.commit()
+        return True, None
     finally:
         conn.close()
 
@@ -511,7 +544,7 @@ def clear_wall_photos():
 
 def _run_create_admin_cli():
     init_db()
-    print("Set up (or reset) the Aerostorm admin account.")
+    print("Add an admin, or reset an existing one's password (same email = reset).")
     email = input("Admin email: ").strip()
     while not email:
         email = input("Admin email (required): ").strip()
@@ -526,11 +559,37 @@ def _run_create_admin_cli():
     print(f"Admin account set for {email}. You can now log in at /admin.html.")
 
 
+def _run_list_admins_cli():
+    init_db()
+    admins = list_admins()
+    if not admins:
+        print("No admins yet — run --create-admin.")
+        return
+    for a in admins:
+        print(f"{a['email']}  (created {a['created_at']}, updated {a['updated_at']})")
+
+
+def _run_delete_admin_cli():
+    init_db()
+    email = input("Email of the admin to delete: ").strip()
+    ok, error = delete_admin(email)
+    if ok:
+        print(f"Deleted admin {email}.")
+    else:
+        print(f"Not deleted: {error}")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--create-admin", action="store_true")
+    parser.add_argument("--create-admin", action="store_true", help="Add a new admin, or reset an existing one's password")
+    parser.add_argument("--list-admins", action="store_true", help="List all admin accounts")
+    parser.add_argument("--delete-admin", action="store_true", help="Remove an admin by email")
     args = parser.parse_args()
     if args.create_admin:
         _run_create_admin_cli()
+    elif args.list_admins:
+        _run_list_admins_cli()
+    elif args.delete_admin:
+        _run_delete_admin_cli()
     else:
         parser.print_help()
