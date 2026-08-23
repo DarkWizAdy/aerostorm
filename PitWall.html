@@ -70,18 +70,10 @@
       box-shadow: 0 12px 40px rgba(0,0,0,0.4);
       border-color: #e0d2b3;
     }
-    .tile::before {
-      content: "";
-      display: block;
-      padding-top: 100%;
-    }
     .tile img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
       display: block;
+      width: 100%;
+      height: auto;
     }
     @keyframes pop {
       0% { transform: scale(0.85); opacity: 0; }
@@ -215,8 +207,8 @@
             return;
           }
           galGrid.innerHTML = images.map(function (img) {
-            return '<div class="aspect-square bg-[#111111] border border-[#1e1e1e] rounded-sm overflow-hidden group relative">' +
-              '<img src="' + img.image + '" alt="' + (img.caption || '') + '" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">' +
+            return '<div class="bg-[#111111] border border-[#1e1e1e] rounded-sm overflow-hidden group relative">' +
+              '<img src="' + img.image + '" alt="' + (img.caption || '') + '" class="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300">' +
               (img.caption ? '<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3"><p class="text-white text-xs">' + img.caption + '</p></div>' : '') +
               '</div>';
           }).join('');
