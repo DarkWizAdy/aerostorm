@@ -108,7 +108,7 @@
       border-radius: 1.5rem;
       box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
     }
-    .hidden { display: none !important; }
+    .jtg-hide { display: none !important; }
   </style>
 </head>
 <body class="h-full bg-[#000000] text-[#e8e8e8] font-heading overflow-auto" id="top">
@@ -172,12 +172,12 @@
           <div class="checker w-full"></div>
 
           <div class="flex flex-col items-center gap-8 py-8">
-            <div id="idle" class="hidden">
+            <div id="idle" class="jtg-hide">
             </div>
 
-            <video id="cameraPreview" class="camera-preview hidden" autoplay playsinline muted></video>
+            <video id="cameraPreview" class="camera-preview jtg-hide" autoplay playsinline muted></video>
             <button id="captureLabel" type="button" class="">TAP&nbsp;TO<br>SNAP</button>
-            <button id="cameraButton" type="button" class="hidden">CAPTURE</button>
+            <button id="cameraButton" type="button" class="jtg-hide">CAPTURE</button>
 
             <div id="lights" class="">
               <div class="bulb" id="b1"></div>
@@ -246,8 +246,8 @@
     let stream = null;
 
     window.addEventListener('load', () => {
-      idle.classList.add('hidden');
-      captureLabel.classList.remove('hidden');
+      idle.classList.add('jtg-hide');
+      captureLabel.classList.remove('jtg-hide');
       if (clearWallButton) {
         clearWallButton.addEventListener('click', clearWall);
       }
@@ -268,9 +268,9 @@
       try {
         stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
         cameraPreview.srcObject = stream;
-        cameraPreview.classList.remove('hidden');
-        cameraButton.classList.remove('hidden');
-        captureLabel.classList.add('hidden');
+        cameraPreview.classList.remove('jtg-hide');
+        cameraButton.classList.remove('jtg-hide');
+        captureLabel.classList.add('jtg-hide');
         statusText.textContent = '';
 
         await new Promise((resolve) => {
@@ -292,8 +292,8 @@
         await new Promise((resolve) => cameraPreview.addEventListener('loadeddata', resolve, { once: true }));
       }
 
-      cameraPreview.classList.add('hidden');
-      cameraButton.classList.add('hidden');
+      cameraPreview.classList.add('jtg-hide');
+      cameraButton.classList.add('jtg-hide');
 
       const videoWidth = cameraPreview.videoWidth || 1280;
       const videoHeight = cameraPreview.videoHeight || 720;
@@ -308,7 +308,7 @@
 
 
     async function processImageDataUrl(dataUrl) {
-      captureLabel.classList.add('hidden');
+      captureLabel.classList.add('jtg-hide');
       lights.classList.add('active');
       statusText.textContent = 'Get ready...';
 
@@ -348,9 +348,9 @@
       lights.classList.remove('active');
       bulbs.forEach(b => { b.classList.remove('on'); b.classList.remove('go'); });
       statusText.textContent = '';
-      captureLabel.classList.remove('hidden');
-      cameraButton.classList.add('hidden');
-      cameraPreview.classList.add('hidden');
+      captureLabel.classList.remove('jtg-hide');
+      cameraButton.classList.add('jtg-hide');
+      cameraPreview.classList.add('jtg-hide');
       stopCameraStream();
     }
 
