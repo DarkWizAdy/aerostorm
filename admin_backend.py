@@ -546,6 +546,26 @@ def clear_wall_photos():
             pass
 
 
+def delete_wall_photo(photo_id):
+    """Deletes one wall photo (file + DB row) by id. Returns True if it
+    existed and was removed, False if no such id."""
+    conn = get_connection()
+    try:
+        row = conn.execute("SELECT image_path FROM wall_photos WHERE id = ?", (photo_id,)).fetchone()
+        if row is None:
+            return False
+        conn.execute("DELETE FROM wall_photos WHERE id = ?", (photo_id,))
+        conn.commit()
+    finally:
+        conn.close()
+
+    try:
+        (BASE_DIR / row["image_path"]).unlink()
+    except OSError:
+        pass
+    return True
+
+
 # ---------------------------------------------------------------------------
 # CLI bootstrap: python admin_backend.py --create-admin
 # ---------------------------------------------------------------------------

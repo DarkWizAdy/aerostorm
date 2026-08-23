@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,400..900;1,400..900&amp;family=Outfit:wght@300;400;500;600;700;800;900&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
  </head>
  <body class="h-full bg-[#000000] text-[#e8e8e8] font-heading">
 
@@ -68,6 +68,7 @@
      <button data-tab="updates" class="admin-tab-btn">Updates</button>
      <button data-tab="sponsors" class="admin-tab-btn">Sponsors</button>
      <button data-tab="gallery" class="admin-tab-btn">Gallery</button>
+     <button data-tab="wallphotos" class="admin-tab-btn">Wall Photos</button>
      <button data-tab="contact" class="admin-tab-btn">Contact Data</button>
      <button data-tab="audit" class="admin-tab-btn">Audit Log</button>
     </div>
@@ -490,19 +491,45 @@
      <!-- GALLERY -->
      <div id="panel-gallery" class="admin-panel hidden">
       <h2 class="text-2xl font-bold text-white mb-1">Gallery</h2>
-      <p class="text-sm text-[#636363] mb-6">Photos shown in the Gallery section of the Pit Wall page.</p>
+      <p class="text-sm text-[#636363] mb-6">Photos shown in the Gallery section of the Pit Wall page. Images display at their full original size on the site — nothing is cropped.</p>
 
       <div class="bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-4 mb-6">
-       <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Upload a photo</label>
-       <input type="file" id="gallery-file-input" accept="image/png,image/jpeg,image/webp,image/gif" class="text-sm text-[#bababa]">
+       <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Upload photos (pick multiple at once)</label>
+       <input type="file" id="gallery-file-input" accept="image/png,image/jpeg,image/webp,image/gif" multiple class="text-sm text-[#bababa]">
        <p id="gallery-upload-status" class="text-xs text-[#636363] mt-2"></p>
       </div>
 
+      <div class="flex items-center gap-4 mb-3">
+       <label class="flex items-center gap-2 text-xs text-[#bababa]"><input type="checkbox" id="gallery-select-all">Select all</label>
+       <span id="gallery-selected-count" class="text-xs text-[#636363]"></span>
+       <button type="button" id="gallery-delete-selected" class="hidden text-xs text-[#e8412f] hover:underline">✕ Remove selected</button>
+      </div>
       <div id="gallery-list" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4"></div>
       <div class="flex items-center gap-4">
        <button type="button" id="save-gallery-btn" class="bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save Gallery</button>
        <span id="gallery-saved-msg" class="hidden text-[#d0bd92] text-sm font-mono">Saved</span>
       </div>
+     </div>
+
+     <!-- WALL PHOTOS -->
+     <div id="panel-wallphotos" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Wall Photos</h2>
+      <p class="text-sm text-[#636363] mb-6">The live photo wall on the Pit Wall page — normally filled by people using the Join the Grid camera kiosk, but you can add or remove photos here directly too. Removals here are immediate (no separate Save step), and display at full size with nothing cropped.</p>
+
+      <div class="bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm p-4 mb-6">
+       <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Add photos (pick multiple at once)</label>
+       <input type="file" id="wallphotos-file-input" accept="image/png,image/jpeg,image/webp,image/gif" multiple class="text-sm text-[#bababa]">
+       <p id="wallphotos-upload-status" class="text-xs text-[#636363] mt-2"></p>
+      </div>
+
+      <div class="flex items-center gap-4 mb-3 flex-wrap">
+       <label class="flex items-center gap-2 text-xs text-[#bababa]"><input type="checkbox" id="wallphotos-select-all">Select all</label>
+       <span id="wallphotos-selected-count" class="text-xs text-[#636363]"></span>
+       <button type="button" id="wallphotos-delete-selected" class="hidden text-xs text-[#e8412f] hover:underline">✕ Remove selected</button>
+       <button type="button" id="wallphotos-clear-all" class="text-xs text-[#e8412f] hover:underline ml-auto">Clear entire wall</button>
+      </div>
+      <div id="wallphotos-list" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+      <p id="wallphotos-empty" class="hidden text-[#636363] text-sm">No photos on the wall yet.</p>
      </div>
 
      <!-- CONTACT DATA -->
@@ -539,6 +566,6 @@
    </div>
   </div>
 
-  <script src="admin.js?v=3"></script>
+  <script src="admin.js?v=4"></script>
  </body>
 </html>

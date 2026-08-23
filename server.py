@@ -263,6 +263,24 @@ class AerostormHandler(SimpleHTTPRequestHandler):
             self._send_json(200, {'ok': True})
             return
 
+        if path.startswith('/api/admin/wall-photos/'):
+            email = self._require_auth()
+            if email is None:
+                return
+            photo_id = path.rsplit('/', 1)[-1]
+            if not photo_id.isdigit():
+                self._send_json(400, {'error': 'Invalid photo id'})
+                return
+
+            ok = admin_backend.delete_wall_photo(int(photo_id))
+            if not ok:
+                self._send_json(404, {'error': 'Photo not found'})
+                return
+
+            admin_backend.log_action(email, 'delete_wall_photo', target=photo_id)
+            self._send_json(200, {'ok': True})
+            return
+
         self._send_json(404, {'error': 'Not found'})
 
 

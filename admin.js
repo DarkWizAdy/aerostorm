@@ -121,6 +121,7 @@
     document.getElementById('panel-' + btn.dataset.tab).classList.remove('hidden');
     if (btn.dataset.tab === 'audit') loadAuditLog();
     if (btn.dataset.tab === 'contact') loadContacts();
+    if (btn.dataset.tab === 'wallphotos') loadWallPhotos();
   });
 
   // -- Site Settings ------------------------------------------------------
@@ -880,22 +881,76 @@
     });
   });
 
+  // -- Bulk selection (shared by Gallery + Wall Photos) ------------------
+  // Wires a "select all" checkbox + live "N selected" label + a bulk-action
+  // button's visibility to a container of per-item checkboxes. Selection
+  // state lives entirely in the checkboxes themselves (no separate JS
+  // state to keep in sync) — getSelected() just reads the checked ones.
+
+  function wireBulkSelection(opts) {
+    var container = document.getElementById(opts.containerId);
+    var selectAll = document.getElementById(opts.selectAllId);
+    var countEl = document.getElementById(opts.countId);
+    var actionBtn = document.getElementById(opts.actionBtnId);
+
+    function refresh() {
+      var boxes = container.querySelectorAll('.item-select');
+      var checked = container.querySelectorAll('.item-select:checked');
+      countEl.textContent = checked.length ? checked.length + ' selected' : '';
+      actionBtn.classList.toggle('hidden', checked.length === 0);
+      selectAll.checked = boxes.length > 0 && checked.length === boxes.length;
+    }
+
+    container.addEventListener('change', function (e) {
+      if (e.target.classList.contains('item-select')) refresh();
+    });
+    selectAll.addEventListener('change', function () {
+      container.querySelectorAll('.item-select').forEach(function (box) { box.checked = selectAll.checked; });
+      refresh();
+    });
+
+    return {
+      getSelectedItems: function () { return Array.from(container.querySelectorAll('.item-select:checked')).map(function (b) { return b.closest('.bulk-item'); }); },
+      refresh: refresh,
+    };
+  }
+
+  function uploadFilesSequentially(files, onEach) {
+    var chain = Promise.resolve();
+    Array.from(files).forEach(function (file) {
+      chain = chain.then(function () {
+        return new Promise(function (resolve) {
+          var reader = new FileReader();
+          reader.onload = function () {
+            apiPost('/api/admin/upload-image', { filename: file.name, data: reader.result }).then(function (result) {
+              onEach(file, result);
+              resolve();
+            });
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+    });
+    return chain;
+  }
+
   // -- Gallery ----------------------------------------------------------
 
   function renderGalleryItem(item) {
     item = item || { id: '', image: '', caption: '' };
     var card = document.createElement('div');
-    card.className = 'bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm overflow-hidden gallery-item-card';
+    card.className = 'relative bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm overflow-hidden gallery-item-card bulk-item';
     card.dataset.image = item.image;
     card.innerHTML =
-      '<div class="aspect-video bg-[#111111]">' +
-      (item.image ? '<img src="' + item.image + '" class="w-full h-full object-cover" alt="">' : '') +
+      '<input type="checkbox" class="item-select absolute top-2 left-2 z-10 w-4 h-4">' +
+      '<div class="bg-[#111111]">' +
+      (item.image ? '<img src="' + item.image + '" class="w-full h-auto object-contain" alt="">' : '') +
       '</div>' +
       '<div class="p-2 space-y-2">' +
       '<input type="text" class="gallery-caption w-full bg-[#111111] border border-[#2c2c2c] rounded-sm px-2 py-1 text-white text-xs" placeholder="Caption" value="' + escapeHtml(item.caption || '') + '">' +
       '<button type="button" class="remove-gallery-item text-[#e8412f] text-xs">✕ Remove</button>' +
       '</div>';
-    card.querySelector('.remove-gallery-item').addEventListener('click', function () { card.remove(); });
+    card.querySelector('.remove-gallery-item').addEventListener('click', function () { card.remove(); galleryBulk.refresh(); });
     return card;
   }
 
@@ -904,29 +959,39 @@
       var list = document.getElementById('gallery-list');
       list.innerHTML = '';
       images.forEach(function (img) { list.appendChild(renderGalleryItem(img)); });
+      galleryBulk.refresh();
     });
   }
 
-  document.getElementById('gallery-file-input').addEventListener('change', function (e) {
-    var file = e.target.files[0];
-    if (!file) return;
-    var statusEl = document.getElementById('gallery-upload-status');
-    statusEl.textContent = 'Uploading...';
+  var galleryBulk = wireBulkSelection({
+    containerId: 'gallery-list', selectAllId: 'gallery-select-all',
+    countId: 'gallery-selected-count', actionBtnId: 'gallery-delete-selected',
+  });
 
-    var reader = new FileReader();
-    reader.onload = function () {
-      apiPost('/api/admin/upload-image', { filename: file.name, data: reader.result }).then(function (result) {
-        if (result.ok) {
-          statusEl.textContent = 'Uploaded: ' + result.data.path;
-          document.getElementById('gallery-list').appendChild(renderGalleryItem({ image: result.data.path, caption: '' }));
-          loadAuditLog();
-        } else {
-          statusEl.textContent = 'Upload failed: ' + (result.data.error || 'unknown error');
-        }
-        e.target.value = '';
-      });
-    };
-    reader.readAsDataURL(file);
+  document.getElementById('gallery-delete-selected').addEventListener('click', function () {
+    galleryBulk.getSelectedItems().forEach(function (item) { item.remove(); });
+    galleryBulk.refresh();
+  });
+
+  document.getElementById('gallery-file-input').addEventListener('change', function (e) {
+    var files = e.target.files;
+    if (!files.length) return;
+    var statusEl = document.getElementById('gallery-upload-status');
+    statusEl.textContent = 'Uploading 0 / ' + files.length + '...';
+    var done = 0;
+    uploadFilesSequentially(files, function (file, result) {
+      done++;
+      if (result.ok) {
+        document.getElementById('gallery-list').appendChild(renderGalleryItem({ image: result.data.path, caption: '' }));
+      } else {
+        statusEl.textContent = 'Failed on ' + file.name + ': ' + (result.data.error || 'unknown error');
+      }
+      statusEl.textContent = 'Uploaded ' + done + ' / ' + files.length;
+    }).then(function () {
+      galleryBulk.refresh();
+      loadAuditLog();
+      e.target.value = '';
+    });
   });
 
   document.getElementById('save-gallery-btn').addEventListener('click', function () {
@@ -946,6 +1011,87 @@
       } else if (result.status === 401) {
         showLogin();
       }
+    });
+  });
+
+  // -- Wall Photos --------------------------------------------------------
+
+  function renderWallPhotoItem(photo) {
+    var card = document.createElement('div');
+    card.className = 'relative bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm overflow-hidden bulk-item';
+    card.dataset.id = photo.id;
+    card.innerHTML =
+      '<input type="checkbox" class="item-select absolute top-2 left-2 z-10 w-4 h-4">' +
+      '<div class="bg-[#111111]"><img src="' + photo.image_path + '" class="w-full h-auto object-contain" alt=""></div>' +
+      '<button type="button" class="remove-wallphoto-item absolute bottom-2 right-2 bg-[#000000]/80 text-[#e8412f] text-xs px-2 py-1 rounded-sm">✕ Remove</button>';
+    card.querySelector('.remove-wallphoto-item').addEventListener('click', function () {
+      fetch('/api/admin/wall-photos/' + photo.id, { method: 'DELETE', credentials: 'same-origin' })
+        .then(function (res) { return res.json(); })
+        .then(function () { card.remove(); wallPhotosBulk.refresh(); loadAuditLog(); });
+    });
+    return card;
+  }
+
+  function loadWallPhotos() {
+    apiGet('/api/wall-photos').then(function (data) {
+      var list = document.getElementById('wallphotos-list');
+      var empty = document.getElementById('wallphotos-empty');
+      var photos = data.photos || [];
+      list.innerHTML = '';
+      empty.classList.toggle('hidden', photos.length > 0);
+      photos.forEach(function (p) { list.appendChild(renderWallPhotoItem(p)); });
+      wallPhotosBulk.refresh();
+    });
+  }
+
+  var wallPhotosBulk = wireBulkSelection({
+    containerId: 'wallphotos-list', selectAllId: 'wallphotos-select-all',
+    countId: 'wallphotos-selected-count', actionBtnId: 'wallphotos-delete-selected',
+  });
+
+  document.getElementById('wallphotos-delete-selected').addEventListener('click', function () {
+    var items = wallPhotosBulk.getSelectedItems();
+    Promise.all(items.map(function (item) {
+      return fetch('/api/admin/wall-photos/' + item.dataset.id, { method: 'DELETE', credentials: 'same-origin' });
+    })).then(function () { loadWallPhotos(); loadAuditLog(); });
+  });
+
+  document.getElementById('wallphotos-clear-all').addEventListener('click', function () {
+    fetch('/api/wall-photos/clear', { method: 'POST' })
+      .then(function () { loadWallPhotos(); loadAuditLog(); });
+  });
+
+  document.getElementById('wallphotos-file-input').addEventListener('change', function (e) {
+    var files = e.target.files;
+    if (!files.length) return;
+    var statusEl = document.getElementById('wallphotos-upload-status');
+    statusEl.textContent = 'Uploading 0 / ' + files.length + '...';
+    var chain = Promise.resolve();
+    var done = 0;
+    Array.from(files).forEach(function (file) {
+      chain = chain.then(function () {
+        return new Promise(function (resolve) {
+          var reader = new FileReader();
+          reader.onload = function () {
+            fetch('/api/wall-photos', {
+              method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ image: reader.result }),
+            }).then(function (res) { return res.json(); }).then(function (result) {
+              done++;
+              statusEl.textContent = result.ok
+                ? 'Uploaded ' + done + ' / ' + files.length
+                : 'Failed on ' + file.name + ': ' + (result.error || 'unknown error');
+              resolve();
+            });
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+    });
+    chain.then(function () {
+      loadWallPhotos();
+      loadAuditLog();
+      e.target.value = '';
     });
   });
 
