@@ -161,15 +161,23 @@
     </section>
 
     <!-- GALLERY -->
-    <section class="w-full bg-[#0a0a0a] border-t border-[#1e1e1e]">
+    <section class="w-full bg-[#111111] border-t-4 border-[#e0d2b3]">
       <div class="max-w-7xl mx-auto px-6 py-16">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-12 h-[2px] bg-[#e0d2b3]"></div>
-          <span id="pw-gallery-eyebrow" class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">From the Archive</span>
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 rounded-sm bg-[#e0d2b3]/10 flex items-center justify-center shrink-0">
+            <i data-lucide="gallery-thumbnails" style="width:22px;height:22px;color:#e0d2b3;"></i>
+          </div>
+          <div>
+            <span id="pw-gallery-eyebrow" class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">From the Archive</span>
+            <h2 id="pw-gallery-heading" class="text-3xl md:text-4xl font-extrabold text-white">Gallery</h2>
+          </div>
         </div>
-        <h2 id="pw-gallery-heading" class="text-3xl md:text-4xl font-extrabold text-white mb-8">Gallery</h2>
+        <div id="pw-gallery-description" class="wysiwyg-content text-[#bababa] max-w-2xl mb-8">A curated look back at the build, the paddock, and race day — hand-picked shots from the team.</div>
         <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
-        <p id="gallery-empty" class="hidden text-[#636363] text-sm text-center py-16">No photos yet — check back soon.</p>
+        <div id="gallery-empty" class="hidden flex flex-col items-center gap-3 text-center py-16 border border-dashed border-[#2c2c2c] rounded-sm">
+          <i data-lucide="image-off" style="width:28px;height:28px;color:#434343;"></i>
+          <p class="text-[#636363] text-sm">No photos yet — check back soon.</p>
+        </div>
       </div>
     </section>
 

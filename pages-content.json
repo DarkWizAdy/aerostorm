@@ -1,7 +1,7 @@
 {
   "engineering": {
     "hero_eyebrow": "Under the Hood",
-    "hero_tagline": "From AR Ventus 2.27 to AR Nimbus 4.51 — the real specs, the CAD process, the physics, and the lessons learned building each car.",
+    "hero_tagline": "<p>From AR Ventus 2.27 to AR Nimbus 4.51 — the real specs, the CAD process, the physics, and the lessons learned building each car.</p>",
     "sections": {
       "evolution": {
         "eyebrow": "The Evolution",
@@ -45,12 +45,19 @@
   },
   "pitwall": {
     "gallery_eyebrow": "From the Archive",
-    "gallery_heading": "Gallery"
+    "gallery_heading": "Gallery",
+    "gallery_description": "<p>A curated look back at the build, the paddock, and race day — hand-picked shots from the team.</p>"
+  },
+  "jointhegrid": {
+    "hero_eyebrow": "Join the Experience",
+    "hero_tagline": "<p>Tap the light. Take your photo. You're on the wall.</p>",
+    "success_heading": "You're on the wall!",
+    "success_text": "Check out the pit display screen."
   },
   "contact": {
     "hero_eyebrow": "Get in Touch",
-    "hero_tagline": "Have questions or general inquiries? Reach out to us through any of the contact methods below.",
+    "hero_tagline": "<p>Have questions or general inquiries? Reach out to us through any of the contact methods below.</p>",
     "quick_chat_heading": "Quick Chat",
-    "quick_chat_text": "Prefer a direct conversation? Message us on Instagram or LinkedIn for the fastest response."
+    "quick_chat_text": "<p>Prefer a direct conversation? Message us on Instagram or LinkedIn for the fastest response.</p>"
   }
 }

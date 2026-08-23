@@ -162,7 +162,7 @@
         <div class="flex flex-col gap-8 items-center">
           <div class="flex items-center gap-3">
             <div class="w-12 h-[2px] bg-[#e0d2b3]"></div>
-            <span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Join the Experience</span>
+            <span id="jtg-hero-eyebrow" class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Join the Experience</span>
             <div class="w-12 h-[2px] bg-[#e0d2b3]"></div>
           </div>
 
@@ -170,9 +170,9 @@
             Join the <span class="font-racing text-[#e0d2b3]">GRID</span>
           </h1>
 
-          <p class="text-lg md:text-xl text-[#bababa] max-w-lg font-light leading-relaxed">
+          <div id="jtg-hero-tagline" class="wysiwyg-content text-lg md:text-xl text-[#bababa] max-w-lg font-light leading-relaxed">
             Tap the light. Take your photo. You're on the wall.
-          </p>
+          </div>
 
           <div class="checker w-full"></div>
 
@@ -196,8 +196,8 @@
 
             <div id="success" class="">
               <div class="flag">🏁</div>
-              <h2 class="text-3xl md:text-4xl font-extrabold text-[#2fbf71] font-racing">You're on the wall!</h2>
-              <p class="text-[#bababa] max-w-xs">Check out the pit display screen.</p>
+              <h2 id="jtg-success-heading" class="text-3xl md:text-4xl font-extrabold text-[#2fbf71] font-racing">You're on the wall!</h2>
+              <p id="jtg-success-text" class="text-[#bababa] max-w-xs">Check out the pit display screen.</p>
             </div>
           </div>
 
@@ -236,6 +236,7 @@
   </div>
 
   <script src="site-chrome.js"></script>
+  <script src="pages-content.js"></script>
   <script src="script.js"></script>
   <script>
     const idle = document.getElementById('idle');

@@ -8,10 +8,18 @@
     if (el && value) el.textContent = value;
   }
 
+  // For fields edited via the admin's WYSIWYG (Quill) editor — stored as
+  // HTML, rendered as HTML. Safe here because this HTML only ever comes
+  // from the admin's own rich-text editor, never from a visitor.
+  function setHtml(id, value) {
+    var el = document.getElementById(id);
+    if (el && value) el.innerHTML = value;
+  }
+
   function renderEngineering(data) {
     if (!data) return;
     setText('eng-hero-eyebrow', data.hero_eyebrow);
-    setText('eng-hero-tagline', data.hero_tagline);
+    setHtml('eng-hero-tagline', data.hero_tagline);
     var sections = data.sections || {};
     Object.keys(sections).forEach(function (key) {
       setText('eng-' + key + '-eyebrow', sections[key].eyebrow);
@@ -41,14 +49,23 @@
     if (!data) return;
     setText('pw-gallery-eyebrow', data.gallery_eyebrow);
     setText('pw-gallery-heading', data.gallery_heading);
+    setHtml('pw-gallery-description', data.gallery_description);
+  }
+
+  function renderJoinTheGrid(data) {
+    if (!data) return;
+    setText('jtg-hero-eyebrow', data.hero_eyebrow);
+    setHtml('jtg-hero-tagline', data.hero_tagline);
+    setText('jtg-success-heading', data.success_heading);
+    setText('jtg-success-text', data.success_text);
   }
 
   function renderContact(data) {
     if (!data) return;
     setText('con-hero-eyebrow', data.hero_eyebrow);
-    setText('con-hero-tagline', data.hero_tagline);
+    setHtml('con-hero-tagline', data.hero_tagline);
     setText('con-quickchat-heading', data.quick_chat_heading);
-    setText('con-quickchat-text', data.quick_chat_text);
+    setHtml('con-quickchat-text', data.quick_chat_text);
   }
 
   fetch('pages-content.json')
@@ -58,7 +75,9 @@
       renderSponsorship(content.sponsorship);
       renderUpdates(content.updates);
       renderPitWall(content.pitwall);
+      renderJoinTheGrid(content.jointhegrid);
       renderContact(content.contact);
+      if (window.lucide) lucide.createIcons();
     })
     .catch(function (err) { console.error('pages-content: failed to load', err); });
 })();

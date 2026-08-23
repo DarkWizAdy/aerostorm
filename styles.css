@@ -183,3 +183,28 @@ html { scroll-margin-top: 80px; }
 .admin-tab-btn:hover { background: #111111; color: #e8e8e8; }
 .admin-tab-btn.active { background: #1e1e1e; color: #e0d2b3; font-weight: 600; }
 .admin-subtab-btn { font-size: 0.8125rem; padding: 8px 14px; color: #929292; }
+
+/* Public-page containers filled with WYSIWYG (Quill) HTML from admin —
+   resets the browser's default <p> margin so single-paragraph content
+   looks identical to the plain-text version it replaced. */
+.wysiwyg-content p { margin: 0 0 0.75em; }
+.wysiwyg-content p:last-child { margin-bottom: 0; }
+.wysiwyg-content a { color: #e0d2b3; text-decoration: underline; }
+.wysiwyg-content strong { color: #ffffff; }
+
+/* Quill editor (admin WYSIWYG fields) — dark-theme override of the default
+   light "snow" theme so it matches the rest of the admin UI. */
+.ql-toolbar.ql-snow { background: #0a0a0a; border-color: #2c2c2c; border-radius: 4px 4px 0 0; }
+.ql-container.ql-snow { background: #0a0a0a; border-color: #2c2c2c; border-radius: 0 0 4px 4px; font-family: inherit; font-size: 0.875rem; }
+.ql-editor { min-height: 100px; color: #e8e8e8; }
+.ql-editor.ql-blank::before { color: #474747; font-style: normal; }
+.ql-snow .ql-stroke { stroke: #929292; }
+.ql-snow .ql-fill { fill: #929292; }
+.ql-snow .ql-picker { color: #929292; }
+.ql-snow .ql-picker-options { background: #111111; border-color: #2c2c2c; }
+.ql-snow.ql-toolbar button:hover, .ql-snow .ql-toolbar button:hover,
+.ql-snow.ql-toolbar button.ql-active, .ql-snow .ql-toolbar button.ql-active { color: #e0d2b3; }
+.ql-snow.ql-toolbar button:hover .ql-stroke, .ql-snow .ql-toolbar button:hover .ql-stroke,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke, .ql-snow .ql-toolbar button.ql-active .ql-stroke { stroke: #e0d2b3; }
+.ql-snow .ql-tooltip { background: #111111; border-color: #2c2c2c; color: #e8e8e8; box-shadow: none; }
+.ql-snow .ql-tooltip input[type="text"] { background: #0a0a0a; border-color: #2c2c2c; color: #e8e8e8; }

@@ -472,11 +472,30 @@
 
   var PAGES_ENGINEERING_SECTIONS = ['evolution', 'aerodynamics', 'cad', 'physics', 'manufacturing', 'track_testing'];
 
+  // WYSIWYG (Quill) fields — prose content on Contact/Engineering/Join the
+  // Grid/Pit Wall, per the user's explicit ask. Short labels/headings on
+  // these same pages (and everything on Sponsorship/Updates) stay plain
+  // text inputs — a one-line heading doesn't need rich formatting.
+  var QUILL_TOOLBAR = [['bold', 'italic', 'underline'], [{ list: 'ordered' }, { list: 'bullet' }], ['link'], ['clean']];
+  var quillEditors = {};
+  ['pg-eng-hero-tagline', 'pg-con-hero-tagline', 'pg-con-quickchat-text', 'pg-pw-gallery-description', 'pg-jtg-hero-tagline'].forEach(function (id) {
+    quillEditors[id] = new Quill('#' + id + '-editor', { theme: 'snow', modules: { toolbar: QUILL_TOOLBAR } });
+  });
+
+  function setQuillHtml(id, value) {
+    quillEditors[id].root.innerHTML = value || '';
+  }
+
+  function getQuillHtml(id) {
+    var html = quillEditors[id].root.innerHTML;
+    return html === '<p><br></p>' ? '' : html;
+  }
+
   function loadPagesContent() {
     fetchJsonFile('pages-content.json').then(function (content) {
       var eng = content.engineering || {};
       document.getElementById('pg-eng-hero-eyebrow').value = eng.hero_eyebrow || '';
-      document.getElementById('pg-eng-hero-tagline').value = eng.hero_tagline || '';
+      setQuillHtml('pg-eng-hero-tagline', eng.hero_tagline);
       var engSections = eng.sections || {};
       PAGES_ENGINEERING_SECTIONS.forEach(function (key) {
         var section = engSections[key] || {};
@@ -501,12 +520,19 @@
       var pw = content.pitwall || {};
       document.getElementById('pg-pw-gallery-eyebrow').value = pw.gallery_eyebrow || '';
       document.getElementById('pg-pw-gallery-heading').value = pw.gallery_heading || '';
+      setQuillHtml('pg-pw-gallery-description', pw.gallery_description);
+
+      var jtg = content.jointhegrid || {};
+      document.getElementById('pg-jtg-hero-eyebrow').value = jtg.hero_eyebrow || '';
+      setQuillHtml('pg-jtg-hero-tagline', jtg.hero_tagline);
+      document.getElementById('pg-jtg-success-heading').value = jtg.success_heading || '';
+      document.getElementById('pg-jtg-success-text').value = jtg.success_text || '';
 
       var con = content.contact || {};
       document.getElementById('pg-con-hero-eyebrow').value = con.hero_eyebrow || '';
-      document.getElementById('pg-con-hero-tagline').value = con.hero_tagline || '';
+      setQuillHtml('pg-con-hero-tagline', con.hero_tagline);
       document.getElementById('pg-con-quickchat-heading').value = con.quick_chat_heading || '';
-      document.getElementById('pg-con-quickchat-text').value = con.quick_chat_text || '';
+      setQuillHtml('pg-con-quickchat-text', con.quick_chat_text);
     });
   }
 
@@ -522,7 +548,7 @@
     var content = {
       engineering: {
         hero_eyebrow: document.getElementById('pg-eng-hero-eyebrow').value.trim(),
-        hero_tagline: document.getElementById('pg-eng-hero-tagline').value.trim(),
+        hero_tagline: getQuillHtml('pg-eng-hero-tagline'),
         sections: sections,
       },
       sponsorship: {
@@ -542,12 +568,19 @@
       pitwall: {
         gallery_eyebrow: document.getElementById('pg-pw-gallery-eyebrow').value.trim(),
         gallery_heading: document.getElementById('pg-pw-gallery-heading').value.trim(),
+        gallery_description: getQuillHtml('pg-pw-gallery-description'),
+      },
+      jointhegrid: {
+        hero_eyebrow: document.getElementById('pg-jtg-hero-eyebrow').value.trim(),
+        hero_tagline: getQuillHtml('pg-jtg-hero-tagline'),
+        success_heading: document.getElementById('pg-jtg-success-heading').value.trim(),
+        success_text: document.getElementById('pg-jtg-success-text').value.trim(),
       },
       contact: {
         hero_eyebrow: document.getElementById('pg-con-hero-eyebrow').value.trim(),
-        hero_tagline: document.getElementById('pg-con-hero-tagline').value.trim(),
+        hero_tagline: getQuillHtml('pg-con-hero-tagline'),
         quick_chat_heading: document.getElementById('pg-con-quickchat-heading').value.trim(),
-        quick_chat_text: document.getElementById('pg-con-quickchat-text').value.trim(),
+        quick_chat_text: getQuillHtml('pg-con-quickchat-text'),
       },
     };
 

@@ -8,6 +8,8 @@
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,400..900;1,400..900&amp;family=Outfit:wght@300;400;500;600;700;800;900&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
   <link rel="stylesheet" href="styles.css">
  </head>
  <body class="h-full bg-[#000000] text-[#e8e8e8] font-heading">
@@ -59,6 +61,7 @@
       <button data-tab="page-sponsorship" class="admin-tab-btn admin-subtab-btn">Sponsorship</button>
       <button data-tab="page-updates" class="admin-tab-btn admin-subtab-btn">Updates</button>
       <button data-tab="page-pitwall" class="admin-tab-btn admin-subtab-btn">Pit Wall</button>
+      <button data-tab="page-jointhegrid" class="admin-tab-btn admin-subtab-btn">Join Grid</button>
       <button data-tab="page-contact" class="admin-tab-btn admin-subtab-btn">Contact</button>
      </div>
      <button data-tab="menu" class="admin-tab-btn">Menu</button>
@@ -195,7 +198,7 @@
        </div>
        <div>
         <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Tagline</label>
-        <textarea id="pg-eng-hero-tagline" rows="2" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm"></textarea>
+        <div id="pg-eng-hero-tagline-editor" class="quill-field"></div>
        </div>
       </div>
       <div class="space-y-3 mb-6">
@@ -307,6 +310,38 @@
         <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Gallery Section Heading</label>
         <input type="text" id="pg-pw-gallery-heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
        </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Gallery Section Description</label>
+        <div id="pg-pw-gallery-description-editor" class="quill-field"></div>
+       </div>
+      </div>
+      <div class="flex items-center gap-4">
+       <button type="button" class="save-pages-btn bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save</button>
+       <span class="pages-saved-msg hidden text-[#d0bd92] text-sm font-mono">Saved</span>
+      </div>
+     </div>
+
+     <!-- PAGES: JOIN THE GRID -->
+     <div id="panel-page-jointhegrid" class="admin-panel hidden">
+      <h2 class="text-2xl font-bold text-white mb-1">Join the Grid Page</h2>
+      <p class="text-sm text-[#636363] mb-6">Hero text and the "you're on the wall" success message shown after a photo is captured.</p>
+      <div class="space-y-3 mb-6">
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Eyebrow</label>
+        <input type="text" id="pg-jtg-hero-eyebrow" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Tagline</label>
+        <div id="pg-jtg-hero-tagline-editor" class="quill-field"></div>
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Success Message Heading</label>
+        <input type="text" id="pg-jtg-success-heading" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Success Message Body</label>
+        <input type="text" id="pg-jtg-success-text" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm">
+       </div>
       </div>
       <div class="flex items-center gap-4">
        <button type="button" class="save-pages-btn bg-[#e0d2b3] text-[#000000] font-bold text-sm uppercase tracking-wide px-8 py-3 rounded-sm hover:bg-[#d0bd92] transition-colors">Save</button>
@@ -325,7 +360,7 @@
        </div>
        <div>
         <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">Hero Tagline</label>
-        <textarea id="pg-con-hero-tagline" rows="2" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm"></textarea>
+        <div id="pg-con-hero-tagline-editor" class="quill-field"></div>
        </div>
        <div>
         <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">"Quick Chat" Card Heading</label>
@@ -333,7 +368,7 @@
        </div>
        <div>
         <label class="block text-xs uppercase tracking-widest text-[#636363] mb-2">"Quick Chat" Card Body Text</label>
-        <textarea id="pg-con-quickchat-text" rows="2" class="w-full bg-[#0a0a0a] border border-[#2c2c2c] rounded-sm px-4 py-3 text-white text-sm"></textarea>
+        <div id="pg-con-quickchat-text-editor" class="quill-field"></div>
        </div>
       </div>
       <div class="flex items-center gap-4">
