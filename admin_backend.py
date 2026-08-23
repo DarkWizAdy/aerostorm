@@ -13,6 +13,7 @@ admin account:
 
 import argparse
 import base64
+import datetime
 import getpass
 import hashlib
 import json
@@ -20,8 +21,12 @@ import os
 import re
 import secrets
 import sqlite3
-import time
 from pathlib import Path
+
+# India Standard Time — fixed UTC+5:30 offset, no DST observed, so a plain
+# fixed-offset timezone is correct year-round without needing the system
+# tzdata database (keeps this stdlib-only, no `tzdata` package required).
+IST = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
 
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = BASE_DIR / "admin.db"
@@ -61,8 +66,12 @@ GALLERY_DIR = BASE_DIR / "Images" / "gallery"
 WALL_DIR = BASE_DIR / "Images" / "wall"
 
 
-def _now_iso():
-    return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+def _now_iso(offset_seconds=0):
+    """Current time in IST (UTC+5:30), optionally offset into the future —
+    used for both 'now' timestamps and session expiry so every timestamp in
+    the app is directly comparable as a string."""
+    when = datetime.datetime.now(IST) + datetime.timedelta(seconds=offset_seconds)
+    return when.strftime("%Y-%m-%dT%H:%M:%S+05:30")
 
 
 def get_connection():
@@ -262,7 +271,6 @@ def create_session(email, user_agent=None):
         if user is None:
             return None
         raw_token = secrets.token_urlsafe(32)
-        now = time.time()
         conn.execute(
             """INSERT INTO sessions
                (token_hash, user_id, created_at, expires_at, last_seen_at, user_agent)
@@ -271,7 +279,7 @@ def create_session(email, user_agent=None):
                 _token_hash(raw_token),
                 user["id"],
                 _now_iso(),
-                time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(now + SESSION_MAX_AGE_SECONDS)),
+                _now_iso(SESSION_MAX_AGE_SECONDS),
                 _now_iso(),
                 user_agent,
             ),
