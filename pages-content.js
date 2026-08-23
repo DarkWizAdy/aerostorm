@@ -173,7 +173,7 @@
     if (phones && Array.isArray(data.phones)) {
       phones.innerHTML = data.phones.map(function (p) {
         var tag = p.name ? ' <span class="text-[#636363]">— ' + p.name + '</span>' : '';
-        return '<div class="flex items-center gap-3 text-[#727272]"><i data-lucide="phone" style="width:18px;height:18px;color:#e0d2b3;"></i> <span class="text-sm">' + p.number + tag + '</span></div>';
+        return '<div class="flex items-center gap-3 text-[#727272]"><i data-lucide="phone" style="width:18px;height:18px;color:#e0d2b3;flex-shrink:0;"></i> <span class="text-sm">' + p.number + tag + '</span></div>';
       }).join('');
     }
   }
