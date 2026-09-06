@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | aerostorm Racing</title>
+  <meta name="robots" content="noindex, follow">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,400..900;1,400..900&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="icon" href="websiteIcon.png">
+  <style>
+    .checker {
+      height: 10px;
+      background-image:
+        linear-gradient(45deg, #e8e8e8 25%, transparent 25%, transparent 75%, #e8e8e8 75%),
+        linear-gradient(45deg, #e8e8e8 25%, #000000 25%, #000000 75%, #e8e8e8 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+    }
+  </style>
+</head>
+<body class="h-full bg-[#000000] text-[#e8e8e8] font-heading">
+  <div class="min-h-screen flex flex-col">
+    <div class="checker"></div>
+    <div class="flex-1 flex items-center justify-center px-6">
+      <div class="max-w-lg w-full text-center flex flex-col items-center gap-6">
+        <img src="aerostormLogoNoBG.png" alt="Aerostorm" class="h-14 w-auto">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-[2px] bg-[#e0d2b3]"></div>
+          <span class="font-mono text-xs tracking-[0.3em] text-[#d0bd92] uppercase">Off Track</span>
+          <div class="w-12 h-[2px] bg-[#e0d2b3]"></div>
+        </div>
+        <h1 class="text-6xl md:text-7xl font-black text-white leading-none">
+          <span class="font-racing text-[#e0d2b3]">404</span>
+        </h1>
+        <p class="text-[#bababa] font-light max-w-sm">This page spun out. The link you followed may be broken, or the page may have been moved.</p>
+        <a href="index.html" class="group inline-flex items-center border border-[#434343] text-[#d9d9d9] px-8 py-4 text-sm font-bold tracking-wide uppercase hover:bg-[#e0d2b3] hover:text-[#000000] hover:border-[#e0d2b3] transition-all duration-300 rounded-sm">
+          Back to Home
+        </a>
+      </div>
+    </div>
+    <div class="checker"></div>
+  </div>
+</body>
+</html>

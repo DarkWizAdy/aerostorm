@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 from http import cookies
 from http.server import HTTPServer, SimpleHTTPRequestHandler
@@ -54,6 +55,25 @@ class AerostormHandler(SimpleHTTPRequestHandler):
             self._send_json(401, {'error': 'Not authenticated'})
             return None
         return email
+
+    def send_error(self, code, message=None, explain=None):
+        # Missing static pages get the branded 404 page instead of the
+        # default plain-text error; everything else (API 404s go through
+        # _send_json directly and never hit this) falls back to normal.
+        if code == 404:
+            try:
+                with open('404.html', 'rb') as f:
+                    body = f.read()
+            except OSError:
+                return super().send_error(code, message, explain)
+            self.send_response(404)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(body)))
+            self.end_headers()
+            if self.command != 'HEAD':
+                self.wfile.write(body)
+            return
+        return super().send_error(code, message, explain)
 
     # -- routing --------------------------------------------------------
 
@@ -297,7 +317,6 @@ if __name__ == '__main__':
 
     admin_backend.init_db()
 
-    import os
     port = int(os.environ.get('PORT', '8000'))
     host = os.environ.get('HOST', '')
     server_address = (host, port)
