@@ -56,11 +56,23 @@
   // -- Auth / session -------------------------------------------------
 
   function showLogin() {
+    sessionActive = false;
     loginView.classList.remove('hidden');
     dashboardView.classList.add('hidden');
+    document.getElementById('login-form').reset();
   }
 
+  // Ends the session the moment the tab is closed (or refreshed/navigated
+  // away) rather than leaving it valid until it naturally expires.
+  // sendBeacon fires reliably even as the page is being torn down.
+  window.addEventListener('pagehide', function () {
+    if (sessionActive) navigator.sendBeacon('/api/admin/logout');
+  });
+
+  var sessionActive = false;
+
   function showDashboard(email) {
+    sessionActive = true;
     loginView.classList.add('hidden');
     dashboardView.classList.remove('hidden');
     document.getElementById('admin-email').textContent = email;
