@@ -10,7 +10,7 @@
 (function () {
   function currentPage() {
     var file = location.pathname.split('/').pop();
-    return file ? file : 'index.html';
+    return (!file || file === 'index.html') ? '/' : file;
   }
 
   function navLinkHtml(entry, page, mobile) {

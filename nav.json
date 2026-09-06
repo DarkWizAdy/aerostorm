@@ -1,5 +1,5 @@
 [
-  { "id": "home",        "label": "Home",        "page": "index.html",       "anchor": null, "exclude_pages": [] },
+  { "id": "home",        "label": "Home",        "page": "/",                "anchor": null, "exclude_pages": [] },
   { "id": "updates",     "label": "Updates",     "page": "Updates.html",     "anchor": null, "exclude_pages": [] },
   { "id": "engineering", "label": "Engineering", "page": "Engineering.html", "anchor": null, "exclude_pages": [] },
   { "id": "sponsorship", "label": "Sponsorship", "page": "Sponsorship.html", "anchor": null, "exclude_pages": [] },
