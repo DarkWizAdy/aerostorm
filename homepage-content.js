@@ -56,7 +56,7 @@
     }
   }
 
-  fetch('homepage-content.json')
+  fetch('homepage-content.json', { cache: 'no-store' })
     .then(function (res) { return res.json(); })
     .then(function (content) {
       if (content.about) renderAbout(content.about);

@@ -178,7 +178,7 @@
     }
   }
 
-  fetch('pages-content.json')
+  fetch('pages-content.json', { cache: 'no-store' })
     .then(function (res) { return res.json(); })
     .then(function (content) {
       renderEngineering(content.engineering);

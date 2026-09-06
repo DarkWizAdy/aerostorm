@@ -85,7 +85,7 @@
     }
   }
 
-  fetch('nav.json')
+  fetch('nav.json', { cache: 'no-store' })
     .then(function (res) { return res.json(); })
     .then(function (nav) {
       renderNav(nav);
@@ -93,7 +93,7 @@
     })
     .catch(function (err) { console.error('site-chrome: failed to load nav.json', err); });
 
-  fetch('site-config.json')
+  fetch('site-config.json', { cache: 'no-store' })
     .then(function (res) { return res.json(); })
     .then(function (config) {
       renderFooter(config);
